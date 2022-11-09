@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.features &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html"><img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../tslumen.html">tslumen</a> &raquo;</li>
+          <li><a href="../profile.html">tslumen.profile</a> &raquo;</li>
+      <li>tslumen.profile.features</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.profile.features</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Time Series features port over and adaptations of some of the functions originally in R&#39;s</span>
+<span class="sd">TSFeatures package.</span>
+
+<span class="sd">See Also:</span>
+<span class="sd">    - TSFeatures: https://cran.r-project.org/package=tsfeatures</span>
+<span class="sd">    - https://robjhyndman.com/papers/icdm2015.pdf</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">welch</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.seasonal</span> <span class="kn">import</span> <span class="n">STL</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span><span class="p">,</span> <span class="n">pacf</span><span class="p">,</span> <span class="n">kpss</span><span class="p">,</span> <span class="n">adfuller</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.tsatools</span> <span class="kn">import</span> <span class="n">freq_to_period</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_supsmu</span> <span class="k">as</span> <span class="n">_ss</span>
+<span class="kn">from</span> <span class="nn">tslumen.profile.base</span> <span class="kn">import</span> <span class="n">ProfilingFunction</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;ft_stl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_entropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_pacf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_tilewin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_cross_pts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_kpss&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_adfuller&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_acf</span><span class="p">(</span>
+    <span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">freq</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_lags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="n">max_lags</span> <span class="o">=</span> <span class="n">max_lags</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">nlags</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">nlags</span><span class="p">),</span> <span class="n">max_lags</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_spectral_entropy</span><span class="p">(</span><span class="n">ts</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">sampling_freq</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">nperseg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">nperseg</span> <span class="o">=</span> <span class="n">nperseg</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">psd</span> <span class="o">=</span> <span class="n">welch</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="n">sampling_freq</span><span class="p">,</span> <span class="n">nperseg</span><span class="o">=</span><span class="n">nperseg</span><span class="p">)</span>
+    <span class="n">psd_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">psd</span><span class="p">,</span> <span class="n">psd</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">spec_entropy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">psd_norm</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">psd_norm</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">spec_entropy</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">psd_norm</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">spec_entropy</span>
+
+
+<div class="viewcode-block" id="ft_stl"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_stl">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_stl</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates features related to STL.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: Series with 4 values: trend, seasonality, acf1(error) and acf10(error).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">freq</span><span class="p">:</span>
+        <span class="n">inferred</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">freq_to_period</span><span class="p">(</span><span class="n">inferred</span><span class="p">)</span> <span class="k">if</span> <span class="n">inferred</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">freq</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Need 2 full periods of data&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;trend&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;seasonality&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;acf1(error)&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+                <span class="s2">&quot;acf10(error)&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">freq</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">seasonal</span> <span class="o">=</span> <span class="mi">13</span>
+        <span class="n">seasonal_jump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">seasonal</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">seasonal_deg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">trend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">1.5</span> <span class="o">*</span> <span class="n">freq</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">/</span> <span class="n">seasonal</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">trend</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">trend</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">trend</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">trend</span><span class="p">))</span>
+        <span class="n">trend_jump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">trend</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">trend_deg</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">low_pass</span> <span class="o">=</span> <span class="n">freq</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">low_pass</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">low_pass</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">low_pass</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">low_pass</span><span class="p">))</span>
+        <span class="n">low_pass_jump</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">low_pass</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">low_pass_deg</span> <span class="o">=</span> <span class="n">trend_deg</span>
+        <span class="n">robust</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">stl</span> <span class="o">=</span> <span class="n">STL</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">limit_direction</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">),</span>
+            <span class="n">freq</span><span class="p">,</span>
+            <span class="n">seasonal</span><span class="o">=</span><span class="n">seasonal</span><span class="p">,</span>
+            <span class="n">trend</span><span class="o">=</span><span class="n">trend</span><span class="p">,</span>
+            <span class="n">low_pass</span><span class="o">=</span><span class="n">low_pass</span><span class="p">,</span>
+            <span class="n">seasonal_deg</span><span class="o">=</span><span class="n">seasonal_deg</span><span class="p">,</span>
+            <span class="n">trend_deg</span><span class="o">=</span><span class="n">trend_deg</span><span class="p">,</span>
+            <span class="n">low_pass_deg</span><span class="o">=</span><span class="n">low_pass_deg</span><span class="p">,</span>
+            <span class="n">robust</span><span class="o">=</span><span class="n">robust</span><span class="p">,</span>
+            <span class="n">seasonal_jump</span><span class="o">=</span><span class="n">seasonal_jump</span><span class="p">,</span>
+            <span class="n">trend_jump</span><span class="o">=</span><span class="n">trend_jump</span><span class="p">,</span>
+            <span class="n">low_pass_jump</span><span class="o">=</span><span class="n">low_pass_jump</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+        <span class="n">trend</span><span class="p">,</span> <span class="n">season</span><span class="p">,</span> <span class="n">resid</span> <span class="o">=</span> <span class="n">stl</span><span class="o">.</span><span class="n">trend</span><span class="p">,</span> <span class="n">stl</span><span class="o">.</span><span class="n">seasonal</span><span class="p">,</span> <span class="n">stl</span><span class="o">.</span><span class="n">resid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">trend</span> <span class="o">=</span> <span class="n">_ss</span><span class="o">.</span><span class="n">supsmu</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">supsmu</span>
+        <span class="n">resid</span> <span class="o">=</span> <span class="n">data</span> <span class="o">-</span> <span class="n">trend</span>
+        <span class="n">season</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">var_resid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">var_deseason</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">resid</span> <span class="o">+</span> <span class="n">trend</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">var_detrend</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">resid</span> <span class="o">+</span> <span class="n">season</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">c_trend</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">var_resid</span> <span class="o">/</span> <span class="n">var_deseason</span><span class="p">)</span>
+    <span class="n">c_season</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">var_resid</span> <span class="o">/</span> <span class="n">var_detrend</span><span class="p">)</span>
+
+    <span class="n">nlags</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resid</span><span class="p">))),</span> <span class="nb">len</span><span class="p">(</span><span class="n">resid</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">resid_acf</span> <span class="o">=</span> <span class="n">acf</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">nlags</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+    <span class="n">c_eacf1</span> <span class="o">=</span> <span class="n">resid_acf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">c_eacf10</span> <span class="o">=</span> <span class="p">(</span><span class="n">resid_acf</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;trend&quot;</span><span class="p">:</span> <span class="n">c_trend</span><span class="p">,</span>
+            <span class="s2">&quot;seasonality&quot;</span><span class="p">:</span> <span class="n">c_season</span><span class="p">,</span>
+            <span class="s2">&quot;acf1(error)&quot;</span><span class="p">:</span> <span class="n">c_eacf1</span><span class="p">,</span>
+            <span class="s2">&quot;acf10(error)&quot;</span><span class="p">:</span> <span class="n">c_eacf10</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ft_entropy"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_entropy">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_entropy</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">sampling_frequency</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">n_per_segment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates spectral entropy of the data and its acf function.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.welch.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">datac</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">entropy_id</span> <span class="o">=</span> <span class="n">_spectral_entropy</span><span class="p">(</span><span class="n">datac</span><span class="p">,</span> <span class="n">sampling_frequency</span><span class="p">,</span> <span class="n">n_per_segment</span><span class="p">)</span>
+    <span class="n">entropy_acf</span> <span class="o">=</span> <span class="n">_spectral_entropy</span><span class="p">(</span><span class="n">_acf</span><span class="p">(</span><span class="n">acf</span><span class="p">,</span> <span class="n">datac</span><span class="p">)[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">sampling_frequency</span><span class="p">,</span> <span class="n">n_per_segment</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;entropy&quot;</span><span class="p">:</span> <span class="n">entropy_id</span><span class="p">,</span>
+            <span class="s2">&quot;entropy_acf&quot;</span><span class="p">:</span> <span class="n">entropy_acf</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_ft_acf</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">n_diff</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+    <span class="n">n_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">freq_to_period</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span><span class="p">)</span> <span class="ow">or</span> <span class="mi">1</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n_diff_</span> <span class="ow">in</span> <span class="n">n_diff</span><span class="p">:</span>
+        <span class="n">datadiff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n_diff_</span><span class="p">)</span>
+        <span class="n">max_lags</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datadiff</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;pacf&quot;</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">ts</span> <span class="o">=</span> <span class="n">_acf</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">datadiff</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span> <span class="n">max_lags</span><span class="o">=</span><span class="n">max_lags</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n_diff_</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ret</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">(season)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="n">freq</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">freq</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="k">for</span> <span class="n">n_size_</span> <span class="ow">in</span> <span class="n">n_size</span><span class="p">:</span>
+            <span class="n">ts_acf</span> <span class="o">=</span> <span class="n">ts</span><span class="p">[</span><span class="mi">1</span> <span class="p">:</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n_size_</span><span class="p">]</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">ts_acf</span><span class="p">)</span> <span class="k">if</span> <span class="n">n_size_</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">ts_acf</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">ret</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}{</span><span class="n">n_size_</span><span class="si">}</span><span class="s2">(d=</span><span class="si">{</span><span class="n">n_diff_</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ft_acf"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_acf">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_acf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">n_diff</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">n_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;ACF-related features&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_ft_acf</span><span class="p">(</span>
+        <span class="s2">&quot;acf&quot;</span><span class="p">,</span>
+        <span class="n">partial</span><span class="p">(</span><span class="n">acf</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">),</span>
+        <span class="n">n_diff</span><span class="p">,</span>
+        <span class="n">n_size</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ft_pacf"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_pacf">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_pacf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">n_diff</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">n_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,)</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;PACF-related features&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_ft_acf</span><span class="p">(</span>
+        <span class="s2">&quot;pacf&quot;</span><span class="p">,</span>
+        <span class="n">partial</span><span class="p">(</span><span class="n">pacf</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;ywm&quot;</span><span class="p">),</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">),</span>
+        <span class="n">n_diff</span><span class="p">,</span>
+        <span class="n">n_size</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ft_tilewin"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_tilewin">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_tilewin</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Tile window features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Timeseries data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: Series with 2 values: instability and lumpiness.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">freq_to_period</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span><span class="p">)</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">10</span>
+    <span class="n">nobs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">nobs</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">width</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Need 2 full periods of data&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+        <span class="n">instability</span><span class="p">,</span> <span class="n">lumpiness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">datac</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+        <span class="n">ts_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">datac</span> <span class="o">-</span> <span class="n">datac</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">datac</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nsegs</span> <span class="o">=</span> <span class="n">nobs</span> <span class="o">//</span> <span class="n">width</span>
+        <span class="n">ts_tiled</span> <span class="o">=</span> <span class="n">ts_scaled</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span> <span class="n">width</span> <span class="o">*</span> <span class="n">nsegs</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nsegs</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+        <span class="n">ts_mean</span> <span class="o">=</span> <span class="n">ts_tiled</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ts_var</span> <span class="o">=</span> <span class="n">ts_tiled</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">instability</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ts_mean</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">lumpiness</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">ts_var</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&quot;instability&quot;</span><span class="p">:</span> <span class="n">instability</span><span class="p">,</span> <span class="s2">&quot;lumpiness&quot;</span><span class="p">:</span> <span class="n">lumpiness</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="ft_cross_pts"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_cross_pts">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_cross_pts</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Number of times a time series crosses the median.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Timeseries data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: Series with 1 value: crossing_points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">datac</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">pts</span> <span class="o">=</span> <span class="p">(</span><span class="n">datac</span> <span class="o">&lt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">datac</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">({</span><span class="s2">&quot;crossing_points&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">pts</span><span class="p">)})</span></div>
+
+
+<div class="viewcode-block" id="ft_kpss"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_kpss">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_kpss</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;KPSS-related features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Timeseries data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: Series with 2 values: kpss(c), kpss(ct).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nlags</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.25</span><span class="p">)</span>
+    <span class="n">datac</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">kpss</span><span class="p">(</span><span class="n">datac</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">nlags</span><span class="p">)</span>
+    <span class="n">ct</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">kpss</span><span class="p">(</span><span class="n">datac</span><span class="p">,</span> <span class="s2">&quot;ct&quot;</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">nlags</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;kpss(c)&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+            <span class="s2">&quot;kpss(ct)&quot;</span><span class="p">:</span> <span class="n">ct</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ft_adfuller"><a class="viewcode-back" href="../../../api/tslumen.profile.features.html#tslumen.profile.features.ft_adfuller">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ft_adfuller</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;ADFuller-related features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Timeseries data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.Series: Series with 4 values: adfuller(c), adfuller(ct), adfuller(ctt) and</span>
+<span class="sd">        adfuller(nc).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data_clean</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="s2">&quot;c&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data_clean</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="s2">&quot;ct&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">ctt</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data_clean</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="s2">&quot;ctt&quot;</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">data_clean</span><span class="p">,</span> <span class="n">regression</span><span class="o">=</span><span class="s2">&quot;nc&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;adfuller(c)&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+            <span class="s2">&quot;adfuller(ct)&quot;</span><span class="p">:</span> <span class="n">ct</span><span class="p">,</span>
+            <span class="s2">&quot;adfuller(ctt)&quot;</span><span class="p">:</span> <span class="n">ctt</span><span class="p">,</span>
+            <span class="s2">&quot;adfuller(nc)&quot;</span><span class="p">:</span> <span class="n">nc</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

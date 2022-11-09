@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.cli package &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.scheduling module" href="tslumen.scheduling.html" />
+    <link rel="prev" title="tslumen.plot.interactive package" href="tslumen.plot.interactive.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tslumen.cli package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-tslumen.cli.readers">tslumen.cli.readers module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+      <li>tslumen.cli package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.cli">
+<span id="tslumen-cli-package"></span><h1>tslumen.cli package<a class="headerlink" href="#module-tslumen.cli" title="Permalink to this headline">¶</a></h1>
+<p>CLI for tslumen.</p>
+<dl class="py class">
+<dt id="tslumen.cli.CLIConfig">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.cli.</span></code><code class="sig-name descname"><span class="pre">CLIConfig</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">defaults:</span> <span class="pre">List[Any]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">hydra:</span> <span class="pre">Any</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">input:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'???'</span></em>, <em class="sig-param"><span class="pre">output:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None</span></em>, <em class="sig-param"><span class="pre">reader:</span> <span class="pre">tslumen.cli.readers.Reader</span> <span class="pre">=</span> <span class="pre">'???'</span></em>, <em class="sig-param"><span class="pre">profiler:</span> <span class="pre">Any</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em>, <em class="sig-param"><span class="pre">scheduler:</span> <span class="pre">tslumen.scheduling.Scheduler.Config</span> <span class="pre">=</span> <span class="pre">Scheduler.Config(n_jobs=-2</span></em>, <em class="sig-param"><span class="pre">prefer='processes'</span></em>, <em class="sig-param"><span class="pre">verbose=0</span></em>, <em class="sig-param"><span class="pre">timeout=None</span></em>, <em class="sig-param"><span class="pre">backend=None</span></em>, <em class="sig-param"><span class="pre">pre_dispatch='2</span> <span class="pre">*</span> <span class="pre">n_jobs'</span></em>, <em class="sig-param"><span class="pre">batch_size='auto'</span></em>, <em class="sig-param"><span class="pre">temp_folder=None</span></em>, <em class="sig-param"><span class="pre">max_nbytes='1M'</span></em>, <em class="sig-param"><span class="pre">mmap_mode='r'</span></em>, <em class="sig-param"><span class="pre">require=None</span></em>, <em class="sig-param"><span class="pre">progress_disable=False)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/cli.html#CLIConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.CLIConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Configurations for the CLI.</p>
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.defaults">
+<code class="sig-name descname"><span class="pre">defaults</span></code><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.defaults" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.hydra">
+<code class="sig-name descname"><span class="pre">hydra</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.hydra" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.input">
+<code class="sig-name descname"><span class="pre">input</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'???'</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.input" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.output">
+<code class="sig-name descname"><span class="pre">output</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.output" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.profiler">
+<code class="sig-name descname"><span class="pre">profiler</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.profiler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.reader">
+<code class="sig-name descname"><span class="pre">reader</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#tslumen.cli.readers.Reader" title="tslumen.cli.readers.Reader"><span class="pre">tslumen.cli.readers.Reader</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">'???'</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.reader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.CLIConfig.scheduler">
+<code class="sig-name descname"><span class="pre">scheduler</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler.Config" title="tslumen.scheduling.Scheduler.Config"><span class="pre">tslumen.scheduling.Scheduler.Config</span></a></em><em class="property"> <span class="pre">=</span> <span class="pre">Scheduler.Config(n_jobs=-2,</span> <span class="pre">prefer='processes',</span> <span class="pre">verbose=0,</span> <span class="pre">timeout=None,</span> <span class="pre">backend=None,</span> <span class="pre">pre_dispatch='2</span> <span class="pre">*</span> <span class="pre">n_jobs',</span> <span class="pre">batch_size='auto',</span> <span class="pre">temp_folder=None,</span> <span class="pre">max_nbytes='1M',</span> <span class="pre">mmap_mode='r',</span> <span class="pre">require=None,</span> <span class="pre">progress_disable=False)</span></em><a class="headerlink" href="#tslumen.cli.CLIConfig.scheduler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.cli.main">
+<code class="sig-prename descclassname"><span class="pre">tslumen.cli.</span></code><code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cfg</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#tslumen.cli.CLIConfig" title="tslumen.cli.CLIConfig"><span class="pre">tslumen.cli.CLIConfig</span></a></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/tslumen/cli.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>CLI entrypoint, takes in all the configurations, instantiates a scheduler, reads the input
+data into a DataFrame using the supplied <cite>Reader</cite>, profiles the data using the
+<cite>DefaultProfiler</cite>, the results of which are supplied to <cite>HtmlReport</cite> and then write the HTML to
+the output file or stream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>cfg</strong> (<a class="reference internal" href="#tslumen.cli.CLIConfig" title="tslumen.cli.CLIConfig"><em>CLIConfig</em></a>) – CLI configurations.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="module-tslumen.cli.readers">
+<span id="tslumen-cli-readers-module"></span><h2>tslumen.cli.readers module<a class="headerlink" href="#module-tslumen.cli.readers" title="Permalink to this headline">¶</a></h2>
+<p>Dataframe readers (mostly wrappers around Pandas <code class="docutils literal notranslate"><span class="pre">read_</span></code> functions).</p>
+<dl class="py class">
+<dt id="tslumen.cli.readers.Reader">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.cli.readers.</span></code><code class="sig-name descname"><span class="pre">Reader</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#Reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for all readers.</p>
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.Reader.path">
+<code class="sig-name descname"><span class="pre">path</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'???'</span></em><a class="headerlink" href="#tslumen.cli.readers.Reader.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.cli.readers.ReaderCsv">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.cli.readers.</span></code><code class="sig-name descname"><span class="pre">ReaderCsv</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderCsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.cli.readers.Reader" title="tslumen.cli.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.cli.readers.Reader</span></code></a></p>
+<p>CSV file reader.</p>
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.comment">
+<code class="sig-name descname"><span class="pre">comment</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.compression">
+<code class="sig-name descname"><span class="pre">compression</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'infer'</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.compression" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.decimal">
+<code class="sig-name descname"><span class="pre">decimal</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'.'</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.decimal" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.delim_whitespace">
+<code class="sig-name descname"><span class="pre">delim_whitespace</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.delim_whitespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.delimiter">
+<code class="sig-name descname"><span class="pre">delimiter</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.delimiter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.doublequote">
+<code class="sig-name descname"><span class="pre">doublequote</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.doublequote" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.encoding">
+<code class="sig-name descname"><span class="pre">encoding</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.encoding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.escapechar">
+<code class="sig-name descname"><span class="pre">escapechar</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.escapechar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.header">
+<code class="sig-name descname"><span class="pre">header</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'infer'</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.index_col">
+<code class="sig-name descname"><span class="pre">index_col</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.index_col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.lineterminator">
+<code class="sig-name descname"><span class="pre">lineterminator</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.lineterminator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.nrows">
+<code class="sig-name descname"><span class="pre">nrows</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.nrows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.prefix">
+<code class="sig-name descname"><span class="pre">prefix</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.quotechar">
+<code class="sig-name descname"><span class="pre">quotechar</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">&quot;'&quot;</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.quotechar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.quoting">
+<code class="sig-name descname"><span class="pre">quoting</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.quoting" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.cli.readers.ReaderCsv.read">
+<code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderCsv.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.sep">
+<code class="sig-name descname"><span class="pre">sep</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">','</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.sep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.skip_blank_lines">
+<code class="sig-name descname"><span class="pre">skip_blank_lines</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.skip_blank_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.skipfooter">
+<code class="sig-name descname"><span class="pre">skipfooter</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.skipfooter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.skipinitialspace">
+<code class="sig-name descname"><span class="pre">skipinitialspace</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.skipinitialspace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.skiprows">
+<code class="sig-name descname"><span class="pre">skiprows</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.skiprows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderCsv.thousands">
+<code class="sig-name descname"><span class="pre">thousands</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderCsv.thousands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.cli.readers.ReaderExcel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.cli.readers.</span></code><code class="sig-name descname"><span class="pre">ReaderExcel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderExcel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.cli.readers.Reader" title="tslumen.cli.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.cli.readers.Reader</span></code></a></p>
+<p>Excel file reader.</p>
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.comment">
+<code class="sig-name descname"><span class="pre">comment</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.comment" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.header">
+<code class="sig-name descname"><span class="pre">header</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.header" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.index_col">
+<code class="sig-name descname"><span class="pre">index_col</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.index_col" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.names">
+<code class="sig-name descname"><span class="pre">names</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.names" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.nrows">
+<code class="sig-name descname"><span class="pre">nrows</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.nrows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.cli.readers.ReaderExcel.read">
+<code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderExcel.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.sheet_name">
+<code class="sig-name descname"><span class="pre">sheet_name</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.sheet_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.skipfooter">
+<code class="sig-name descname"><span class="pre">skipfooter</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.skipfooter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.skiprows">
+<code class="sig-name descname"><span class="pre">skiprows</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.skiprows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderExcel.thousands">
+<code class="sig-name descname"><span class="pre">thousands</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderExcel.thousands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.cli.readers.ReaderFwf">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.cli.readers.</span></code><code class="sig-name descname"><span class="pre">ReaderFwf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderFwf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.cli.readers.Reader" title="tslumen.cli.readers.Reader"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.cli.readers.Reader</span></code></a></p>
+<p>Fixed-width formatted file reader.</p>
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderFwf.colspecs">
+<code class="sig-name descname"><span class="pre">colspecs</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'infer'</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf.colspecs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderFwf.infer_nrows">
+<code class="sig-name descname"><span class="pre">infer_nrows</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">100</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf.infer_nrows" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.cli.readers.ReaderFwf.read">
+<code class="sig-name descname"><span class="pre">read</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/cli/readers.html#ReaderFwf.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf.read" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderFwf.sep">
+<code class="sig-name descname"><span class="pre">sep</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">','</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf.sep" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.cli.readers.ReaderFwf.widths">
+<code class="sig-name descname"><span class="pre">widths</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.cli.readers.ReaderFwf.widths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.plot.interactive.html" class="btn btn-neutral float-left" title="tslumen.plot.interactive package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.scheduling.html" class="btn btn-neutral float-right" title="tslumen.scheduling module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

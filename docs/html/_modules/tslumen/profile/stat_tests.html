@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.stat_tests &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html"><img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../tslumen.html">tslumen</a> &raquo;</li>
+          <li><a href="../profile.html">tslumen.profile</a> &raquo;</li>
+      <li>tslumen.profile.stat_tests</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.profile.stat_tests</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Statistical tests.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">statsmodels.stats.api</span> <span class="k">as</span> <span class="nn">sms</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.tsatools</span> <span class="kn">import</span> <span class="n">freq_to_period</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="kn">import</span> <span class="n">acf</span><span class="p">,</span> <span class="n">adfuller</span><span class="p">,</span> <span class="n">kpss</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.profile.base</span> <span class="kn">import</span> <span class="n">ProfilingFunction</span><span class="p">,</span> <span class="n">_DCDict</span>
+<span class="kn">from</span> <span class="nn">tslumen.misc</span> <span class="kn">import</span> <span class="n">repr_html</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;TestResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;levene_constant_variance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ljungbox_autocorrelation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;jarque_bera_normality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;omnibus_normality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller_stationarity&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kpss_stationarity&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="TestResult"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.TestResult">[docs]</a><span class="nd">@repr_html</span>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TestResult</span><span class="p">(</span><span class="n">_DCDict</span><span class="p">):</span>
+    <span class="n">test</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">p_value</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">null_hypothesis</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">reject_null_hypothesis</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">details</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="levene_constant_variance"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.levene_constant_variance">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">levene_constant_variance</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Levene test for constant variances, tests the null hypothesis that all input samples are</span>
+<span class="sd">    from populations with equal variances.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.levene.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">freq</span> <span class="o">=</span> <span class="n">freq_to_period</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span><span class="p">)</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">freq</span> <span class="k">if</span> <span class="n">freq</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">10</span>
+        <span class="n">n_segs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">//</span> <span class="n">width</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
+        <span class="n">n_segs</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_segs</span>
+
+    <span class="n">sample_groups</span> <span class="o">=</span> <span class="n">ser_clean</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span> <span class="n">n_segs</span> <span class="o">*</span> <span class="n">width</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_segs</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">t_statistic</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">levene</span><span class="p">(</span><span class="o">*</span><span class="n">sample_groups</span><span class="p">)</span>
+    <span class="n">initial_hypothesis</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Variance is constant between </span><span class="si">{</span><span class="n">n_segs</span><span class="si">}</span><span class="s2"> groups&quot;</span>
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;t_statistic&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">t_statistic</span><span class="p">)}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Levene&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="n">initial_hypothesis</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="ljungbox_autocorrelation"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.ljungbox_autocorrelation">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">ljungbox_autocorrelation</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Null hypothesis - no auto correlation amounts specified lags.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        n_lags (int): Number of lags, if not supplied calculated as ``10*log(data.length)``.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">n_lags</span><span class="p">:</span>
+        <span class="n">n_lags</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="c1"># n_lags needs to be less than array&quot;s len -&gt; edge case, small arrays</span>
+        <span class="n">n_lags</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">n_lags</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">acf_result</span><span class="p">,</span> <span class="n">confidence_interval</span><span class="p">,</span> <span class="n">q_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">acf</span><span class="p">(</span>
+        <span class="n">ser_clean</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">n_lags</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">qstat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">confidence_level</span>
+    <span class="p">)</span>
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;acf&quot;</span><span class="p">:</span> <span class="n">acf_result</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;confidence_interval&quot;</span><span class="p">:</span> <span class="n">confidence_interval</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;q_stat&quot;</span><span class="p">:</span> <span class="n">q_stat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+        <span class="s2">&quot;p_values&quot;</span><span class="p">:</span> <span class="n">p_value</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+    <span class="p">}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">p_value</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Ljung-Box&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;No autocorrelation among specified lag(</span><span class="si">{</span><span class="n">n_lags</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="jarque_bera_normality"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.jarque_bera_normality">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">jarque_bera_normality</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The Jarque-Bera test statistic tests the null hypothesis that the data is normally</span>
+<span class="sd">    distributed against an alternative that the data follow some other distribution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.stats.stattools.jarque_bera.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">jarque_bera_test_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">skew</span><span class="p">,</span> <span class="n">kurtosis</span> <span class="o">=</span> <span class="n">sms</span><span class="o">.</span><span class="n">jarque_bera</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">)</span>
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;jarque_bera_test_statistic&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">jarque_bera_test_statistic</span><span class="p">),</span>
+        <span class="s2">&quot;skew&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">skew</span><span class="p">),</span>
+        <span class="s2">&quot;kurtosis&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">kurtosis</span><span class="p">),</span>
+    <span class="p">}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Jarque Bera&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="n">p_value</span><span class="p">,</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="s2">&quot;Data is normally distributed&quot;</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="omnibus_normality"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.omnibus_normality">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">omnibus_normality</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Omnibus test for normality, null hypothesis: data is normally distributed.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.stats.stattools.omni_normtest.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">k_2</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">sms</span><span class="o">.</span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">)</span>
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;k2&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">k_2</span><span class="p">)}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Omnibus&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="s2">&quot;Data is normally distributed&quot;</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="adfuller_stationarity"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.adfuller_stationarity">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">adfuller_stationarity</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Augmented Dickey-Fuller unit root test, can be used to test for a unit root in a univariate</span>
+<span class="sd">    process in the presence of serial correlation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.adfuller.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Sample size is too short&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+        <span class="n">test_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">,</span> <span class="n">crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">test_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">,</span> <span class="n">n_obs</span><span class="p">,</span> <span class="n">crit</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">adfuller</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">,</span> <span class="n">autolag</span><span class="o">=</span><span class="s2">&quot;AIC&quot;</span><span class="p">)</span>
+
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;test_statistic&quot;</span><span class="p">:</span> <span class="n">test_statistic</span><span class="p">,</span>
+        <span class="s2">&quot;n_lags&quot;</span><span class="p">:</span> <span class="n">n_lags</span><span class="p">,</span>
+        <span class="s2">&quot;n_obs&quot;</span><span class="p">:</span> <span class="n">n_obs</span><span class="p">,</span>
+        <span class="s2">&quot;critical_values&quot;</span><span class="p">:</span> <span class="n">crit</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Augmented Dickey-Fuller&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="s2">&quot;Data has unit root&quot;</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="kpss_stationarity"><a class="viewcode-back" href="../../../api/tslumen.profile.stat_tests.html#tslumen.profile.stat_tests.kpss_stationarity">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">kpss_stationarity</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">confidence_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestResult</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Kwiatkowski-Phillips-Schmidt-Shin test for the null hypothesis that the data is level or</span>
+<span class="sd">    trend stationary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Time series.</span>
+<span class="sd">        confidence_level (float): Confidence level for rejecting the null hypothesis.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        TestResult: test name, p-value, null hypothesis, reject?, confidence level and details.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.kpss.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="n">ser_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Found and removed N/A values.&quot;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">test_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">,</span> <span class="n">crit</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">kpss</span><span class="p">(</span><span class="n">ser_clean</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">OverflowError</span><span class="p">)</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">test_statistic</span><span class="p">,</span> <span class="n">p_value</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">,</span> <span class="n">crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">outcome_specifics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;test_statistic&quot;</span><span class="p">:</span> <span class="n">test_statistic</span><span class="p">,</span>
+        <span class="s2">&quot;n_lags&quot;</span><span class="p">:</span> <span class="n">n_lags</span><span class="p">,</span>
+        <span class="s2">&quot;critical_values&quot;</span><span class="p">:</span> <span class="n">crit</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">reject_h0</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">confidence_level</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">TestResult</span><span class="p">(</span>
+        <span class="n">test</span><span class="o">=</span><span class="s2">&quot;Kwiatkowski-Phillips-Schmidt-Shin&quot;</span><span class="p">,</span>
+        <span class="n">p_value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">p_value</span><span class="p">),</span>
+        <span class="n">confidence_level</span><span class="o">=</span><span class="n">confidence_level</span><span class="p">,</span>
+        <span class="n">null_hypothesis</span><span class="o">=</span><span class="s2">&quot;Data is level stationary&quot;</span><span class="p">,</span>
+        <span class="n">reject_null_hypothesis</span><span class="o">=</span><span class="n">reject_h0</span><span class="p">,</span>
+        <span class="n">details</span><span class="o">=</span><span class="n">outcome_specifics</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">result</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

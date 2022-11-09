@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report.dashboard.sections.features &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html"><img src="../../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.report.dashboard.sections.features</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.report.dashboard.sections.features</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Features section and blocks.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.plot</span> <span class="kn">import</span> <span class="n">interactive</span> <span class="k">as</span> <span class="n">viz</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.interactive.base</span> <span class="kn">import</span> <span class="n">go</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.dashboard.base</span> <span class="kn">import</span> <span class="n">DashInput</span><span class="p">,</span> <span class="n">DashSection</span><span class="p">,</span> <span class="n">DashBlock</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.dashboard._dash</span> <span class="kn">import</span> <span class="n">dbc</span><span class="p">,</span> <span class="n">html</span><span class="p">,</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Plot</span><span class="p">,</span> <span class="n">EmptyFigure</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;BlockTSFTSelect&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSFeaturesHeatmap&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSFeaturesRadar&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SectionFeatures&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">_PROFILERS_TSFEATURES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;ft_stl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_entropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_pacf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_tilewin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_kpss&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_adfuller&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_MAIN</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;trend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;seasonality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entropy_acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;instability&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lumpiness&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_STAT</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;kpss(c)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kpss(ct)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(c)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(ct)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(ctt)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(nc)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_ACF</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;acf1(d=0)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(d=1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(d=2)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=0)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=2)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(error)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(error)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf(season)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_PACF</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pacf5(d=0)&quot;</span><span class="p">,</span> <span class="s2">&quot;pacf5(d=1)&quot;</span><span class="p">,</span> <span class="s2">&quot;pacf5(d=2)&quot;</span><span class="p">,</span> <span class="s2">&quot;pacf(season)&quot;</span><span class="p">]</span>
+<span class="n">_FTS</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="n">_FTS_MAIN</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="n">_FTS_STAT</span><span class="p">,</span> <span class="n">acf</span><span class="o">=</span><span class="n">_FTS_ACF</span><span class="p">,</span> <span class="n">pacf</span><span class="o">=</span><span class="n">_FTS_PACF</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="BlockTSFTSelect"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.features.BlockTSFTSelect">[docs]</a><span class="k">class</span> <span class="nc">BlockTSFTSelect</span><span class="p">(</span><span class="n">DashInput</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block for selecting which timeseries details to display&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;select-ftfeatures&quot;</span><span class="p">,</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Main features&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;main&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Stationarity&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;stat&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;ACF&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;acf&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;PACF&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;pacf&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">value</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">select</span> <span class="o">=</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Checklist</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">ser</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">ser</span><span class="p">}</span> <span class="k">for</span> <span class="n">ser</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">],</span>
+            <span class="n">value</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;select-ftts&quot;</span><span class="p">,</span>
+            <span class="n">inline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">H4</span><span class="p">(</span><span class="s2">&quot;Group&quot;</span><span class="p">),</span>
+                <span class="n">features</span><span class="p">,</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">Hr</span><span class="p">(),</span>
+                <span class="n">html</span><span class="o">.</span><span class="n">H4</span><span class="p">(</span><span class="s2">&quot;Select series&quot;</span><span class="p">),</span>
+                <span class="n">select</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlockTSFeaturesHeatmap"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap">[docs]</a><span class="k">class</span> <span class="nc">BlockTSFeaturesHeatmap</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with ts features heatmap&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Heatmap&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;400px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ser</span><span class="p">[</span><span class="n">ft</span><span class="p">]</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">_PROFILERS_TSFEATURES</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ser</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">],</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-ftheat&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">EmptyFigure</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Select a series&quot;</span><span class="p">),)</span>
+
+        <span class="n">df_fts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">_FTS</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">names</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">lim_min</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">features</span> <span class="o">==</span> <span class="s2">&quot;main&quot;</span> <span class="k">else</span> <span class="n">df_fts</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">lim_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">df_fts</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plot_heat</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span>
+            <span class="n">df_fts</span><span class="p">,</span>
+            <span class="n">colorbar_limit</span><span class="o">=</span><span class="p">(</span><span class="n">lim_min</span><span class="p">,</span> <span class="n">lim_max</span><span class="p">),</span>
+            <span class="n">xrotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">50</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)),</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">plot</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">plot_heat</span><span class="p">,)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-ftheat&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-ftfeatures&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;select-ftts&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSFeaturesRadar"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar">[docs]</a><span class="k">class</span> <span class="nc">BlockTSFeaturesRadar</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with ts features radar&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Radar&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;400px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ser</span><span class="p">[</span><span class="n">ft</span><span class="p">]</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">_PROFILERS_TSFEATURES</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ser</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">],</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-ftradar&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">features</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">EmptyFigure</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Select a series&quot;</span><span class="p">),)</span>
+
+        <span class="n">df_fts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">_FTS</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">names</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">plot_radar</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">Radar</span><span class="p">(</span>
+            <span class="n">df_fts</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">show_legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">legend_position</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">plot</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">plot_radar</span><span class="p">,)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-ftradar&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-ftfeatures&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;select-ftts&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="SectionFeatures"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.features.SectionFeatures">[docs]</a><span class="k">class</span> <span class="nc">SectionFeatures</span><span class="p">(</span><span class="n">DashSection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the contents of the &quot;Features&quot; section&quot;&quot;&quot;</span>
+
+    <span class="n">_block_classes</span> <span class="o">=</span> <span class="p">[</span><span class="n">BlockTSFTSelect</span><span class="p">,</span> <span class="n">BlockTSFeaturesHeatmap</span><span class="p">,</span> <span class="n">BlockTSFeaturesRadar</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Features&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSFTSelect&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;col-sm-auto&quot;</span><span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSFeaturesHeatmap&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSFeaturesRadar&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

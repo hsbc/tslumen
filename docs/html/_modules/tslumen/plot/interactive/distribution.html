@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.plot.interactive.distribution &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html"><img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.plot.interactive.distribution</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.plot.interactive.distribution</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Distribution plots.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.plot.interactive.base</span> <span class="kn">import</span> <span class="n">VizBase</span><span class="p">,</span> <span class="n">go</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Histogram&quot;</span><span class="p">,</span> <span class="s2">&quot;SampleTheoretical&quot;</span><span class="p">,</span> <span class="s2">&quot;BoxPlot&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Histogram"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.distribution.Histogram">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">Histogram</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Histogram plot, displaying the distribution of continuous values.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_xaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bin&quot;</span><span class="p">,</span>
+        <span class="n">label_yaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Count&quot;</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">legend_position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bargap</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">barmode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;stack&quot;</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y:d}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            data (Union[pd.DataFrame, pd.Series]): Values to be plotted on the histogram.</span>
+<span class="sd">            labels (list): Optional labels.</span>
+<span class="sd">            label_xaxis (str): X-axis label, default to &#39;Bins&#39;.</span>
+<span class="sd">            label_yaxis (str): Y-axis label, default to &#39;Count&#39;.</span>
+<span class="sd">            xrotation (int): Rotation degree to apply to the x axis, default 0.</span>
+<span class="sd">            show_legend (bool): Whether to show the legend, default False.</span>
+<span class="sd">            legend_position (str): Where to position the legend, default &#39;right&#39;.</span>
+<span class="sd">            color (Union[str, list]): Color of the plot bars.</span>
+<span class="sd">            bargap (Union[float, int]): Gap between each bar of the histogram, default 0.1.</span>
+<span class="sd">            barmode (str): Options include &quot;stack&quot; (default), &quot;relative&quot;, &quot;group&quot; and &quot;overlay&quot;.</span>
+<span class="sd">            width (int): The width of the plot.</span>
+<span class="sd">            height (int): The height of the plot.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span> <span class="o">=</span> <span class="n">label_xaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span> <span class="o">=</span> <span class="n">label_yaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="n">show_legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span> <span class="o">=</span> <span class="n">legend_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">barmode</span> <span class="o">=</span> <span class="n">barmode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bargap</span> <span class="o">=</span> <span class="n">bargap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pfix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+        <span class="n">label_yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span>
+
+        <span class="n">hists</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Bar</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                <span class="n">meta</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                    <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="n">label_yaxis</span><span class="p">,</span>
+                    <span class="s2">&quot;column&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+                    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span>
+                <span class="p">},</span>
+                <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">[</span><span class="n">ix</span><span class="p">]},</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">hists</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;legend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">LEGEND_POSITION</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span><span class="p">],</span>
+            <span class="s2">&quot;bargap&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">bargap</span><span class="p">,</span>
+            <span class="s2">&quot;barmode&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">barmode</span><span class="p">,</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+                <span class="s2">&quot;tickvals&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span><span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">opts</span></div>
+
+
+<div class="viewcode-block" id="SampleTheoretical"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.distribution.SampleTheoretical">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">SampleTheoretical</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;PP/QQ plot.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">col_theoretical</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">col_sample</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">col_reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">label_xaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Theoretical&quot;</span><span class="p">,</span>
+        <span class="n">label_yaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Sample&quot;</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_sample</span> <span class="o">=</span> <span class="n">col_sample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_theoretical</span> <span class="o">=</span> <span class="n">col_theoretical</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_reference</span> <span class="o">=</span> <span class="n">col_reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span> <span class="o">=</span> <span class="n">label_xaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span> <span class="o">=</span> <span class="n">label_yaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">color_m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">color_l</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span>
+        <span class="n">label_yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span>
+
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span> <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="n">label_yaxis</span><span class="p">},</span>
+            <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col_theoretical</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col_reference</span><span class="p">],</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color_l</span><span class="p">},</span>
+                    <span class="o">**</span><span class="n">kwargs</span>
+                <span class="p">),</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col_theoretical</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col_sample</span><span class="p">],</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color_m</span><span class="p">},</span>
+                    <span class="o">**</span><span class="n">kwargs</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span><span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">opts</span></div>
+
+
+<div class="viewcode-block" id="BoxPlot"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.distribution.BoxPlot">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">BoxPlot</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;BoxPlot w/ whiskers.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_xaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">label_yaxis</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">legend_position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y:d}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span> <span class="o">=</span> <span class="n">label_xaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span> <span class="o">=</span> <span class="n">label_yaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="n">show_legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span> <span class="o">=</span> <span class="n">legend_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pfix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+        <span class="n">label_yaxis</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span>
+
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Box</span><span class="p">(</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                <span class="n">meta</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                    <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="n">label_yaxis</span><span class="p">,</span>
+                    <span class="s2">&quot;column&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+                    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span>
+                <span class="p">},</span>
+                <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">[</span><span class="n">ix</span><span class="p">]},</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">boxes</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">opts</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;legend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">LEGEND_POSITION</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span><span class="p">],</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+                <span class="s2">&quot;tickvals&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span><span class="p">},</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">opts</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

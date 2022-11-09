@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.plot.interactive.correlation &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html"><img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.plot.interactive.correlation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.plot.interactive.correlation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Correlation plots.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">gaussian_kde</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.plot.interactive.base</span> <span class="kn">import</span> <span class="n">VizBase</span><span class="p">,</span> <span class="n">go</span><span class="p">,</span> <span class="n">make_subplots</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.utils</span> <span class="kn">import</span> <span class="n">cmapper</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LagCorrelation&quot;</span><span class="p">,</span> <span class="s2">&quot;LagMatrix&quot;</span><span class="p">,</span> <span class="s2">&quot;ScatterMatrix&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="LagCorrelation"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.correlation.LagCorrelation">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">LagCorrelation</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Lag correlation (ACF/PACF) plots, commonly known as lollipop, for analysing correlation on</span>
+<span class="sd">    a given lag. Useful for auto-, partial-, cross- and partial-cross-correlation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">col_corr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;correlation&quot;</span><span class="p">,</span>
+        <span class="n">col_lag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;lag&quot;</span><span class="p">,</span>
+        <span class="n">col_up_bound</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;up&quot;</span><span class="p">,</span>
+        <span class="n">col_lo_bound</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span>
+        <span class="n">label_corr</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_lag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_up_bound</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_lo_bound</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_xaxis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Lag&quot;</span><span class="p">,</span>
+        <span class="n">label_yaxis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Correlation&quot;</span><span class="p">,</span>
+        <span class="n">color_area</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rgba(160, 158, 187, 0.25)&quot;</span><span class="p">,</span>
+        <span class="n">color_vlines</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">color_up_bound</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">VizBase</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">color_lo_bound</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">VizBase</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">color_circle</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">VizBase</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">scatter_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="n">vlines_width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            data (pd.DataFrame): Dataframe with lag, correlation and optionally upper and lower CI.</span>
+<span class="sd">            col_corr (str): Name of the correlation column.</span>
+<span class="sd">            col_lag (str): Name of the lag column.</span>
+<span class="sd">            col_up_bound (str): Name of the upper boundary column.</span>
+<span class="sd">            col_lo_bound (str): Name of the lower boundary column.</span>
+<span class="sd">            label_corr (str): Label for the correlation, defaults to `col_corr` if not provided.</span>
+<span class="sd">            label_lag (str): Label for the lag, defaults to `col_lag` if not provided.</span>
+<span class="sd">            label_up_bound (str): Label for the upper boundary, defaults to `col_up_bound`.</span>
+<span class="sd">            label_lo_bound (str): Label for the upper boundary, defaults to `col_lo_bound`.</span>
+<span class="sd">            legend_position (str): Where to position the legend, default &#39;right&#39;.</span>
+<span class="sd">            label_xaxis (str): X-axis label, default &#39;Lag&#39;.</span>
+<span class="sd">            label_yaxis (str): Y-axis label, default &#39;Correlation&#39;.</span>
+<span class="sd">            color_area (str): Color of the shaded area between the boundaries.</span>
+<span class="sd">            color_vlines (str): Color of the vertical lines/spikes.</span>
+<span class="sd">            color_up_bound (str): Color of the upper boundary line.</span>
+<span class="sd">            color_lo_bound (str): Color of the lower boundary line.</span>
+<span class="sd">            color_circle (str): Color of the scatter points.</span>
+<span class="sd">            scatter_size (float): Size of the scatter points, default 6.</span>
+<span class="sd">            vlines_width (float): Width of the vertical lines/spikes, default 2.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_col_corr</span> <span class="o">=</span> <span class="n">col_corr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span> <span class="o">=</span> <span class="n">col_lag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_col_up_bound</span> <span class="o">=</span> <span class="n">col_up_bound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_col_lo_bound</span> <span class="o">=</span> <span class="n">col_lo_bound</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_corr</span> <span class="o">=</span> <span class="n">label_corr</span> <span class="k">if</span> <span class="n">label_corr</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_corr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_lag</span> <span class="o">=</span> <span class="n">label_lag</span> <span class="k">if</span> <span class="n">label_lag</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_up_bound</span> <span class="o">=</span> <span class="n">label_up_bound</span> <span class="k">if</span> <span class="n">label_up_bound</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_up_bound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_lo_bound</span> <span class="o">=</span> <span class="n">label_lo_bound</span> <span class="k">if</span> <span class="n">label_lo_bound</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_lo_bound</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_xaxis</span> <span class="o">=</span> <span class="n">label_xaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_label_yaxis</span> <span class="o">=</span> <span class="n">label_yaxis</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_area</span> <span class="o">=</span> <span class="n">color_area</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_vlines</span> <span class="o">=</span> <span class="n">color_vlines</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_up_bound</span> <span class="o">=</span> <span class="n">color_up_bound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_lo_bound</span> <span class="o">=</span> <span class="n">color_lo_bound</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_color_circle</span> <span class="o">=</span> <span class="n">color_circle</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scatter_size</span> <span class="o">=</span> <span class="n">scatter_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vlines_width</span> <span class="o">=</span> <span class="n">vlines_width</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h_line_width</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_h_line_color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
+            <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">x1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">y1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span>
+            <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+            <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h_line_color</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_h_line_width</span><span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_lo_bound</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_up_bound</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_up_bound</span><span class="p">],</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lag</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                    <span class="s2">&quot;%</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_up_bound</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                    <span class="s2">&quot;%</span><span class="si">{y}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_up_bound</span><span class="p">,</span>
+                    <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_up_bound</span><span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lo_bound</span><span class="p">],</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+                    <span class="n">hoverinfo</span><span class="o">=</span><span class="s2">&quot;skip&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lo_bound</span><span class="p">,</span>
+                    <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_lo_bound</span><span class="p">},</span>
+                    <span class="n">fillcolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_color_area</span><span class="p">,</span>
+                    <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;tonexty&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span><span class="p">],</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lo_bound</span><span class="p">],</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                    <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lag</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                    <span class="s2">&quot;%</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lo_bound</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                    <span class="s2">&quot;%</span><span class="si">{y}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lo_bound</span><span class="p">,</span>
+                    <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_lo_bound</span><span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">lag</span><span class="p">,</span> <span class="n">corr</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_col_corr</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span>
+                <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+                <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+                <span class="n">x0</span><span class="o">=</span><span class="n">lag</span><span class="p">,</span>
+                <span class="n">y0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">x1</span><span class="o">=</span><span class="n">lag</span><span class="p">,</span>
+                <span class="n">y1</span><span class="o">=</span><span class="n">corr</span><span class="p">,</span>
+                <span class="n">line</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_vlines</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vlines_width</span><span class="p">},</span>
+                <span class="n">layer</span><span class="o">=</span><span class="s2">&quot;below&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_lag</span><span class="p">],</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_col_corr</span><span class="p">],</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_lag</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                <span class="s2">&quot;%</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_corr</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                <span class="s2">&quot;%</span><span class="si">{y}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_label_corr</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_color_circle</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scatter_size</span><span class="p">},</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;zeroline&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label_xaxis</span><span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;zeroline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_label_yaxis</span><span class="p">},</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="LagMatrix"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.correlation.LagMatrix">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">LagMatrix</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Lag Matrix plot.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">corr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span>
+        <span class="n">col_original</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;original&quot;</span><span class="p">,</span>
+        <span class="n">ncols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">col_original</span> <span class="o">=</span> <span class="n">col_original</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span> <span class="o">=</span> <span class="n">ncols</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="n">show_legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">original</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col_original</span><span class="p">]</span>
+        <span class="n">lags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">col_original</span><span class="p">]]</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncols</span>
+        <span class="n">nrows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">lags</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">ncols</span><span class="p">))</span>
+        <span class="n">color_m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">opt_xaxis</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xaxis&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">opt_yaxis</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;yaxis&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+            <span class="n">rows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
+            <span class="n">cols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span>
+            <span class="n">start_cell</span><span class="o">=</span><span class="s2">&quot;top-left&quot;</span><span class="p">,</span>
+            <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span>
+            <span class="n">vertical_spacing</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lags</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+            <span class="n">ix_row</span> <span class="o">=</span> <span class="n">ix</span> <span class="o">//</span> <span class="n">ncols</span>
+            <span class="n">ix_col</span> <span class="o">=</span> <span class="n">ix</span> <span class="o">%</span> <span class="n">ncols</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">original</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">lags</span><span class="p">[</span><span class="n">col</span><span class="p">],</span>
+                    <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="s2">&quot;level&quot;</span><span class="p">,</span> <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">},</span>
+                    <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                    <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color_m</span><span class="p">},</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">col</span><span class="p">,</span>
+                    <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="o">**</span><span class="n">opt_xaxis</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                    <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="o">**</span><span class="n">opt_yaxis</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                <span class="p">},</span>
+                <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="n">title_text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ScatterMatrix"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.correlation.ScatterMatrix">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">ScatterMatrix</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Scatter matrix (aka pair plot) with scatters, KDE and correlation Heatmap.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">corr</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="n">show_legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">opt_xaxis</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;xaxis&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">opt_yaxis</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;yaxis&quot;</span><span class="p">,</span> <span class="p">{}))</span>
+        <span class="n">cmap_pos</span> <span class="o">=</span> <span class="n">cmapper</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">)</span>
+        <span class="n">cmap_neg</span> <span class="o">=</span> <span class="n">cmapper</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Purples_r&quot;</span><span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span>
+            <span class="n">rows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span>
+            <span class="n">cols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span>
+            <span class="n">start_cell</span><span class="o">=</span><span class="s2">&quot;top-left&quot;</span><span class="p">,</span>
+            <span class="n">shared_xaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">horizontal_spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">vertical_spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ix</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">tcolors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">annotations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ix_row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrows</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">ix_col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
+                <span class="n">ix</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">col_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">ix_row</span><span class="p">]</span>
+                <span class="n">col_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">ix_col</span><span class="p">]</span>
+                <span class="n">corr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">corr</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">col_x</span><span class="p">,</span> <span class="n">col_y</span><span class="p">]</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="p">(</span><span class="n">cmap_pos</span> <span class="k">if</span> <span class="n">corr</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">cmap_neg</span><span class="p">)(</span><span class="n">corr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ix_row</span> <span class="o">==</span> <span class="n">ix_col</span><span class="p">:</span>
+                    <span class="n">series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col_x</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">series</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">series</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">500</span><span class="p">)</span>
+                    <span class="n">y</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">series</span><span class="p">)</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                    <span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                        <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+                        <span class="n">textposition</span><span class="o">=</span><span class="s2">&quot;middle center&quot;</span><span class="p">,</span>
+                        <span class="n">name</span><span class="o">=</span><span class="n">col_x</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">annotations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ix</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">col_x</span><span class="p">))</span>
+
+                <span class="k">elif</span> <span class="n">ix_row</span> <span class="o">&gt;</span> <span class="n">ix_col</span><span class="p">:</span>
+                    <span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col_x</span><span class="p">],</span>
+                        <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">col_y</span><span class="p">],</span>
+                        <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="n">col_x</span><span class="p">,</span> <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="n">col_y</span><span class="p">},</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">},</span>
+                        <span class="n">textposition</span><span class="o">=</span><span class="s2">&quot;middle center&quot;</span><span class="p">,</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col_x</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">col_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tcolors</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">ix</span><span class="p">,</span> <span class="n">color</span><span class="p">))</span>
+                    <span class="n">trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                        <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+                        <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">],</span>
+                        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
+                        <span class="n">textposition</span><span class="o">=</span><span class="s2">&quot;middle center&quot;</span><span class="p">,</span>
+                        <span class="n">text</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s2"> .3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+                        <span class="n">textfont</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.6</span> <span class="k">else</span> <span class="s2">&quot;white&quot;</span><span class="p">},</span>
+                        <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col_x</span><span class="si">}</span><span class="s2"> x </span><span class="si">{</span><span class="n">col_y</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="n">hovertemplate</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{</span><span class="n">col_x</span><span class="si">}</span><span class="s2">&lt;/b&gt; x &lt;b&gt;</span><span class="si">{</span><span class="n">col_y</span><span class="si">}</span><span class="s2">&lt;/b&gt;: &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">trace</span><span class="p">:</span>
+                        <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="o">**</span><span class="n">opt_xaxis</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                        <span class="s2">&quot;mirror&quot;</span><span class="p">:</span> <span class="n">ix_row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="s2">&quot;showticklabels&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="o">**</span><span class="n">opt_yaxis</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                        <span class="s2">&quot;mirror&quot;</span><span class="p">:</span> <span class="n">ix_col</span> <span class="o">==</span> <span class="n">ncols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                        <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                        <span class="s2">&quot;showticklabels&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="n">row</span><span class="o">=</span><span class="n">ix_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">col</span><span class="o">=</span><span class="n">ix_col</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;shapes&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;rect&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;x0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;y0&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;y1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="s2">&quot;layer&quot;</span><span class="p">:</span> <span class="s2">&quot;below&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;line_width&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                        <span class="s2">&quot;xref&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;x</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;yref&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;y</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;fillcolor&quot;</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span>
+                    <span class="p">}</span>
+                    <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">tcolors</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">ix</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">annotations</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_annotation</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span>
+                    <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+                    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+                    <span class="n">xref</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;x</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">yref</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;y</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">),</span>
+                    <span class="n">textangle</span><span class="o">=-</span><span class="mi">45</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="p">}</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

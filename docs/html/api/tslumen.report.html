@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report package &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.report.html package" href="tslumen.report.html.html" />
+    <link rel="prev" title="tslumen.profile.summary module" href="tslumen.profile.summary.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tslumen.report package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.report.html.html">tslumen.report.html package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.report.dashboard.html">tslumen.report.dashboard package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tslumen.report.base">tslumen.report.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+      <li>tslumen.report package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.report">
+<span id="tslumen-report-package"></span><h1>tslumen.report package<a class="headerlink" href="#module-tslumen.report" title="Permalink to this headline">¶</a></h1>
+<p>Reporting package, encloses all functionality to output/render/report the profiling results.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tslumen.report.html.html">tslumen.report.html package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html.html#module-tslumen.report.html.report">tslumen.report.html.report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html.html#module-tslumen.report.html.sections">tslumen.report.html.sections module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html.html#module-tslumen.report.html.base">tslumen.report.html.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tslumen.report.dashboard.html">tslumen.report.dashboard package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.base">tslumen.report.dashboard.base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.report">tslumen.report.dashboard.report module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.sections.features">tslumen.report.dashboard.sections.features module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.sections.relations">tslumen.report.dashboard.sections.relations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.sections.summary">tslumen.report.dashboard.sections.summary module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.dashboard.html#module-tslumen.report.dashboard.sections.timeseries">tslumen.report.dashboard.sections.timeseries module</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="module-tslumen.report.base">
+<span id="tslumen-report-base-module"></span><h2>tslumen.report.base module<a class="headerlink" href="#module-tslumen.report.base" title="Permalink to this headline">¶</a></h2>
+<p>Base functionality for creating profiling Reports.</p>
+<dl class="py class">
+<dt id="tslumen.report.base.Report">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.base.</span></code><code class="sig-name descname"><span class="pre">Report</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledProfiler" title="tslumen.profile.base.BundledProfiler"><span class="pre">tslumen.profile.base.BundledProfiler</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiler_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><span class="pre">tslumen.scheduling.Scheduler</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/base.html#Report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.base.Report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for creating profiling Reports.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Timeseries data.</p></li>
+<li><p><strong>meta</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Timeseries metadata, a 2-level dictionary, first level indexed
+by <code class="docutils literal notranslate"><span class="pre">{'frame':</span> <span class="pre">{&lt;key&gt;:</span> <span class="pre">&lt;value&gt;},</span> <span class="pre">{'series':</span> <span class="pre">{&lt;series</span> <span class="pre">name&gt;:</span> <span class="pre">&lt;desc&gt;}}</span></code>.</p></li>
+<li><p><strong>result</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><em>BundledResult</em></a><em>]</em>) – For instantiating the report with pre-computed
+results from a profiler.</p></li>
+<li><p><strong>profiler</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledProfiler" title="tslumen.profile.base.BundledProfiler"><em>BundledProfiler</em></a><em>]</em>) – The <cite>BundledProfiler</cite> to run the profiling,
+defaults to <cite>DefaultProfiler</cite>.</p></li>
+<li><p><strong>profiler_config</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Profiler’s configurations.</p></li>
+<li><p><strong>scheduler</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><em>Scheduler</em></a><em>]</em>) – A <cite>Scheduler</cite>, default’s to <cite>Scheduler</cite>.</p></li>
+<li><p><strong>scheduler_config</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Scheduler’s configurations.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="tslumen.report.base.Report.df">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">df</span></code><a class="headerlink" href="#tslumen.report.base.Report.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.base.Report.meta">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">meta</span></code><a class="headerlink" href="#tslumen.report.base.Report.meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.base.Report.profiler">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">profiler</span></code><a class="headerlink" href="#tslumen.report.base.Report.profiler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.base.Report.result">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">result</span></code><a class="headerlink" href="#tslumen.report.base.Report.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.profile.summary.html" class="btn btn-neutral float-left" title="tslumen.profile.summary module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.report.html.html" class="btn btn-neutral float-right" title="tslumen.report.html package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

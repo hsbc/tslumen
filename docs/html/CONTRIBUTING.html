@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; tslumen  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/project.css" type="text/css" /><link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="CHANGELOG.html" />
+    <link rel="prev" title="API Index" href="genindex.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html"><img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">API Index</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#process">Process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#source-management">Source management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ground-rules">Ground rules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#review-process">Review process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#important-things-to-keep-in-mind">Important things to keep in mind</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#developing">Developing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#environment-setup">Environment setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coding-standards">Coding standards</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#why-are-they-needed">Why are they needed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#coding-standards-in-detail">Coding Standards in detail</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#unit-tests-guidelines">Unit tests guidelines</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unit-tests-conventions">Unit tests conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#makefile">Makefile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>This page provides guidance and useful information about contributing to tslumen.</p>
+<section id="process">
+<h2>Process<a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h2>
+<p>All contributions should be tied to a GitHub issue. An issue should be
+filed under one of three categories:</p>
+<ul class="simple">
+<li><p>Bug report</p></li>
+<li><p>Documentation improvement</p></li>
+<li><p>Feature request</p></li>
+</ul>
+<p>Details required for each category will be different; the issue template
+should guide the user to through the process.</p>
+<p>Once created, the issue will be given the <code class="docutils literal notranslate"><span class="pre">triage</span></code> label, regardless
+of the category it belongs to. Once reviewed it will either be accepted
+(thus dropping the <code class="docutils literal notranslate"><span class="pre">triage</span></code> label) or rejected. In case it is rejected,
+the issue will be marked with the label <code class="docutils literal notranslate"><span class="pre">Won't</span> <span class="pre">fix</span></code> and closed.</p>
+<p>Before proceeding to implement a feature or patch, we recommend to wait
+for the issue to be approved and to get some feedback, namely on the
+implementation strategy. Doing so should expedite the process and help
+with keeping the code base consistent.</p>
+<p>Similarly, the repository owners should offer guidance in setting the
+target release version. It is important to do so ahead of any changes to
+the code, so that the appropriate branch can be selected as the base, thus
+reducing the likelihood of conflicts arising when attempting to merge.</p>
+<p>Once there’s an agreed upon implementation strategy and target release,
+the development process can start. The first step should be to create a
+branch off of the release branch. There are naming conventions that must
+be followed, which can be found in the <em>Source control</em> section.</p>
+<p>To get the changes merged a Pull Request needs to be raised, reviewed
+and approved.  For better visibility and continuous involvement, the Pull
+Request can be raised even before the changes are finalized, just make
+sure to mark it as <em>draft</em>. Be sure to point to the correct target branch,
+as by default GitHub assumes all Pull Requests are to go into <code class="docutils literal notranslate"><span class="pre">master</span></code>.</p>
+<p>During the review process there might be questions or comments and
+additional changes to the code as a result. Make sure to keep all the
+changes in the same branch and inform the reviewers of the progress.</p>
+<p>Once approved and merged to the release branch, your changes will be on
+their way into the next release.</p>
+</section>
+<section id="source-management">
+<h2>Source management<a class="headerlink" href="#source-management" title="Permalink to this headline">¶</a></h2>
+<section id="ground-rules">
+<h3>Ground rules<a class="headerlink" href="#ground-rules" title="Permalink to this headline">¶</a></h3>
+<p>Git and GitHub are used for version control/source management of the
+complete codebase of tslumen.</p>
+<p>Some branches serve special purposes and are protected against direct
+commits (except from administrators). These would include the <code class="docutils literal notranslate"><span class="pre">master</span></code> and
+release branches, as well as the documentation branch <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>. Changes
+to these branches should happen exclusively via Pull requests.</p>
+<p>All development work – be it bug fixes, new features or changes to
+the documentation – should be done off of feature branches, which need
+to undergo a code review cycle supported on a Pull Request before being
+merged to protected branches.</p>
+</section>
+<section id="review-process">
+<h3>Review process<a class="headerlink" href="#review-process" title="Permalink to this headline">¶</a></h3>
+<p>All review comments should be recorded in GitHub next to the line/block
+of code they refer to.  If the comment is more general and covers the
+entire file, preferably stick it to the top.</p>
+<p>The reviewer who raised the comment should be the one marking it as
+resolved. To signal that the comment has been addressed, and the changes
+implemented, the submitter should leave a reply in the appropriate
+comment.</p>
+<p>Make sure to reply to all comments that have been addressed, so that
+the reviewer knows that particular issue ready for a subsequent review.</p>
+<p>When in doubt or disagreement, use the review comments to engage in
+discussion. This allows the community to chip in with their views and
+forces everyone to articulate their thoughts in a well-structured manner.</p>
+<p>Once the reviewer is happy with the changes, the Pull Request will be
+marked as approved. Avoid pushing any more changes to the branch, or
+you’ll trigger a new review cycle.</p>
+</section>
+<section id="important-things-to-keep-in-mind">
+<h3>Important things to keep in mind<a class="headerlink" href="#important-things-to-keep-in-mind" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Pull requests should have short and meaningful titles as well as a clear description of the changes</p></li>
+<li><p>Git client must be configured properly to prevent committing as an unrecognized author</p></li>
+<li><p>Secrets, local configs and dependencies should not leak into source control</p></li>
+<li><p>Binaries and data should not, in principle, be kept under source control (exceptions may apply)</p></li>
+<li><p>Commits should be clean, single-purposed and accompanied by a meaningful commit message</p></li>
+<li><p>Commit early; commit often</p></li>
+<li><p>Branches should be kept up to date and ideally be merged soon to prevent becoming stale</p></li>
+<li><p>Stale branches should be deleted, ideally by their owners</p></li>
+</ul>
+</section>
+</section>
+<section id="developing">
+<h2>Developing<a class="headerlink" href="#developing" title="Permalink to this headline">¶</a></h2>
+<section id="environment-setup">
+<h3>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h3>
+<p>Make sure that your name and email are configured in your git client so
+that your commits and Pull Requests are signed.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;&lt;Your Name&gt;&quot;</span>
+git config --global user.email &lt;youremail@something.com&gt;
+</pre></div>
+</div>
+<p>To avoid dependency issues, the recommendation is to work off of a
+sandboxed python environment. Assuming you have <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>virtualenv venv
+<span class="nb">source</span> venv/bin/activate
+pip install -r requirements.txt
+pip install -r requirements-extras.txt
+pip install -r requirements-dev.txt
+</pre></div>
+</div>
+<p>The first two requirements files contain the package dependencies –
+core and extras, respectively. The dev one includes some additional
+packages required only to support the development process (i.e. linters,
+test frameworks, doc generation etc.)</p>
+</section>
+<section id="coding-standards">
+<h3>Coding standards<a class="headerlink" href="#coding-standards" title="Permalink to this headline">¶</a></h3>
+<section id="why-are-they-needed">
+<h4>Why are they needed<a class="headerlink" href="#why-are-they-needed" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong>Readability</strong> – following a consistent convention makes it easier to read the code, as it prevents styling differences that can be distracting and encourages general good programming practices that make the logic easier to follow.</p></li>
+<li><p><strong>Consistency</strong> – code should be considered a company asset and, as such, be cohesive rather than exhibit the individual preferences of each developer.</p></li>
+<li><p><strong>Maintainability</strong> – a consistent and easy to read codebase is easier to maintain.</p></li>
+<li><p><strong>Lower the TCO</strong> – all previously mentioned aspects contribute in lowering the total cost of ownership. The induction of new contributors, as an example, should be much smoother when these standards are being followed.</p></li>
+</ul>
+</section>
+<section id="coding-standards-in-detail">
+<h4>Coding Standards in detail<a class="headerlink" href="#coding-standards-in-detail" title="Permalink to this headline">¶</a></h4>
+<p><strong>Idiomatic Python</strong></p>
+<ul class="simple">
+<li><p>Zen of Python – <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">this</span></code></p></li>
+</ul>
+<blockquote>
+<div><p>The Zen of Python, by Tim Peters</p>
+<p>Beautiful is better than ugly.<br />
+Explicit is better than implicit.<br />
+Simple is better than complex.<br />
+Complex is better than complicated.<br />
+Flat is better than nested.<br />
+Sparse is better than dense.<br />
+Readability counts.<br />
+Special cases aren’t special enough to break the rules.<br />
+Although practicality beats purity.<br />
+Errors should never pass silently.<br />
+Unless explicitly silenced.<br />
+In the face of ambiguity, refuse the temptation to guess.<br />
+There should be one– and preferably only one –obvious way to do it.<br />
+Although that way may not be obvious at first unless you’re Dutch.<br />
+Now is better than never.<br />
+Although never is often better than <em>right</em> now.<br />
+If the implementation is hard to explain, it’s a bad idea.<br />
+If the implementation is easy to explain, it may be a good idea.<br />
+Namespaces are one honking great idea – let’s do more of those!</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>DRY (Don’t Repeat Yourself)</p>
+<ul>
+<li><p>If you find you’re having to repeat the same logic (eventually with small variations) over and over, you are repeating yourself and contributing to an unnecessarily complex solution</p></li>
+<li><p>Try to package blocks of logic into reusable representations</p></li>
+</ul>
+</li>
+<li><p>Code should be modular and broken down in smaller functions</p>
+<ul>
+<li><p>Avoid long functions with too many lines of code</p></li>
+<li><p>Instead, try to have higher levels of abstraction</p></li>
+<li><p>The logical stages within your function can be isolated into smaller functions, even if you won’t have to use them more than once, it makes the code easier to grasp</p></li>
+</ul>
+</li>
+<li><p>Separation of concerns</p>
+<ul>
+<li><p>When designing your program, make sure to break it enough so that there’s as little overlap in functionality as possible</p></li>
+</ul>
+</li>
+<li><p>Don’t reinvent the wheel</p>
+<ul>
+<li><p>First see if what you’re attempting to do already exists</p></li>
+<li><p>If you require a slight variation on existing logic, think of the best options to extend it, rather than replicating blocks of code</p></li>
+<li><p>If it’s available as an external library or there’s an industry standard way for doing it, favor adoption over adaptation</p></li>
+</ul>
+</li>
+<li><p>Encapsulation:</p>
+<ul>
+<li><p>Consider variables and methods visibility – what is exposed is a de facto contract</p></li>
+<li><p>Though Python is inherently open, there are conventions that help signaling to the consumers what is for public consumption and what should be seen as internal</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Code Layout</strong> – mostly enforced by <code class="docutils literal notranslate"><span class="pre">black</span></code>+<code class="docutils literal notranslate"><span class="pre">flake8</span></code></p>
+<ul class="simple">
+<li><p>Indentation:</p>
+<ul>
+<li><p>Spaces only! No tabs or mixed indentation</p></li>
+<li><p>4 spaces per indentation level</p></li>
+<li><p>Continuation lines should be aligned vertically or with hanging indents</p></li>
+</ul>
+</li>
+<li><p>Maximum Line Length: 99 characters</p></li>
+<li><p>Line Breaks: preferably break before each operator</p></li>
+<li><p>Blank Lines</p>
+<ul>
+<li><p>2 blank lines surrounding top-level function and class definitions</p></li>
+<li><p>1 blank line surrounding methods inside a class</p></li>
+<li><p>1 blank line in functions, sparingly, to indicate logical sections</p></li>
+</ul>
+</li>
+<li><p>Imports:</p>
+<ul>
+<li><p>Always at the top of the file</p></li>
+<li><p>Grouped as follows: standard libraries, third-party libraries; local libraries</p></li>
+<li><p>One import per line</p></li>
+<li><p>Avoid wildcard imports</p></li>
+</ul>
+</li>
+<li><p>Source File Encoding: utf-8, no need for encoding declaration</p></li>
+</ul>
+<p><strong>Naming conventions</strong></p>
+<ul class="simple">
+<li><p>Use meaningful, descriptive names</p></li>
+<li><p>Methods and functions: verbs in present or infinitive</p></li>
+<li><p>Classes and variables: names</p></li>
+<li><p>Collections should be plural</p></li>
+<li><p>Single entities should be singular</p></li>
+<li><p>Avoid abbreviations</p></li>
+<li><p>Class names in CapWords</p></li>
+<li><p>Variable and functions in lowercase separated by underscores</p></li>
+<li><p>Constants in capital letters separated by underscores</p></li>
+<li><p>Private variables and methods should have a leading underscore</p></li>
+</ul>
+<p><strong>Documentation</strong></p>
+<ul class="simple">
+<li><p>Docstrings present on all modules, classes and methods/functions</p></li>
+<li><p>All docstrings to be written in Google format</p></li>
+<li><p>When documenting a function, make sure each argument, the return value(s) and explicit exceptions are documented</p></li>
+<li><p>Comments should capture the functionality rather than describing what each line of code is doing</p></li>
+<li><p>Documentation should follow a top down approach, start by summarizing before diving into the nit-picky details</p></li>
+<li><p>When writing comments, think from the perspective of the reader and ensure the necessary context is provided as well as any useful details</p></li>
+<li><p>Where relevant include examples</p></li>
+</ul>
+<p><strong>Warnings and Exception Handling</strong></p>
+<ul class="simple">
+<li><p>Warnings raised where relevant, but should be used sparingly</p></li>
+<li><p>Ensure proper exception handling is included</p></li>
+<li><p>Avoid using generic exceptions when possible</p></li>
+</ul>
+<p><strong>Miscellaneous</strong></p>
+<ul class="simple">
+<li><p>Be careful with hardcoded values or configurations directly tied to your particular setup</p></li>
+<li><p>All code should include unit tests</p></li>
+</ul>
+</section>
+</section>
+<section id="unit-tests-guidelines">
+<h3>Unit tests guidelines<a class="headerlink" href="#unit-tests-guidelines" title="Permalink to this headline">¶</a></h3>
+<p>Writing unit tests clarifies thinking about the contracts of the code
+they test, as well as the dependencies of that code.</p>
+<p>Unit tests should:</p>
+<ul class="simple">
+<li><p>Run quickly – ideally the entire test suite should be executed before every code check in. Keeping the tests fast reduce the development turnaround time.</p></li>
+<li><p>Be straightforward to write</p></li>
+<li><p>Be independent – tests should avoid coupling with other tests, or with parts of the application which they are not responsible for testing.</p></li>
+<li><p>Be predictable</p></li>
+<li><p>Test only at unit level – avoid the temptation to test an entire work-flow using a unit testing framework, as it will make tests slow and hard to maintain.</p></li>
+<li><p>Check just one thing – when in testing mode it is sometimes tempting to assert on “everything” in every test; this should be avoided as it makes maintenance hard and the tests redundant</p></li>
+<li><p>Provide excellent coverage – the goal of a test suite should be to ensure high execution coverage by exploring as many code paths as possible</p></li>
+<li><p>Assist in case of failure – helping to diagnose and repair and to confirm missing or incomplete implementations</p></li>
+</ul>
+<section id="unit-tests-conventions">
+<h4>Unit tests conventions<a class="headerlink" href="#unit-tests-conventions" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Unit tests should be organized to closely follow the source directory/package that they correspond to, making it easy to draw a parallel between implementation and test cases.</p></li>
+<li><p>Naming conventions:</p>
+<ul>
+<li><p>Classes – prefix with <code class="docutils literal notranslate"><span class="pre">Test</span></code>, e.g. test class for FooBar should be named TestFooBar</p></li>
+<li><p>Functions/methods – prefix with <code class="docutils literal notranslate"><span class="pre">test_</span></code>, e.g. test_barbarbar</p></li>
+<li><p>Should be obvious from the name what is it that is being tested, e.g. test_div_zero suggests the aim of the test is to stress a division by zero.</p></li>
+</ul>
+</li>
+<li><p>Ensure you are not relying on local configurations or setup nor are you connecting to predefined external resources</p>
+<ul>
+<li><p>Unit tests should be written without explicit knowledge of the environment context in which they are executed so that they can be run anywhere at any time</p></li>
+<li><p>In order to provide required resources for a test these resources should instead be made available by the test itself</p></li>
+<li><p>Consider for instance a class for parsing files of a certain type. Instead of picking a sample file from a predefined location, put the file content inside the test, write it to a temporary file in the test setup process and delete the file when the test is done.</p></li>
+<li><p>If this is not feasible, an alternative is to maintain a separate directory for resources required by the tests.</p></li>
+</ul>
+</li>
+<li><p>Test both the trivial cases and the boundary cases</p>
+<ul>
+<li><p>Make sure the parameter boundary cases are covered.</p></li>
+<li><p>For numbers, test negatives, 0, positive, smallest, largest, NaN, infinity, etc.</p></li>
+<li><p>For strings test empty string, single character string, non-ASCII string, multi-MB strings etc.</p></li>
+<li><p>For dates, test January 1, February 29, December 31 etc.</p></li>
+<li><p>The class being tested will suggest the boundary cases in each specific case. The point is to make sure as many as possible of these are tested properly as these cases are the prime candidates for errors.</p></li>
+</ul>
+</li>
+<li><p>Include negative tests</p>
+<ul>
+<li><p>Negative tests intentionally misuse the code and verify robustness and appropriate error handling.</p></li>
+</ul>
+</li>
+<li><p>The code to be tested should not have any hidden inputs</p>
+<ul>
+<li><p>An example would be a method that reads the current system time and returns a result based on that value.</p></li>
+<li><p>Such non-deterministic behavior makes it impossible to test the internal logic of the method without actually changing the system date and time.</p></li>
+<li><p>One workaround for this sort of situation is to create mock objects for the required dependencies.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="makefile">
+<h3>Makefile<a class="headerlink" href="#makefile" title="Permalink to this headline">¶</a></h3>
+<p>Common build-related tasks can be performed with <code class="docutils literal notranslate"><span class="pre">make</span></code>. Main rules
+included in the Makefile:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code> – shortcut to run the documentation’s makefile; fully regenerates the documentation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tests</span></code> – runs pytest with coverage and prints the coverage report</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cq</span></code> – shorthand for “code quality”, runs black, flake8 and mypy (styling, linting and type checking)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">build</span></code> – installs the requirements, builds a wheel and source dist and checks with twine</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> – does the whole lot (except the documentation)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="genindex.html" class="btn btn-neutral float-left" title="API Index" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CHANGELOG.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

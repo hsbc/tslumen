@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report.dashboard package &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.plot package" href="tslumen.plot.html" />
+    <link rel="prev" title="tslumen.report.html package" href="tslumen.report.html.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tslumen.report.html.html">tslumen.report.html package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tslumen.report.dashboard package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.base">tslumen.report.dashboard.base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.report">tslumen.report.dashboard.report module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.sections.features">tslumen.report.dashboard.sections.features module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.sections.relations">tslumen.report.dashboard.sections.relations module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.sections.summary">tslumen.report.dashboard.sections.summary module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.report.dashboard.sections.timeseries">tslumen.report.dashboard.sections.timeseries module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.report.html#module-tslumen.report.base">tslumen.report.base module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+          <li><a href="tslumen.report.html">tslumen.report package</a> &raquo;</li>
+      <li>tslumen.report.dashboard package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.report.dashboard">
+<span id="tslumen-report-dashboard-package"></span><h1>tslumen.report.dashboard package<a class="headerlink" href="#module-tslumen.report.dashboard" title="Permalink to this headline">¶</a></h1>
+<section id="module-tslumen.report.dashboard.base">
+<span id="tslumen-report-dashboard-base-module"></span><h2>tslumen.report.dashboard.base module<a class="headerlink" href="#module-tslumen.report.dashboard.base" title="Permalink to this headline">¶</a></h2>
+<p>Base classes for building the dashboard.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.base.BaseDash">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.base.</span></code><code class="sig-name descname"><span class="pre">BaseDash</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#BaseDash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Base class for dash objects.</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.BaseDash.app">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">app</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash.app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.BaseDash.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.BaseDash.layout">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">layout</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash.layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.BaseDash.run_server">
+<code class="sig-name descname"><span class="pre">run_server</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'100%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">650</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_exceptions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#BaseDash.run_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash.run_server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.BaseDash.server">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">server</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.BaseDash.server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.base.DashBlock">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.base.</span></code><code class="sig-name descname"><span class="pre">DashBlock</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#DashBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.BaseDash" title="tslumen.report.dashboard.base.BaseDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.BaseDash</span></code></a></p>
+<p>Base class for dash independent blocks, then composed into sections and the dashboard.</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.block_id">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">block_id</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.block_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.layout">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">layout</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.style">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">style</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashBlock.title">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">title</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashBlock.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.base.DashInput">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.base.</span></code><code class="sig-name descname"><span class="pre">DashInput</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#DashInput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.DashInput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Base class for dash input blocks.</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashInput.layout">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">layout</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashInput.layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.base.DashSection">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.base.</span></code><code class="sig-name descname"><span class="pre">DashSection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#DashSection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.BaseDash" title="tslumen.report.dashboard.base.BaseDash"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.BaseDash</span></code></a></p>
+<p>Base class for independent sections, then composed into the dashboard.</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.anchors">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">anchors</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.anchors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.body">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.layout">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">layout</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.section_id">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">section_id</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.section_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.base.DashSection.title">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">title</span></code><a class="headerlink" href="#tslumen.report.dashboard.base.DashSection.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.base.TslumenDash">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.base.</span></code><code class="sig-name descname"><span class="pre">TslumenDash</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/base.html#TslumenDash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.base.TslumenDash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">jupyter_dash.jupyter_app.JupyterDash</span></code></p>
+<p>Extends <cite>JupyterDash</cite> in order to put in the default configurations.</p>
+</dd></dl>
+
+</section>
+<section id="module-tslumen.report.dashboard.report">
+<span id="tslumen-report-dashboard-report-module"></span><h2>tslumen.report.dashboard.report module<a class="headerlink" href="#module-tslumen.report.dashboard.report" title="Permalink to this headline">¶</a></h2>
+<p>Module with the main class <code class="docutils literal notranslate"><span class="pre">Dashboard</span></code>.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.report.Dashboard">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.report.</span></code><code class="sig-name descname"><span class="pre">Dashboard</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledProfiler" title="tslumen.profile.base.BundledProfiler"><span class="pre">tslumen.profile.base.BundledProfiler</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiler_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><span class="pre">tslumen.scheduling.Scheduler</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/report.html#Dashboard"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.report.Dashboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tslumen.report.html#tslumen.report.base.Report" title="tslumen.report.base.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.base.Report</span></code></a></p>
+<p>Renders the profiling results as an interactive Dash application, either directly in/from a
+Jupyter notebook or as a standalone web app. Requires a live kernel or server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – Timeseries data.</p></li>
+<li><p><strong>meta</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Timeseries metadata, a 2-level dictionary, first level indexed
+by <code class="docutils literal notranslate"><span class="pre">{'frame':</span> <span class="pre">{&lt;key&gt;:</span> <span class="pre">&lt;value&gt;},</span> <span class="pre">{'series':</span> <span class="pre">{&lt;series</span> <span class="pre">name&gt;:</span> <span class="pre">&lt;desc&gt;}}</span></code>.</p></li>
+<li><p><strong>result</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><em>BundledResult</em></a><em>]</em>) – For instantiating the report with pre-computed
+results from a profiler.</p></li>
+<li><p><strong>profiler</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledProfiler" title="tslumen.profile.base.BundledProfiler"><em>BundledProfiler</em></a><em>]</em>) – The <cite>BundledProfiler</cite> to run the profiling,
+defaults to <cite>DefaultProfiler</cite>.</p></li>
+<li><p><strong>profiler_config</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Profiler’s configurations.</p></li>
+<li><p><strong>scheduler</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><em>Scheduler</em></a><em>]</em>) – A <cite>Scheduler</cite>, default’s to <cite>Scheduler</cite>.</p></li>
+<li><p><strong>scheduler_config</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Scheduler’s configurations.</p></li>
+<li><p><strong>name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The name Flask should use for your app. Even if you provide your
+own <code class="docutils literal notranslate"><span class="pre">server</span></code>, <code class="docutils literal notranslate"><span class="pre">name</span></code> will be used to help find assets. Typically <code class="docutils literal notranslate"><span class="pre">__name__</span></code>
+(the magic global var, not a string) is the best value to use.
+Default <code class="docutils literal notranslate"><span class="pre">'__main__'</span></code>, env: <code class="docutils literal notranslate"><span class="pre">DASH_APP_NAME</span></code></p></li>
+<li><p><strong>server_url</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The base URL that the app will be served at, from the
+perspective of the client. If not specified, will default to the host argument
+passed to the <code class="docutils literal notranslate"><span class="pre">run_server</span></code> method.</p></li>
+<li><p><strong>kwargs</strong> – Refer to <code class="docutils literal notranslate"><span class="pre">dash.Dash</span></code> documentation.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.report.Dashboard.SECTIONS">
+<code class="sig-name descname"><span class="pre">SECTIONS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">[&lt;class</span> <span class="pre">'tslumen.report.dashboard.sections.summary.SectionSummary'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'tslumen.report.dashboard.sections.timeseries.SectionTimeSeries'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'tslumen.report.dashboard.sections.features.SectionFeatures'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'tslumen.report.dashboard.sections.relations.SectionRelations'&gt;]</span></em><a class="headerlink" href="#tslumen.report.dashboard.report.Dashboard.SECTIONS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.report.Dashboard.app">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">app</span></code><a class="headerlink" href="#tslumen.report.dashboard.report.Dashboard.app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.report.Dashboard.run_server">
+<code class="sig-name descname"><span class="pre">run_server</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'100%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">650</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inline_exceptions</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/report.html#Dashboard.run_server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.report.Dashboard.run_server" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serve the app using flask in a background thread. You should not run this on a
+production server, use gunicorn/waitress instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Display mode. One of: <code class="docutils literal notranslate"><span class="pre">&quot;external&quot;</span></code>: The URL of the app will be
+displayed in the notebook output cell. Clicking this URL will open the app in the
+default web browser; <code class="docutils literal notranslate"><span class="pre">&quot;inline&quot;</span></code>: The app will be displayed inline in the notebook
+output cell in an iframe; <code class="docutils literal notranslate"><span class="pre">&quot;jupyterlab&quot;</span></code>: The app will be displayed in a dedicate
+tab in the JupyterLab interface. Requires JupyterLab and the <cite>jupyterlab-dash</cite>
+extension.</p></li>
+<li><p><strong>width</strong> – Width of app when displayed using mode=”inline”</p></li>
+<li><p><strong>height</strong> – Height of app when displayed using mode=”inline”</p></li>
+<li><p><strong>inline_exceptions</strong> – If True, callback exceptions are displayed inline in the the
+notebook output cell. Defaults to True if mode==”inline”, False otherwise.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments to pass to the superclass <code class="docutils literal notranslate"><span class="pre">Dash.run_server</span></code>
+method.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.report.Dashboard.server">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">server</span></code><a class="headerlink" href="#tslumen.report.dashboard.report.Dashboard.server" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.report.dashboard.sections.features">
+<span id="tslumen-report-dashboard-sections-features-module"></span><h2>tslumen.report.dashboard.sections.features module<a class="headerlink" href="#module-tslumen.report.dashboard.sections.features" title="Permalink to this headline">¶</a></h2>
+<p>Features section and blocks.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFTSelect">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.features.</span></code><code class="sig-name descname"><span class="pre">BlockTSFTSelect</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/features.html#BlockTSFTSelect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFTSelect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashInput" title="tslumen.report.dashboard.base.DashInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashInput</span></code></a></p>
+<p>Block for selecting which timeseries details to display</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFTSelect.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFTSelect.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.features.</span></code><code class="sig-name descname"><span class="pre">BlockTSFeaturesHeatmap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/features.html#BlockTSFeaturesHeatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with ts features heatmap</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'400px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Heatmap'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesHeatmap.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.features.</span></code><code class="sig-name descname"><span class="pre">BlockTSFeaturesRadar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/features.html#BlockTSFeaturesRadar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with ts features radar</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'400px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Radar'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.features.BlockTSFeaturesRadar.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.features.SectionFeatures">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.features.</span></code><code class="sig-name descname"><span class="pre">SectionFeatures</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/features.html#SectionFeatures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.features.SectionFeatures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashSection" title="tslumen.report.dashboard.base.DashSection"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashSection</span></code></a></p>
+<p>Class holding the contents of the “Features” section</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.features.SectionFeatures.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.features.SectionFeatures.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.features.SectionFeatures.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Features'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.features.SectionFeatures.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.report.dashboard.sections.relations">
+<span id="tslumen-report-dashboard-sections-relations-module"></span><h2>tslumen.report.dashboard.sections.relations module<a class="headerlink" href="#module-tslumen.report.dashboard.sections.relations" title="Permalink to this headline">¶</a></h2>
+<p>Relations section and blocks.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.relations.</span></code><code class="sig-name descname"><span class="pre">BlockTSCorrelations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/relations.html#BlockTSCorrelations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with correlations</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'400px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSCorrelations.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Correlations'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSCorrelations.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.relations.</span></code><code class="sig-name descname"><span class="pre">BlockTSGranger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/relations.html#BlockTSGranger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with Granger causality matrix</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSGranger.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Granger</span> <span class="pre">Causality'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSGranger.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSRelSelect">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.relations.</span></code><code class="sig-name descname"><span class="pre">BlockTSRelSelect</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/relations.html#BlockTSRelSelect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSRelSelect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashInput" title="tslumen.report.dashboard.base.DashInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashInput</span></code></a></p>
+<p>Block for selecting which timeseries details to display</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSRelSelect.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSRelSelect.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.BlockTSRelSelect.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Select</span> <span class="pre">series'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.BlockTSRelSelect.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.relations.SectionRelations">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.relations.</span></code><code class="sig-name descname"><span class="pre">SectionRelations</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/relations.html#SectionRelations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.SectionRelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashSection" title="tslumen.report.dashboard.base.DashSection"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashSection</span></code></a></p>
+<p>Class holding the contents of the “Relations” section</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.relations.SectionRelations.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.SectionRelations.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.relations.SectionRelations.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Relations'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.relations.SectionRelations.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.report.dashboard.sections.summary">
+<span id="tslumen-report-dashboard-sections-summary-module"></span><h2>tslumen.report.dashboard.sections.summary module<a class="headerlink" href="#module-tslumen.report.dashboard.sections.summary" title="Permalink to this headline">¶</a></h2>
+<p>Summary section and blocks.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.summary.</span></code><code class="sig-name descname"><span class="pre">BlockPreview</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/summary.html#BlockPreview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with a preview of the time series on a line plot</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'600px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.BlockPreview.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Preview'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockPreview.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStats">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.summary.</span></code><code class="sig-name descname"><span class="pre">BlockStats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/summary.html#BlockStats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with the dataframe’s summary stats</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStats.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStats.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStats.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'width':</span> <span class="pre">'350px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStats.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStats.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Frame</span> <span class="pre">statistics'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStats.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStatus">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.summary.</span></code><code class="sig-name descname"><span class="pre">BlockStatus</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/summary.html#BlockStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStatus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with metadata, execution stats, config and issues</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.BlockStatus.layout">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">layout</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.BlockStatus.layout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.summary.SectionSummary">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.summary.</span></code><code class="sig-name descname"><span class="pre">SectionSummary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/summary.html#SectionSummary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.SectionSummary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashSection" title="tslumen.report.dashboard.base.DashSection"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashSection</span></code></a></p>
+<p>Class holding the contents of the “Summary” section</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.summary.SectionSummary.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.SectionSummary.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.SectionSummary.controls">
+<code class="sig-name descname"><span class="pre">controls</span></code><em class="property"> <span class="pre">=</span> <span class="pre">['BlockStatus']</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.SectionSummary.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.summary.SectionSummary.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Summary'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.summary.SectionSummary.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.report.dashboard.sections.timeseries">
+<span id="tslumen-report-dashboard-sections-timeseries-module"></span><h2>tslumen.report.dashboard.sections.timeseries module<a class="headerlink" href="#module-tslumen.report.dashboard.sections.timeseries" title="Permalink to this headline">¶</a></h2>
+<p>Time series section and blocks.</p>
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSAutoCorrelation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSAutoCorrelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with ACF and PACF plot</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Auto</span> <span class="pre">Correlation'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSComponents">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSComponents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with a time series decomposition</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSComponents.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSComponents.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSComponents.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSComponents.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSComponents.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSComponents.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSComponents.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Decomposition'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSComponents.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDetails">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSDetails</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSDetails"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with the time series details</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDetails.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDetails.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDetails.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDetails.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDetails.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'width':</span> <span class="pre">'225px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDetails.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDetails.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Series</span> <span class="pre">Details'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDetails.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSDist</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSDist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with the distribution plots</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'300px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSDist.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Distribution'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSDist.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSLagPlots</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSLagPlots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with a lag (scatter) plots</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Lag</span> <span class="pre">Plots'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSPlot">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSPlot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with a preview of the time series on a line plot</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSPlot.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSPlot.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSPlot.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSPlot.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSPlot.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSPlot.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSPlot.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Preview'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSPlot.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSSeasonality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSSeasonality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with seasonality plots</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'500px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Seasonality'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSelect">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSSelect</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSSelect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSelect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashInput" title="tslumen.report.dashboard.base.DashInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashInput</span></code></a></p>
+<p>Block for selecting which timeseries details to display</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSelect.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSelect.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSelect.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Select</span> <span class="pre">a</span> <span class="pre">series'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSelect.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSSmoothing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSSmoothing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with smooth series</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.controls">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">controls</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.controls" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'minWidth':</span> <span class="pre">'300px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Smoothing'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSStats">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">BlockTSStats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#BlockTSStats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashBlock" title="tslumen.report.dashboard.base.DashBlock"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashBlock</span></code></a></p>
+<p>Block with the dataframe’s statistics and stats tests</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSStats.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSStats.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSStats.callbacks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">callbacks</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSStats.callbacks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSStats.style">
+<code class="sig-name descname"><span class="pre">style</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'height':</span> <span class="pre">'100%',</span> <span class="pre">'width':</span> <span class="pre">'450px'}</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSStats.style" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.BlockTSStats.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Statistics'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.BlockTSStats.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.report.dashboard.sections.timeseries.SectionTimeSeries">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.report.dashboard.sections.timeseries.</span></code><code class="sig-name descname"><span class="pre">SectionTimeSeries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="tslumen.profile.base.html#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.report.dashboard.base.TslumenDash" title="tslumen.report.dashboard.base.TslumenDash"><span class="pre">tslumen.report.dashboard.base.TslumenDash</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/report/dashboard/sections/timeseries.html#SectionTimeSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.SectionTimeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.report.dashboard.base.DashSection" title="tslumen.report.dashboard.base.DashSection"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.report.dashboard.base.DashSection</span></code></a></p>
+<p>Class holding the contents of the “TimeSeries” section</p>
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.anchors">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">anchors</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.anchors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.body">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">body</span></code><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'Time</span> <span class="pre">Series'</span></em><a class="headerlink" href="#tslumen.report.dashboard.sections.timeseries.SectionTimeSeries.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.report.html.html" class="btn btn-neutral float-left" title="tslumen.report.html package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.plot.html" class="btn btn-neutral float-right" title="tslumen.plot package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

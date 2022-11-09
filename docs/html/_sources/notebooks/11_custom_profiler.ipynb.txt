@@ -1,0 +1,606 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Creating and bundling custom profilers"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:23.899318Z",
+     "start_time": "2022-09-21T08:59:23.046421Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from typing import Union, Tuple, Optional\n",
+    "import itertools as it\n",
+    "\n",
+    "import numpy as np\n",
+    "import pandas as pd\n",
+    "import statsmodels.tsa.api as sm"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:23.904931Z",
+     "start_time": "2022-09-21T08:59:23.901494Z"
+    },
+    "nbsphinx": "hidden"
+   },
+   "outputs": [],
+   "source": [
+    "# patch it\n",
+    "_read_csv = pd.read_csv\n",
+    "pd.read_csv = lambda fpath, *args, **kwargs: _read_csv(fpath.split('/')[-1], *args, **kwargs)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Profiling Functions"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Creating a customer profiler is very straightforward. For a function to qualify as a profiler it needs:\n",
+    "\n",
+    "- To be type annotated\n",
+    "- To have one and only one positional argument, the timeseries, which needs to be a pandas DataFrame or Series (or a union of both)\n",
+    "- To be decorated with `@ProfilingFunction`\n",
+    "\n",
+    "Let's use a few dummy examples to better illustrate this."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.230369Z",
+     "start_time": "2022-09-21T08:59:23.907720Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from tslumen.profile import ProfilingFunction"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.265911Z",
+     "start_time": "2022-09-21T08:59:25.233580Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "@ProfilingFunction\n",
+    "def shape(data: Union[pd.Series, pd.DataFrame]) -> Tuple[int, ...]:\n",
+    "    return data.shape\n",
+    "\n",
+    "shape"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As shown by the checkmarks, the `shape` function we just created is applied to the DataFrame as a whole, as well as each individual series. \n",
+    "\n",
+    "Under the hood, the `@ProfilingFunction` decorator inspects the function and wraps it inside a class which, among other purposes, identifies the scope of action of the profiler (i.e. single Series, DataFrame or both), particularly useful when orchestrating the execution of multiple profilers. More on that later."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.293840Z",
+     "start_time": "2022-09-21T08:59:25.267782Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "@ProfilingFunction\n",
+    "def acovf(data: pd.Series, adjusted: bool = False, demean: bool = True,\n",
+    "          fft: bool = True, missing: str = 'none', nlag: Optional[int] = None) -> pd.Series:\n",
+    "    est = sm.acovf(data.values, adjusted=adjusted, demean=demean, fft=fft, missing=missing, nlag=nlag)\n",
+    "    return pd.Series(est, index=data.index)\n",
+    "\n",
+    "acovf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.321064Z",
+     "start_time": "2022-09-21T08:59:25.295903Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "@ProfilingFunction\n",
+    "def euc_sim(data: pd.DataFrame, measure: str = 'rmse') -> pd.DataFrame:\n",
+    "    fn = lambda d: d.mean() if measure == 'mean' else np.sqrt((d**2).mean())\n",
+    "    res = {(a, b): fn(data[b]-data[a])\n",
+    "           for a, b in it.product(data.columns, data.columns)}\n",
+    "    return pd.Series(res).unstack(0)\n",
+    "\n",
+    "euc_sim"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now the `acovf` function is for Series only, whereas `euc_sim` is for DataFrames only.\n",
+    "\n",
+    "When wrapping functionality from another library, it is a good idea to expose (some of) its parameters as to make the profiler more configurable. Naturally, in some cases, it's actually a good idea to hide them from the end-user, particularly when the wrapper itself will have the logic to select the parameters.\n",
+    "\n",
+    "Note that any arguments the profiling function exposes (other than the first one) need to have defaults.\n",
+    "\n",
+    "\n",
+    "Let's load a dataset and try out these profilers"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.343087Z",
+     "start_time": "2022-09-21T08:59:25.323014Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "df = pd.read_csv('https://datahub.io/core/s-and-p-500/r/data.csv', parse_dates=[0], index_col=0)\n",
+    "df = df[(df.index >= '1990-01-01') & (df.index < '2015-01-01')]\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.376218Z",
+     "start_time": "2022-09-21T08:59:25.345102Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "shape(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.403901Z",
+     "start_time": "2022-09-21T08:59:25.378460Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "shape(df.SP500)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.443542Z",
+     "start_time": "2022-09-21T08:59:25.409058Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "acovf(df.SP500)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.500281Z",
+     "start_time": "2022-09-21T08:59:25.445584Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "euc_sim(df, 'rmse')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "All decorated functions return a `ProfileResult` object, which is a mere wrapper around the function's result to capture additional details like the name of the function, execution times, exceptions, etc. \n",
+    "\n",
+    "It can be used as a class or cast as a dictionary."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.505910Z",
+     "start_time": "2022-09-21T08:59:25.501961Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr = shape(df.SP500)\n",
+    "dict(pr)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.511277Z",
+     "start_time": "2022-09-21T08:59:25.507855Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr.start"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Bundling profilers together"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Single profilers (i.e. `ProfilingFunction` decorated functions) can be bundled together in one single class, which will deal with orchestrating their execution and collecting the results.\n",
+    "\n",
+    "A `DefaultProfiler` is included in tslumen, essentially bundling all the profiling functions included in the package.\n",
+    "\n",
+    "Creating a custom bundle is simply a matter of creating a subclass of `BundledProfiler` and defining the class variable `_profilers` as a list of the profiling functions that are to be included. Note that these need to have unique names, as the name is used to store the output of the function.\n",
+    "\n",
+    "Let's start by having a look at the `DefaultProfiler`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.515457Z",
+     "start_time": "2022-09-21T08:59:25.512891Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from tslumen.profile import DefaultProfiler"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.523244Z",
+     "start_time": "2022-09-21T08:59:25.517699Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "DefaultProfiler.get_profilers()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The class method `get_profilers` returns a dictionary with all the `ProfilingFunction` bundled in this `BundledProfiler`\n",
+    "\n",
+    "As the name suggests, the class method `get_config_defaults` returns a dictionary with the default parameters of each `ProfilingFunction`. It is useful for understanding exactly which parameter defaults can be overridden.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.533591Z",
+     "start_time": "2022-09-21T08:59:25.525169Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "DefaultProfiler.get_config_defaults()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let us now create our own profiler by bundling the functions defined above."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.538137Z",
+     "start_time": "2022-09-21T08:59:25.535513Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from tslumen.profile import BundledProfiler\n",
+    "\n",
+    "\n",
+    "class MyProfiler(BundledProfiler):\n",
+    "    _profilers = [shape, acovf, euc_sim]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.544157Z",
+     "start_time": "2022-09-21T08:59:25.540140Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "MyProfiler.get_profilers()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.549988Z",
+     "start_time": "2022-09-21T08:59:25.546210Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "MyProfiler.get_config_defaults()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-17T13:17:47.804705Z",
+     "start_time": "2022-09-17T13:17:47.799474Z"
+    }
+   },
+   "source": [
+    "When instantiating the bundled profiler, the configs will be set, essentially by taking the defaults of each `ProfilingFunction` and overriding any parameters explicitly provided as an argument."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.555849Z",
+     "start_time": "2022-09-21T08:59:25.551979Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# default configs were set\n",
+    "profiler1 = MyProfiler()\n",
+    "profiler1.config"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:25.562217Z",
+     "start_time": "2022-09-21T08:59:25.557743Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# euc_sim's measure was overriden\n",
+    "profiler2 = MyProfiler(config={'euc_sim': {'measure': 'mean'}})\n",
+    "profiler2.config"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-17T13:39:58.485374Z",
+     "start_time": "2022-09-17T13:39:58.480621Z"
+    }
+   },
+   "source": [
+    "With our profiler instantiated, we can now profile our data. The bundled profiler will take care of orchestrating the execution of the profiling functions and collecting the results. Depending on the function's scope, each will be called with the dataset or once per series."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.651853Z",
+     "start_time": "2022-09-21T08:59:25.564396Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr1 = profiler1.profile(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.773526Z",
+     "start_time": "2022-09-21T08:59:31.654328Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr2 = profiler2.profile(df)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.899891Z",
+     "start_time": "2022-09-21T08:59:31.775925Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Results are held in a `BundledResult` object, which includes the same details as `ProfileResult`. Under the `result` attribute you'll find:\n",
+    "\n",
+    "\n",
+    "- `exec_details` a DataFrame with all the executions\n",
+    "- `config` the configurations passed onto this execution\n",
+    "- `frame` a dictionary with the results of each profiling function whose scope is DataFrame\n",
+    "- `series` a dictionary with each of the series in the DataFrame, and for each series a dictionary with the results of the series profiling functions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.914095Z",
+     "start_time": "2022-09-21T08:59:31.902051Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr1.result.frame['euc_sim']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.928739Z",
+     "start_time": "2022-09-21T08:59:31.916568Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr2.result.frame['euc_sim']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2022-09-21T08:59:31.934593Z",
+     "start_time": "2022-09-21T08:59:31.930667Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "pr1.result.frame['euc_sim'].equals(pr2.result.frame['euc_sim'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As we can see, the parameter is being passed on correctly to `euc_sim`."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Closing thoughts\n",
+    "\n",
+    "\n",
+    "This notebook illustrates how simple it is to create custom profilers and bundles.\n",
+    "\n",
+    "It's up to the user to mix and match whichever profilers are relevant to their needs, pre-canned ones available under `tslumen.profile` or user-defined functions, provided they meet the conventions listed above and are decorated using `@ProfilingFunction`. "
+   ]
+  }
+ ],
+ "metadata": {
+  "celltoolbar": "Edit Metadata",
+  "hide_input": false,
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.7"
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": false,
+   "skip_h1_title": true,
+   "title_cell": "Table of Contents",
+   "title_sidebar": "Contents",
+   "toc_cell": false,
+   "toc_position": {},
+   "toc_section_display": true,
+   "toc_window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
