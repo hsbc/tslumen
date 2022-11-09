@@ -1,0 +1,85 @@
+{# TABLE RENDERES #}
+{# ------------------------------------------------------------------------- #}
+{% macro render_stats_table(table_title, dict_obj, align="right") -%}
+  {% if table_title -%}
+    <p class="h4">{{ table_title }}</p>
+  {%- endif %}
+  {% if dict_obj -%}
+    <table class="table table-condensed stats">
+      <tbody>
+      {% for key, value in dict_obj.items() -%}
+        <tr><th>{{ key }}</th><td class="text-{{ align }}">{{ value|autoformat }}</td></tr>
+      {%- endfor %}
+      </tbody>
+    </table >
+  {%- endif %}
+{%- endmacro %}
+
+{% macro render_dataframe(df_title, df, classes="", show_index=True, show_columns=True) -%}
+  {% if df_title -%}
+    <p class="h4">{{ df_title }}</p>
+  {%- endif %}
+  <table class="table table-sm table-striped dataframe {{ classes }}">
+    {% if show_columns -%}
+    <thead class="thead-dark">
+      <tr>
+        {% if show_index -%}
+          <th>{{ df.index.name or ""|autoformat }}</th>
+        {%- endif %}
+        {% for col in df.columns -%}
+          <th>{{ col|autoformat }}</th>
+        {%- endfor %}
+      </tr>
+    </thead>
+  {%- endif %}
+    <tbody>
+    {% for index, row in df.iterrows() -%}
+      <tr>
+        {% if show_index -%}
+          <th>{{ index|autoformat }}</th>
+        {%- endif %}
+        {% for value in row -%}
+          <td class="{{ 'text-right' if value is number else 'text-left'}}">
+            {{ value|autoformat }}
+          </td>
+        {%- endfor %}
+      </tr>
+    {%- endfor %}
+    </tbody>
+  </table>
+{%- endmacro %}
+
+
+
+{# NAV HELPERS #}
+{# ------------------------------------------------------------------------- #}
+{% macro make_nav(nav_id, links, classes="nav-tabs") -%}
+<nav>
+  <div class="nav {{ classes }}" id="{{ nav_id|idhtml }}" role="tablist">
+    {% for text in links %}
+      <a class="nav-link {{ 'active' if loop.index == 1 else '' }}"
+         aria-selected="{{ 'true' if loop.index == 1 else 'false' }}"
+         aria-controls="nav-{{ text|idhtml }}"
+         id="nav-{{ text|idhtml }}-tab" href="#nav-{{ text|idhtml }}"
+         title="{{ text }}"
+         data-toggle="tab" role="tab">{{ text }}</a>
+    {% endfor %}
+  </div>
+</nav>
+{%- endmacro %}
+
+
+
+{# OTHERS #}
+{# ------------------------------------------------------------------------- #}
+{% macro render_figure(plot, fmt="png") -%}
+  {% if plot %}
+  <div class="plot">
+    {% if fmt == "png" %}
+      <img  class="img-plot" src="data:image/png;base64,{{ plot.to_png() }}" />
+    {% else %}
+      {{ plot.to_svg() }}
+    {% endif %}
+  </div>
+  {% endif %}
+{%- endmacro %}

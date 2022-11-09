@@ -1,0 +1,10 @@
+{% from '_macros.html' import render_summary_details, render_collapsible_dict, render_list %}
+{{ render_summary_details("exec_details", obj.exec_details) }}
+{{ render_summary_details("config", render_collapsible_dict(obj.config)) }}
+{% if obj.series|length > 20 %}
+    {{ render_summary_details("frame", render_list(obj.frame.keys())) }}
+    {{ render_summary_details("series", render_list(obj.series.keys())) }}
+{% else %}
+    {{ render_summary_details("frame", render_collapsible_dict(obj.frame)) }}
+    {{ render_summary_details("series", render_collapsible_dict(obj.series)) }}
+{% endif %}

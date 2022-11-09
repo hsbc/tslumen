@@ -1,0 +1,18 @@
+{% from '_macros.html' import render_figure, render_dataframe %}
+<div class="row">
+  <div class="col-4">
+    <p class="h6">Main Features</p>
+    {{ render_figure(obj.plot_fts_main) }}
+    {{ render_dataframe(None, obj.df_fts_main, classes="df-small", show_columns=False) }}
+  </div>
+  <div class="col-4">
+    <p class="h6">Stationarity</p>
+    {{ render_figure(obj.plot_fts_stat) }}
+    {{ render_dataframe(None, obj.df_fts_stat, classes="df-small", show_columns=False) }}
+  </div>
+  <div class="col-4">
+    <p class="h6">ACF/PACF</p>
+    {{ render_figure(obj.plot_fts_acf) }}
+    {{ render_dataframe(None, obj.df_fts_acf, classes="df-small", show_columns=False) }}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+{% block navbar %}
+<nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-header logo anchor" href="#top">
+        {% include 'static/logo.svg' %}
+      </a>
+      <button class="navbar-toggler" type="button"
+              data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-md-auto">
+          {%  for section in obj.sections -%}
+            <li class="nav-item">
+              <a class="nav-link anchor" href="#{{ section._id|idhtml }}">{{ section._title }}</a>
+            </li>
+          {%- endfor %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+{%- endblock navbar %}
+
+{% block content -%}
+<a class="anchor-pos" id="top"></a>
+{%  for section in obj.sections -%}
+  {{ section|html }}
+{%- endfor %}
+
+<p class="m-3 text-muted small text-center">
+  Report generated in {{ obj.duration }} &bull; <strong>tslumen</strong>
+</p>
+{%- endblock content %}

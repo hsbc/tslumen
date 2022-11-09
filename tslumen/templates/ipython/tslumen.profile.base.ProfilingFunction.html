@@ -1,0 +1,13 @@
+{% from '_macros.html' import render_bool %}
+{% extends "_class.html" %}
+{% block base_class_name %}{{ obj.__class__.__name__  }}{% endblock %}
+{% block class_name %}{{ obj.__name__  }}{% endblock %}
+{% block oid %}{{ oid }}{% endblock %}
+{% block extra_head -%} |
+Frame {{ render_bool(obj.is_pframe) }},
+Series {{ render_bool(obj.is_pseries) }}
+{% endblock %}
+{% block details -%}
+Signature:
+<samp>{{ obj.sig }}</samp>
+{% endblock %}

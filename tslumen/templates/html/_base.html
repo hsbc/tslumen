@@ -1,0 +1,48 @@
+{% block doc -%}
+<!DOCTYPE html>
+<html{% block html_attribs %}{% endblock html_attribs %} lang="en">
+  {%- block html %}
+  <head>
+    {%- block head %}
+      <title>{% block title %}{{ title|default('tslumen') }}{% endblock title %}</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      {%- block metas %}
+      {%- endblock metas %}
+      <style type="text/css">{% include 'static/bootstrap.min.css' %}</style>
+      {% block styles %}
+        <style type="text/css">{% include 'static/sboot.css' %}</style>
+        <style type="text/css">{% include 'static/style.css' %}</style>
+      {%- endblock styles %}
+    {%- endblock head %}
+  </head>
+  <body {% block body_attribs %}{% endblock body_attribs %}>
+    {% block body -%}
+      {% block navbar %}
+      {%- endblock navbar %}
+      {% block content -%}
+      {%- endblock content %}
+      <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="img-modal">
+        <div class="modal-dialog modal-100">
+          <div class="modal-content modal-center p-3">
+            <div class="float-right">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-img-container">
+              <img src="" id="img-modal-img">
+            </div>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">{% include 'static/jquery-3.5.1.min.js' %}</script>
+      <script type="text/javascript">{% include 'static/bootstrap.bundle.min.js' %}</script>
+      {% block scripts %}
+        <script type="text/javascript">{% include 'static/script.js' %}</script>
+      {%- endblock scripts %}
+    {%- endblock body %}
+  </body>
+  {%- endblock html %}
+</html>
+{% endblock doc -%}

@@ -1,0 +1,100 @@
+{% extends "_section.html" %}
+{% from '_macros.html' import make_nav, render_stats_table, render_dataframe, render_figure %}
+{% block section_content -%}
+
+{{ make_nav("nav-tab-summary", ["Overview", "Metadata", "Execution"] + ([] if obj.issues.empty else ["Issues"])) }}
+
+<div class="tab-content border border-top-0" id="nav-tabContent">
+
+  <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
+    <div class="row">
+      <div class="col-4">
+        <p class="h4">Frame statistics</p>
+        <table class="table table-condensed stats">
+          <tbody>
+            <tr><th>Number of series</th><td class="text-right">{{ obj.n_series }}</td></tr>
+            <tr><th>Time series length</th><td class="text-right">{{ obj.length }}</td></tr>
+            <tr><th>Start date</th><td class="text-right">{{ obj.dt_start|dateformat(freq=obj.freq) }}</td></tr>
+            <tr><th>End date</th><td class="text-right">{{ obj.dt_end|dateformat(freq=obj.freq) }}</td></tr>
+            <tr><th>Frequency</th><td class="text-right">{{ obj.freq }}</td></tr>
+            <tr><th>Period</th><td class="text-right">{{ obj.period }}</td></tr>
+            <tr><th>Total size in memory</th><td class="text-right">{{ obj.sz_total|filesizeformat }}</td></tr>
+            <tr><th>Average series size</th><td class="text-right">{{ obj.sz_rec|filesizeformat }}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-8">
+        {{ make_nav("nav-tab-summary", ["Preview", "Scaled"], "nav-pills") }}
+        <div class="tab-content border-0 p-0" id="nav-previewContent">
+          <div class="tab-pane fade show active" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
+            {{ render_figure(obj.plot) }}
+          </div>
+          <div class="tab-pane fade" id="nav-scaled" role="tabpanel" aria-labelledby="nav-scaled-tab">
+            {{ render_figure(obj.plot_scaled) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="nav-metadata" role="tabpanel" aria-labelledby="nav-metadata-tab">
+    <div class="row">
+      <div class="col-7">
+        {{ render_stats_table("Frame details", obj.meta_frame, align="left") }}
+      </div>
+      <div class="col-5">
+        {{ render_stats_table("Time Series", obj.meta_series, align="left") }}
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="nav-execution" role="tabpanel" aria-labelledby="nav-execution-tab">
+    <div class="row">
+      <div class="col-4">
+        <p class="h4">Execution stats</p>
+        <table class="table table-condensed stats">
+          <tbody>
+            <tr><th>Started</th><td class="text-right">{{ obj.exec_start }}</td></tr>
+            <tr><th>Ended</th><td class="text-right">{{ obj.exec_end }}</td></tr>
+            <tr><th>Duration</th><td class="text-right">{{ obj.exec_duration }}</td></tr>
+            <tr><th>Package</th><td class="text-right"><code>{{ obj.package }}{{ '==' if obj.version else ''}}{{ obj.version }}</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col">
+        <p class="h4">Configuration details</p>
+        <div class="border p-3 pre-scrollable small">
+          <div class="float-right flex-column">
+            <textarea id="config-dict" class="ta-hide">{{ obj.config_dict}}</textarea>
+            <textarea id="config-yaml" class="ta-hide">{{ obj.config_yaml }}</textarea>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="copyClipboard('#config-dict')">Copy dict</button>
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="copyClipboard('#config-yaml')">Copy yaml</button>
+          </div>
+          <ul>
+          {% for profiler, configs in obj.config.items() %}
+            <li>{{ profiler }}
+              {%  if configs %}
+                <ul>
+                {%  for key, value in configs.items() %}
+                  <li>{{ key }}: {{ value }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if not obj.issues.empty %}
+    <div class="tab-pane fade" id="nav-issues" role="tabpanel" aria-labelledby="nav-issues-tab">
+      <p class="h4">Issues</p>
+      <p>A total of <span class="badge badge-danger">{{ obj.issues.shape[0] }}</span> issues occurred while profiling.</p>
+      {{ render_dataframe(None, obj.issues, show_index=False) }}
+    </div>
+  {% endif %}
+
+</div>
+{%- endblock %}

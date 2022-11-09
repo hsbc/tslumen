@@ -1,0 +1,7 @@
+{% from '_macros.html' import render_summary_details, render_collapsible_dict, render_list %}
+{% extends "_class.html" %}
+{% block class_name %}{{ obj.__class__.__name__  }}{% endblock %}
+{% block oid %}{{ oid }}{% endblock %}
+{% block details -%}
+    {{ render_summary_details('config', render_collapsible_dict(obj.config)) }}
+{%- endblock %}

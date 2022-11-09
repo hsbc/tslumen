@@ -1,0 +1,5 @@
+{% from '_macros.html' import render_figure %}
+<p class="h4">Smoothing</p>
+<div class="row"><div class="col">{{ render_figure(obj.plot_rolling_avg) }}</div></div>
+<div class="row"><div class="col">{{ render_figure(obj.plot_supsmu) }}</div></div>
+<div class="row"><div class="col">{{ render_figure(obj.plot_lowess) }}</div></div>

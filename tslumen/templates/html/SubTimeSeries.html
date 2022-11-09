@@ -1,0 +1,58 @@
+{% from '_macros.html' import render_stats_table, render_figure, render_dataframe %}
+
+<div class="row">
+  <div class="col-9">
+    <p class="h3">{{ obj.name }}</p>
+    {{ render_figure(obj.plot_ts) }}
+  </div>
+  <div class="col-3">
+    <p class="h4">Series details</p>
+    <table class="table table-condensed stats">
+      <tbody>
+        <tr><th>Mean</th><td class="text-right">{{ obj.mean|numberformat }}</td></tr>
+        <tr><th>Deviation</th><td class="text-right">{{ obj.std|numberformat }}</td></tr>
+        <tr><th>Maximum</th><td class="text-right">{{ obj.maximum|numberformat }}</td></tr>
+        <tr><th>Minimum</th><td class="text-right">{{ obj.minimum|numberformat }}</td></tr>
+        <tr><th>Zeros</th><td class="text-right">{{ obj.zeros }}</td></tr>
+        <tr><th>Missing</th><td class="text-right">{{ obj.missing }}</td></tr>
+        <tr><th>Infinites</th><td class="text-right">{{ obj.infinite }}</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col df-scroll">
+    {{  render_dataframe("Sample", obj.sample, classes="df-small", show_index=False) }}
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col">
+    <ul class="nav nav-pills justify-content-between">
+      {% for tab in obj.tabs -%}
+      <li class="nav-item">
+        <a class="nav-link {{ 'active' if loop.index == 1 else '' }}"
+           id="nav-{{ tab|idhtml }}-{{ obj.name|idhtml }}-tab"
+           href="#nav-{{ tab|idhtml}}-{{ obj.name|idhtml }}"
+           aria-controls="nav-{{ tab|idhtml }}"
+           data-toggle="tab" role="tab" aria-selected="true">{{ tab }}</a>
+      </li>
+      {%- endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <div class="tab-content htab-content" id="nav-tabContent-{{ obj.name|idhtml }}">
+      {% for tab, tab_obj in obj.tabs.items() -%}
+      <div class="tab-pane fade {{ 'show active' if loop.index == 1 else '' }}"
+           id="nav-{{ tab|idhtml }}-{{ obj.name|idhtml }}"
+           aria-labelledby="nav-{{ tab|idhtml }}-tab"
+           role="tabpanel">
+        {{ tab_obj|html }}
+      </div>
+      {%- endfor %}
+    </div>
+  </div>
+</div>

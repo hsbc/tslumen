@@ -1,0 +1,7 @@
+{% from '_macros.html' import render_figure  %}
+<p class="h4">Time Series Decomposition</p>
+{% if obj.seasonality %}
+  {{ render_figure(obj.plot_stl) }}
+{% else %}
+  <p>Cannot determine the series seasonal period.</p>
+{% endif %}
