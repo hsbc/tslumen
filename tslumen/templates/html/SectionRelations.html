@@ -1,0 +1,45 @@
+{% extends "_section.html" %}
+{% from '_macros.html' import make_nav, render_figure %}
+{% block section_content -%}
+
+  {{ make_nav("nav-tab-relations", ["Correlations", "Granger Matrix", "Granger Graph"]) }}
+
+  <div class="tab-content border border-top-0" id="nav-tabRelations">
+
+    <div class="tab-pane fade show active" id="nav-correlations" role="tabpanel" aria-labelledby="nav-correlations-tab">
+      <p class="h4">{{ obj.correlation }} Correlations</p>
+      <div class="text-center">
+        {{ render_figure(obj.plot_scatter) }}
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="nav-granger-matrix" role="tabpanel" aria-labelledby="nav-granger-matrix-tab">
+      <p class="h4">Granger Causality Matrix</p>
+      <p>
+        Critical value <code>{{ obj.granger_critical }}</code>.
+        {% if obj.granger_diff > 0 %}
+          Data differenced <code>{{ obj.granger_diff }}</code> time{{ "s" if obj.granger_diff > 1 else "" }} to try to achieve stationarity.
+        {% endif %}
+      </p>
+      <div class="text-center">
+        {{ render_figure(obj.plot_granger_m) }}
+      </div>
+    </div>
+
+    <div class="tab-pane fade" id="nav-granger-graph" role="tabpanel" aria-labelledby="nav-granger-graph-tab">
+      <p class="h4">Granger Causality Graph</p>
+      <p>
+        Critical value <code>{{ obj.granger_critical }}</code>.
+        {% if obj.granger_diff > 0 %}
+          Data differenced <code>{{ obj.granger_diff }}</code> time{{ "s" if obj.granger_diff > 1 else "" }} to try to achieve stationarity.
+        {% endif %}
+        Highlighted are the strongest granger-causality (lowest p-value) relationship of any given target variable.
+      </p>
+      <div class="text-center">
+        {{ render_figure(obj.plot_granger_g) }}
+      </div>
+    </div>
+
+  </div>
+
+{%- endblock %}

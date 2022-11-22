@@ -1,0 +1,88 @@
+* {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+body {
+    padding-top: 80px;
+    font-size: 14px;
+}
+.container-fluid {
+    max-width: 967px;
+}
+table {
+    font-size: 14px;
+}
+.table td, .table th {
+    padding: 5px;
+}
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+.h1, h1 {
+    font-size: 36px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.h4, h4 { font-size: 18px; }
+.h4, .h5, .h6, h4, h5, h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.tab-content {
+    padding: 20px;
+}
+.htab-content {
+    border-top: unset;
+}
+a.anchor-pos {
+    display: block;
+    position: relative;
+    top: -70px;
+    visibility: hidden;
+}
+.logo {
+    height: 40px;
+}
+.plot svg {
+    max-width: 100%;
+    height: auto;
+}
+.df-scroll {
+    overflow-x: hidden;
+}
+.df-small {
+    font-size: smaller;
+}
+.ta-hide {
+    opacity: .01;
+    height:0;
+    position:absolute;
+    z-index: -1;
+}
+img.img-plot {
+    max-width: 100%;
+}
+img.img-plot:hover {
+    cursor: pointer;
+}
+.modal-100 {
+    max-width: 100%;
+    width: fit-content;
+    text-align: center;
+}
+.modal-center {
+    flex-wrap: wrap;
+    align-content: center;
+}
+.modal-img-container {
+    overflow: auto;
+    width: 100%;
+    max-width: 100%;
+}
+#img-modal-img {
+    max-width: max-content;
+}
+.nav-clip {
+    max-width: 100%;
+    overflow-x: hidden;
+}

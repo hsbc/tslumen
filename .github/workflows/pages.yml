@@ -1,0 +1,43 @@
+name: Generate pages
+
+on: 
+  push:
+    branches:
+      - 'gh-pages'
+
+jobs:
+  gen-docs:
+    name: Generate documentation
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Install pandoc
+      run: sudo apt-get install -y pandoc
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+        cache: 'pip'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-extras.txt
+        pip install -r requirements-dev.txt
+
+    - name:  Make
+      run: |
+        make docs
+
+    - name: Commit
+      run: |
+        git config --global user.name 'Bruno Oliveira'
+        git config --global user.email 'bruno.m.deoliveira@hsbc.com'
+        git add -f docs
+        git commit -m 'gh-pages'
+        git push -u origin gh-pages
+

@@ -1,0 +1,9 @@
+{% from '_macros.html' import render_figure %}
+<p class="h4">Seasonality plots</p>
+{% if obj.seasonality %}
+  <div class="row"><div class="col">{{ render_figure(obj.plot_seasonality) }}</div></div>
+  <div class="row"><div class="col">{{ render_figure(obj.plot_seas_box1) }}</div></div>
+  <div class="row"><div class="col">{{ render_figure(obj.plot_seas_box2) }}</div></div>
+{% else %}
+  <p>Undetermined or unsupported seasonal period.</p>
+{% endif %}

@@ -1,0 +1,22 @@
+<iframe name="{{ ifname }}" id="{{ ifid }}" width="100%" height="100%" frameborder="0" allowfullscreen
+        onload="h_{{ ifid }}();" srcdoc="{{ srce }}">
+</iframe>
+<button id="b_{{ ifid }}" onclick="s_{{ ifid }}()" class="btn btn-default" style="position:relative;float:right;right:30px;top:-35px;">
+    <i class="fa-download fa"></i>
+</button>
+<script>
+function h_{{ ifid }}(){
+    var hheader = $('#header').height() || 0;
+    var height = $('body').height() - hheader - 10;
+    $('#{{ ifid }}')[0].height = height;
+}
+function s_{{ ifid }}() {
+    var html = $('#{{ ifid }}').contents().find('html').html();
+    var link = document.createElement('a');
+    mime = 'text/html';
+    link.setAttribute('download', 'tslumen.html');
+    link.setAttribute('href', 'data:'+mime+';charset=utf-8,'+encodeURIComponent(html));
+    link.click();
+}
+$($('#{{ ifid }}')[0].parentNode.parentNode.parentNode).find('div.p-Widget.p-Panel').each(function a(n, el){$(el.parentNode.parentNode).hide()});
+</script>

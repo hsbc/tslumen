@@ -1,0 +1,14 @@
+{% from '_macros.html' import render_figure %}
+<p class="h4">Auto Correlation</p>
+<div class="row">
+  <div class="col-6">{{ render_figure(obj.plot_acf) }}</div>
+  <div class="col-6">{{ render_figure(obj.plot_pacf) }}</div>
+</div>
+<div class="row">
+  <div class="col-6">{{ render_figure(obj.plot_acf_1d) }}</div>
+  <div class="col-6">{{ render_figure(obj.plot_pacf_1d) }}</div>
+</div>
+<div class="row">
+  <div class="col-6">{{ render_figure(obj.plot_acf_2d) }}</div>
+  <div class="col-6">{{ render_figure(obj.plot_pacf_2d) }}</div>
+</div>

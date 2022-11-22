@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tslumen - a library for exploratory analysis of Time Series data</title>
+    <meta property="og:title" content="tslumen - a library for exploratory analysis of Time Series data" />
+    <meta name="author" content="HSBC Innovation, Global Functions • Data & Artificial Intelligence" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="description" content="tslumen helps bring to light the key characteristics of your time series data with rich, pre-canned artifacts, packed with charts and statistical information." />
+    <meta property="og:description" content="tslumen helps bring to light the key characteristics of your time series data with rich, pre-canned artifacts, packed with charts and statistical information." />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="shortcut icon" href="favicon.png"/>
+    <style type="text/css">
+body {
+  font-family: Helvetica, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+.container {
+  max-width: 1248px;
+}
+.site-header {
+  background-color: #fcfcfc;
+}
+.site-header a {
+  color: #6c6c6d;
+  transition: color .15s ease-in-out;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 80%;
+  white-space: nowrap;
+}
+.site-header a:hover {
+  color: #a09ebb;
+  text-decoration: none;
+}
+.hero-cover {
+  background: linear-gradient(0deg, #fcfcfc, rgb(185 186 214 / 30%)) !important;
+}
+.bg-light {
+  background-color: #fcfcfc !important;
+}
+.bg-dark {
+  background-color: #e4e4ed !important;
+}
+.d-brow {
+  width: 90%;
+  height: 300px;
+  border-radius: 11px 11px 0 0;
+}
+.d-brow-t {
+  border-radius: 11px 11px 0 0;
+  background-color: #f3f6f6;
+  border-bottom: solid 1px rgb(221 224 224 / 25%);
+  padding: 6px 0 2px 9px;
+  text-align: left;
+  color: #aaa;
+  font-family: Arial, sans-serif !important;
+  font-size: 11px;
+  font-weight: 800;
+}
+footer {
+  font-size: small;
+}
+.flex-equal > * {
+  flex: 1;
+}
+@media (min-width: 768px) {
+  .flex-md-equal > * {
+    flex: 1;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <header class="site-header sticky-top py-1">
+      <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2" href="./" aria-label="tslumen">
+          <img src="logo.svg" height="30px" alt="tslumen"/>
+        </a>
+        <div class="align-right">
+          <a class="px-2 py-3 d-none d-md-inline-block" href="html/installation.html">Getting Started</a>
+          <a class="px-2 py-3 d-none d-md-inline-block" href="html/notebooks/01_multiple_series.html">User Guide</a>
+          <a class="px-2 py-3 d-none d-md-inline-block" href="html/index_api.html">API Documentation</a>
+          <a class="px-2 py-3 d-none d-md-inline-block" href="https://github.com/hsbc/tslumen">GitHub</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="position-relative overflow-hidden p-3 p-md-3 m-0 text-center hero-cover">
+        <div class="col-md-5 p-lg-5 mx-auto my-4">
+          <img src="logo.svg" alt="tslumen" width="450px"/>
+          <p class="lead fw-normal mt-2">A library for exploratory analysis of Time Series data</p>
+          <a class="btn btn-outline-secondary" href="html/installation.html">Get Started</a>
+        </div>
+      </div>
+      <div>
+        <div class="d-md-flex flex-md-equal w-100 container ps-md-3 pt-5 align-items-end">
+          <div class="me-md-3 text-center overflow-hidden">
+            <div class="my-3 pt-3">
+              <h2 class="display-7">Self-contained, HTML report</h2>
+              <p class="lead">Easy to download and share</p>
+            </div>
+            <div class="bg-body shadow mx-auto d-brow">
+              <div class="d-brow-t">&#9711; &#9711; &#9711;</div>
+              <img src="html.png" style="max-width: 100%" height="275px" />
+            </div>
+          </div>
+          <div class="me-md-3 text-center overflow-hidden">
+            <div class="my-3 pt-3">
+              <h2 class="display-7">Blends in with your notebooks platform</h2>
+              <p class="lead">Highly configurable, customizable and extensible</p>
+            </div>
+            <div class="bg-body shadow mx-auto d-brow">
+              <div class="d-brow-t">&#9711; &#9711; &#9711;</div>
+              <img src="jupyter.png" style="max-width: 100%" height="275px" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-light">
+        <div class="d-md-flex flex-md-equal w-100 container ps-md-3 pt-5 align-items-end">
+          <div class="me-md-3 text-center overflow-hidden">
+            <div class="my-3 pt-3">
+              <h2 class="display-7">Ready to integrate your pipelines</h2>
+              <p class="lead">Clean API and comprehensive command line interface</p>
+            </div>
+            <div class="bg-body shadow mx-auto d-brow">
+              <div class="d-brow-t">&#9711; &#9711; &#9711;</div>
+              <div class="w-100 h-100" style="background-color: #1e1e1e">
+                <img src="cli.png" style="max-width: 100%" />
+              </div>
+            </div>
+          </div>
+          <div class="me-md-3 text-center overflow-hidden">
+            <div class="my-3 pt-3">
+              <h2 class="display-7">Interactive Visualizations</h2>
+              <p class="lead">Explore your timeseries with feature-rich plots</p>
+            </div>
+            <div class="bg-body shadow mx-auto d-brow">
+              <div class="d-brow-t">&#9711; &#9711; &#9711;</div>
+              <img src="dashboard.png" style="max-width: 100%" height="275px" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="d-md-flex flex-md-equal w-100 container ps-md-3 pt-5">
+          <div class="me-md-3 overflow-hidden">
+            <div class="my-3 px-2 pt-3">
+              <h2 class="display-7 text-center">Your library for Time Series EDA</h2>
+              <p class="lead mt-5">
+                <b>tslumen</b> helps bring to light the key characteristics of your time series data
+                with rich, pre-canned artifacts, packed with charts and statistical information.
+              </p>
+              <p class="lead">
+                The primary goal of <b>tslumen</b> is to expedite and bring consistency to how time series
+                EDA is performed, allowing you to uncover the fundamental aspects in seconds and focus on
+                the analysis, instead of the boilerplate code.
+              </p>
+            </div>
+          </div>
+          <div class="me-md-3 overflow-hidden">
+            <div class="my-3 px-2 pt-3">
+              <h2 class="display-7 text-center">Key features</h2>
+              <ul class="fw-light mt-5">
+                <li>Platform agnostic, integrates nicely with your datascience workspace</li>
+                <li>Built on open source technology and research</li>
+                <li>Highly customizable and extensible</li>
+                <li>Data (profiling results) completely detached from the visuals</li>
+                <li>Can be executed from the command line</li>
+                <li>Efficient execution using parallel processing</li>
+                <li>Includes a great number of statistical information, including descriptive statistics statistical tests like KPSS or ADF, correlation, <i>tsfeatures</i>, etc.</li>
+                <li>Various plots specifically tailored to time series analysis</li>
+                <li>Self-contained HTML report that can easily be shared with interested parties</li>
+                <li>Fully interactive dashboard for a richer experience and detailed exploration</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="py-5 text-muted bg-dark mt-5 w-100">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 col-md">
+            <img src="logo.svg" alt="tslumen" height="24px" style="filter: grayscale(100%);"/>
+            <small class="d-block mb-3 pt-2">&copy; 2022 - HSBC Group Management Services Limited</small>
+          </div>
+          <div class="col-6 col-md">
+            <b>Links</b>
+            <ul class="fw-light list-unstyled">
+              <li><a href="html/installation.html" class="link-secondary">Getting Started</a></li>
+              <li><a href="html/notebooks/01_multiple_series.html" class="link-secondary">User Guide</a></li>
+              <li><a href="html/index_api.html" class="link-secondary">API Documentation</a></li>
+              <li><a href="https://github.com/hsbc/tslumen" class="link-secondary">GitHub</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
+</html>

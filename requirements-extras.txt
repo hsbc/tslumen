@@ -1,0 +1,4 @@
+plotly>=4.12.0,<6.0.0
+jupyter-dash>=0.3,<0.5
+dash>=1.20,<2.7
+dash_bootstrap_components>1.0.0

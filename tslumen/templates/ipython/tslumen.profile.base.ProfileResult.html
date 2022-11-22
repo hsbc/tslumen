@@ -1,0 +1,21 @@
+{% from '_macros.html' import render_summary_details, render_list, render_bool %}
+{% extends "_class.html" %}
+{% block class_name %}{{ obj.__class__.__name__  }}{% endblock %}
+{% block oid %}{{ oid }}{% endblock %}
+{% block extra_head -%}|
+ <span class="text-info">name</span>: {{ obj.name }}
+ <span class="text-info">scope</span>: {{ obj.scope }}
+{% if obj.target -%}
+ <span class="text-info">target</span>: {{ obj.target }}
+{% endif %}|
+ <span class="text-info">execution</span>: {{ render_bool(obj.success) }} {{ obj.end - obj.start }}
+{% endblock %}
+{% block details -%}
+{% if obj.exception -%}
+<samp class="text-danger"><b>Exception:</b> {{ obj.exception }}</samp>
+{% endif %}
+{% if obj.warnings -%}
+    {{ render_summary_details('warnings', render_list(obj.warnings)) }}
+{% endif %}
+{{ obj.result|autoformat }}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "_base.html" %}
+{% block content -%}
+<i>{% block base_class_name %}{% endblock %}</i>
+ <b>{% block class_name %}{% endblock %}</b>
+ at {% block oid %}{% endblock %}
+{% block extra_head %}{% endblock %}
+<div class="no-ws">
+    {% block details %}{% endblock details %}
+</div>
+{%- endblock content %}

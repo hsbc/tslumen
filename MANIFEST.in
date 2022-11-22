@@ -1,0 +1,21 @@
+global-exclude *.pyc
+global-exclude *.md
+global-exclude .DS_Store
+global-exclude __pycache__
+
+exclude .git*
+exclude .*rc
+exclude *.ini
+exclude index.html
+exclude Makefile
+exclude .nojekyll
+recursive-exclude docs/ *
+recursive-exclude tests/ *
+
+include requirements.txt
+include requirements-extras.txt
+include README.md
+include pyproject.toml
+include tslumen/_version.py
+include tslumen/py.typed
+recursive-include tslumen/templates *

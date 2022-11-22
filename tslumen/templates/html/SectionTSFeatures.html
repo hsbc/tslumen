@@ -1,0 +1,12 @@
+{% extends "_section.html" %}
+{% from '_macros.html' import render_figure %}
+{% block section_content -%}
+  <div class="row border">
+    <div class="col-6 p-4 text-center">
+      {{ render_figure(obj.plot_heat) }}
+    </div>
+    <div class="col-6 p-4 text-center">
+      {{ render_figure(obj.plot_radar) }}
+    </div>
+  </div>
+{%- endblock %}

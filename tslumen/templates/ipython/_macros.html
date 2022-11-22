@@ -1,0 +1,75 @@
+{% macro render_bool(val, label="") -%}
+    {% if val -%}
+        <span class="text-success">✓</span>
+    {% else %}
+        <span class="text-danger">✘</span>
+    {%- endif %}
+{%- endmacro %}
+
+
+{% macro render_summary_details(summary, details, max_inline=100) -%}
+    {% set rdetails = details|autoformat %}
+    {% if details is defined and rdetails|length > max_inline %}
+        <details>
+            <summary><span class="text-info">{{ summary }}</span></summary>
+            {{ rdetails }}
+        </details>
+    {% else %}
+        <span class="text-info sum-pad">{{ summary }}</span> {{ rdetails }}
+    {% endif %}
+{%- endmacro %}
+
+
+{% macro render_list(list_obj, ulclass="no-bullet") -%}
+    {% if list_obj is defined -%}
+        <ul class={{ulclass}} >
+        {% for value in list_obj -%}
+            <li>
+                {% if value is mapping -%}
+                    {{ render_dict(value) }}
+                {% else %}
+                    {{ value|autoformat }}
+                {%- endif %}
+            </li>
+        {%- endfor %}
+        </ul>
+    {%- endif %}
+{%- endmacro %}
+
+
+{% macro render_dict(dict_obj) -%}
+    {% if dict_obj -%}
+        <ul class="no-bullet">
+        {% for key, value in dict_obj.items() -%}
+            <li>
+                <span class="ansi-bold text-info">{{ key }}:</span>
+                {% if value is mapping -%}
+                    {{ render_dict(value) }}
+                {% else %}
+                    {{ value|autoformat }}
+                {%- endif %}
+            </li>
+        {%- endfor %}
+        </ul>
+    {%- endif %}
+{%- endmacro %}
+
+
+{% macro render_collapsible_dict(dict_obj) -%}
+    {% if dict_obj -%}
+        <ul class="no-bullet">
+            {% for key, value in dict_obj.items() -%}
+                <li>
+                    {% if value is mapping -%}
+                        {% set rvalue = render_collapsible_dict(value) %}
+                    {% elif value|islist -%}
+                        {% set rvalue = render_list(value, "list-dash") %}
+                    {% else %}
+                        {% set rvalue = value|autoformat %}
+                    {%- endif %}
+                    {{ render_summary_details(key, rvalue) }}
+                </li>
+            {%- endfor %}
+        </ul>
+    {%- endif %}
+{%- endmacro %}

@@ -1,0 +1,14 @@
+hydra-core>=1.1,<2.0
+hydra_colorlog
+typing_inspect>=0.6.0
+numpy>=1.19
+pandas>=1.0.0,<1.5.0,!=1.4.0
+jinja2>=3.0,<3.1
+matplotlib>=3.3.2,<4.0.0
+networkx
+scipy>=1.5.0
+statsmodels>=0.12.0,<0.14
+supersmoother==0.4
+joblib>=1.0.0<2.0.0
+tqdm
+PyYAML>=5.0.0
