@@ -9,6 +9,8 @@ with open('requirements-extras.txt', 'r') as f:
 setup(
     python_requires='>=3.6.0',
     use_scm_version=True,
+    long_description=open('README.md', 'r').read(),
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     package_data={'tslumen': ['py.typed',
                               "templates/ipython/*",
