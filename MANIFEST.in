@@ -1,3 +1,8 @@
+global-exclude *.pyc
+global-exclude *.md
+global-exclude .DS_Store
+global-exclude __pycache__
+
 exclude .git*
 exclude .*rc
 exclude *.ini
@@ -14,8 +19,3 @@ include pyproject.toml
 include tslumen/_version.py
 include tslumen/py.typed
 recursive-include tslumen/templates *
-
-global-exclude *.pyc
-global-exclude *.md
-global-exclude .DS_Store
-global-exclude __pycache__
