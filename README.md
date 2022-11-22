@@ -51,7 +51,7 @@ make install
 
 ## Examples
 
-Refer to the [Quick Start](https://hsbc.github.io/tslumen/quickstart.html) 
+Refer to the [Quick Start](https://hsbc.github.io/tslumen/html/quickstart.html) 
 page of the documentation for a brief tour of the package.
 
 Complete example notebooks can be found on the **User Guide** section of the documentation.
