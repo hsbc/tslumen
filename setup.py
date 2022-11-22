@@ -6,10 +6,13 @@ with open('requirements.txt', 'r') as f:
 with open('requirements-extras.txt', 'r') as f:
     install_requires_extras = f.read().splitlines()
 
+with open('README.md', 'r') as f:
+  long_description = f.read()
+
 setup(
     python_requires='>=3.6.0',
     use_scm_version=True,
-    long_description=open('README.md', 'r').read(),
+    long_description=long_description,
     long_description_content_type='text/markdown',
     packages=find_packages(),
     package_data={'tslumen': ['py.typed',

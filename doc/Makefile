@@ -23,6 +23,7 @@ clean:
 github:
 	@make html
 	cp $(HOMEDIR)/* $(BUILDDIR)
+	touch $(BUILDDIR)/.nojekyll
 	chmod 755 -R "$(BUILDDIR)"
 
 
