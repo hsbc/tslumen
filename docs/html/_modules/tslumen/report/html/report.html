@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report.html.report &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html"><img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.report.html.report</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.report.html.report</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module with the main class ``HtmlReport``.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.misc</span> <span class="kn">import</span> <span class="n">lazyproperty</span>
+<span class="kn">from</span> <span class="nn">tslumen.scheduling</span> <span class="kn">import</span> <span class="n">Scheduler</span>
+<span class="kn">from</span> <span class="nn">tslumen.profile.base</span> <span class="kn">import</span> <span class="n">BundledProfiler</span><span class="p">,</span> <span class="n">BundledResult</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.base</span> <span class="kn">import</span> <span class="n">Report</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.html.base</span> <span class="kn">import</span> <span class="n">HtmlBlock</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.html.sections</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SectionSummary</span><span class="p">,</span>
+    <span class="n">SectionTimeSeries</span><span class="p">,</span>
+    <span class="n">SectionTSFeatures</span><span class="p">,</span>
+    <span class="n">SectionRelations</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;HtmlReport&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="HtmlReport"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.HtmlReport">[docs]</a><span class="k">class</span> <span class="nc">HtmlReport</span><span class="p">(</span><span class="n">Report</span><span class="p">,</span> <span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Renders the profiling results as an interactive, fully self-contained HTML report that</span>
+<span class="sd">    can be downloaded and shared without the need for a running server or Python kernel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">SECTIONS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">SectionSummary</span><span class="p">,</span>
+        <span class="n">SectionTimeSeries</span><span class="p">,</span>
+        <span class="n">SectionTSFeatures</span><span class="p">,</span>
+        <span class="n">SectionRelations</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">_multiple_series</span> <span class="o">=</span> <span class="p">[</span><span class="n">SectionTSFeatures</span><span class="p">,</span> <span class="n">SectionRelations</span><span class="p">]</span>
+    <span class="n">_sequential</span> <span class="o">=</span> <span class="p">[</span><span class="n">SectionTimeSeries</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BundledResult</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">profiler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BundledProfiler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">profiler_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scheduler_config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            df (pd.DataFrame): Timeseries data.</span>
+<span class="sd">            meta (Optional[dict]): Timeseries metadata, a 2-level dictionary, first level indexed</span>
+<span class="sd">                by ``{&#39;frame&#39;: {&lt;key&gt;: &lt;value&gt;}, {&#39;series&#39;: {&lt;series name&gt;: &lt;desc&gt;}}``.</span>
+<span class="sd">            result (Optional[BundledResult]): For instantiating the report with pre-computed</span>
+<span class="sd">                results from a profiler.</span>
+<span class="sd">            profiler (Optional[BundledProfiler]): The `BundledProfiler` to run the profiling,</span>
+<span class="sd">                defaults to `DefaultProfiler`.</span>
+<span class="sd">            profiler_config (Optional[dict]): Profiler&#39;s configurations.</span>
+<span class="sd">            scheduler (Optional[Scheduler]): A `Scheduler`, default&#39;s to `Scheduler`.</span>
+<span class="sd">            scheduler_config (Optional[dict]): Scheduler&#39;s configurations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">20</span>
+        <span class="p">),</span> <span class="s2">&quot;HtmlReport not suitable for sets with more than 20 time series.&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+            <span class="n">meta</span><span class="o">=</span><span class="n">meta</span><span class="p">,</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+            <span class="n">profiler</span><span class="o">=</span><span class="n">profiler</span><span class="p">,</span>
+            <span class="n">profiler_config</span><span class="o">=</span><span class="n">profiler_config</span><span class="p">,</span>
+            <span class="n">scheduler</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+            <span class="n">scheduler_config</span><span class="o">=</span><span class="n">scheduler_config</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">HtmlBlock</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_taint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_html</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@lazyproperty</span>
+    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Lazy loading property with the HTML representation of the report.&quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_result</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">20</span>
+        <span class="p">),</span> <span class="s2">&quot;HtmlReport not suitable for sets with more than 20 time series.&quot;</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta</span> <span class="ow">or</span> <span class="p">{}</span>
+
+        <span class="c1"># instantiate sections and build execution plan</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">HtmlBlock</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">parallel</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">HtmlBlock</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sections</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">klass</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SECTIONS</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">klass</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiple_series</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="n">klass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">meta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">sequence</span> <span class="k">if</span> <span class="n">klass</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequential</span> <span class="k">else</span> <span class="n">parallel</span><span class="p">)</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+
+        <span class="c1"># execute sequential</span>
+        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+            <span class="n">_</span> <span class="o">=</span> <span class="n">section</span><span class="o">.</span><span class="n">html</span>
+        <span class="c1"># execute parallel</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">html</span><span class="p">,</span>
+            <span class="p">[(</span><span class="n">section</span><span class="p">,)</span> <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">parallel</span><span class="p">],</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Rendering remaining sections&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">render_duration</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+        <span class="n">profile_duration</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">profile_duration</span> <span class="o">+</span> <span class="n">render_duration</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">html</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HtmlReport.save"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.HtmlReport.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">path_or_buffer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">TextIOBase</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span>
+        <span class="n">encoding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Save rendered html to disk&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">path_or_buffer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_page</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_or_buffer</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_page</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">path_or_buffer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">html_page</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

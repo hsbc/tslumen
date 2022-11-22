@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report.html.sections &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html"><img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.report.html.sections</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.report.html.sections</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module with the sections that go into ``HtmlReport``.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pformat</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+
+<span class="kn">import</span> <span class="nn">tslumen</span>
+<span class="kn">from</span> <span class="nn">tslumen.misc</span> <span class="kn">import</span> <span class="n">lazyproperty</span>
+<span class="kn">from</span> <span class="nn">tslumen.scheduling</span> <span class="kn">import</span> <span class="n">Scheduler</span>
+<span class="kn">from</span> <span class="nn">tslumen.profile</span> <span class="kn">import</span> <span class="n">BundledResult</span>
+<span class="kn">from</span> <span class="nn">tslumen</span> <span class="kn">import</span> <span class="n">jinja_utils</span> <span class="k">as</span> <span class="n">ju</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.html.base</span> <span class="kn">import</span> <span class="n">HtmlBlock</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.static</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TS</span><span class="p">,</span>
+    <span class="n">TSStack</span><span class="p">,</span>
+    <span class="n">Distribution</span><span class="p">,</span>
+    <span class="n">BoxPlot</span><span class="p">,</span>
+    <span class="n">LagCorrelation</span><span class="p">,</span>
+    <span class="n">LagMatrix</span><span class="p">,</span>
+    <span class="n">Radar</span><span class="p">,</span>
+    <span class="n">Heatmap</span><span class="p">,</span>
+    <span class="n">ScatterMatrix</span><span class="p">,</span>
+    <span class="n">GrangerMatrix</span><span class="p">,</span>
+    <span class="n">GrangerGraph</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;SectionSummary&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSStatistics&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSDistribution&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSFeatures&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSAutoCorrelation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSLagPlots&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSComponents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSSeasonality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;TabTSSmoothing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SubTimeSeries&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SectionTimeSeries&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SectionTSFeatures&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SectionRelations&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">_PROFILERS_TSFEATURES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;ft_stl&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_entropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_pacf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_tilewin&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_kpss&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ft_adfuller&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_MAIN</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;trend&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;seasonality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entropy&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entropy_acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;instability&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lumpiness&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_STAT</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;kpss(c)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kpss(ct)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(c)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(ct)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(ctt)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;adfuller(nc)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">_FTS_ACF</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;acf1(d=0)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(d=1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(d=2)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=0)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(d=2)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf5(d=0)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf5(d=1)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf5(d=2)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf1(error)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf10(error)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf(season)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf(season)&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="SectionSummary"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.SectionSummary">[docs]</a><span class="k">class</span> <span class="nc">SectionSummary</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the contents of the &quot;Summary&quot; section&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="s2">&quot;summary&quot;</span>
+    <span class="n">_title</span> <span class="o">=</span> <span class="s2">&quot;Summary&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">BundledResult</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span>
+
+        <span class="c1"># Tab: Overview</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_series</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;n_series&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt_start</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dt_start&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dt_end</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dt_end&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;freq&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">period</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;period&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sz_total</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sz_total&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sz_rec</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sz_total&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;n_series&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">df_scaled</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;df_scaled&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot</span> <span class="o">=</span> <span class="n">TS</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.8</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">),</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_scaled</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">df_scaled</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">TS</span><span class="p">(</span><span class="n">df_scaled</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">5.8</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">),</span> <span class="n">yaxis</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Tab: Metadata</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_frame</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;frame&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_series</span> <span class="o">=</span> <span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;series&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="c1"># Tab: Execution stats</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exec_start</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exec_end</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">end</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exec_duration</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">result</span><span class="o">.</span><span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">package</span> <span class="o">=</span> <span class="s2">&quot;tslumen&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="n">tslumen</span><span class="o">.</span><span class="n">__version__</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_dict</span> <span class="o">=</span> <span class="n">pformat</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config_yaml</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">config</span><span class="p">)</span>
+
+        <span class="c1"># Tab: Issues</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">issues</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">exec_details</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s2">&quot;~ Succeeded&quot;</span><span class="p">)[</span>
+                <span class="p">[</span><span class="s2">&quot;Profiler&quot;</span><span class="p">,</span> <span class="s2">&quot;Scope&quot;</span><span class="p">,</span> <span class="s2">&quot;Target&quot;</span><span class="p">,</span> <span class="s2">&quot;Exceptions&quot;</span><span class="p">]</span>
+            <span class="p">]</span>
+            <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;Profiler&quot;</span><span class="p">,</span> <span class="s2">&quot;Target&quot;</span><span class="p">])</span>
+            <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSStatistics"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSStatistics">[docs]</a><span class="k">class</span> <span class="nc">TabTSStatistics</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Statistics&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="n">fun</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fun</span> <span class="ow">in</span> <span class="p">{</span>
+                    <span class="s2">&quot;Mean&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Variance&quot;</span><span class="p">:</span> <span class="s2">&quot;var&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Standard deviation&quot;</span><span class="p">:</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Median&quot;</span><span class="p">:</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Median absolute deviation&quot;</span><span class="p">:</span> <span class="s2">&quot;mad&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Coefficient of variation&quot;</span><span class="p">:</span> <span class="s2">&quot;cov&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Minimum&quot;</span><span class="p">:</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;25%&quot;</span><span class="p">:</span> <span class="s2">&quot;q25&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;50%&quot;</span><span class="p">:</span> <span class="s2">&quot;q50&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;75%&quot;</span><span class="p">:</span> <span class="s2">&quot;q75&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Maximum&quot;</span><span class="p">:</span> <span class="s2">&quot;maximum&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Interquartile range&quot;</span><span class="p">:</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Kurtosis&quot;</span><span class="p">:</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Skewness&quot;</span><span class="p">:</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span>
+                <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">},</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+
+        <span class="n">series_tests</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">tname</span> <span class="ow">in</span> <span class="p">[</span>
+            <span class="s2">&quot;levene_constant_variance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ljungbox_autocorrelation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;jarque_bera_normality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;omnibus_normality&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;adfuller_stationarity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;kpss_stationarity&quot;</span><span class="p">,</span>
+        <span class="p">]:</span>
+            <span class="n">tr</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tname</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">tr</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">series_tests</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">test</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;Null Hypothesis&quot;</span><span class="p">:</span> <span class="n">tr</span><span class="o">.</span><span class="n">null_hypothesis</span><span class="p">,</span>
+                <span class="s2">&quot;Reject&quot;</span><span class="p">:</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">reject_null_hypothesis</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;pvalue&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Confidence&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">confidence_level</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tests</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">series_tests</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSDistribution"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSDistribution">[docs]</a><span class="k">class</span> <span class="nc">TabTSDistribution</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Distribution&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_dist</span> <span class="o">=</span> <span class="n">Distribution</span><span class="p">(</span>
+            <span class="n">series</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;binned&quot;</span><span class="p">],</span>
+            <span class="n">df_percentiles</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;pd_percentiles&quot;</span><span class="p">],</span>
+            <span class="n">df_quantiles</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;pd_quantiles&quot;</span><span class="p">],</span>
+            <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSFeatures"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSFeatures">[docs]</a><span class="k">class</span> <span class="nc">TabTSFeatures</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Features&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="n">df_fts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result</span><span class="p">[</span><span class="n">ft</span><span class="p">]</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">_PROFILERS_TSFEATURES</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts_main</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_fts</span><span class="p">[</span><span class="n">_FTS_MAIN</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;Main&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts_stat</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_fts</span><span class="p">[</span><span class="n">_FTS_STAT</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;Stationarity&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts_acf</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_fts</span><span class="p">[</span><span class="n">_FTS_ACF</span><span class="p">]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;ACF/PACF&quot;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_fts_main</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_fts_main</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_fts_stat</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_fts_stat</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_fts_acf</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">df_fts_acf</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+                <span class="p">[</span>
+                    <span class="s2">&quot;acf1(d=0)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;acf1(d=1)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;acf1(d=2)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;acf1(error)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;acf10(error)&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;acf(season)&quot;</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSAutoCorrelation"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSAutoCorrelation">[docs]</a><span class="k">class</span> <span class="nc">TabTSAutoCorrelation</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Auto Correlation&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_acf</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;acf&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ACF&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_acf_1d</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;acf_1d&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ACF (1-diff)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_acf_2d</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;acf_2d&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;ACF (2-diff)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_pacf</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;pacf&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_pacf_1d</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;pacf_1d&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF (1-diff)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_pacf_2d</span> <span class="o">=</span> <span class="n">LagCorrelation</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;pacf_2d&quot;</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;PACF (2-diff)&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSLagPlots"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSLagPlots">[docs]</a><span class="k">class</span> <span class="nc">TabTSLagPlots</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Lag Plots&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_lag</span> <span class="o">=</span> <span class="n">LagMatrix</span><span class="p">(</span>
+            <span class="n">original</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;lag_corr&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">original</span><span class="p">,</span>
+            <span class="n">lags</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;lag_corr&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span>
+            <span class="n">corr</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;lag_corr&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TabTSComponents"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSComponents">[docs]</a><span class="k">class</span> <span class="nc">TabTSComponents</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Components&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;stl&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seasonality</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_stl</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seasonality</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_stl</span> <span class="o">=</span> <span class="n">TSStack</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TabTSSeasonality"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSSeasonality">[docs]</a><span class="k">class</span> <span class="nc">TabTSSeasonality</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Seasonality&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;seasonal_split&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seasonality</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seasonality</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seas_box1</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seas_box2</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seasonality</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seasonality</span> <span class="o">=</span> <span class="n">TS</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;PuBu&quot;</span><span class="p">)</span>
+            <span class="n">dfb1</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+                <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span>
+                <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">dfb2</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seas_box1</span> <span class="o">=</span> <span class="n">BoxPlot</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">dfb1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_seas_box2</span> <span class="o">=</span> <span class="n">BoxPlot</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">dfb2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="TabTSSmoothing"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.TabTSSmoothing">[docs]</a><span class="k">class</span> <span class="nc">TabTSSmoothing</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Time Series tab: Smoothing&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;rolling_avg&quot;</span><span class="p">,</span> <span class="s2">&quot;supsmu&quot;</span><span class="p">,</span> <span class="s2">&quot;lowess&quot;</span><span class="p">]:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">plot</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plot</span> <span class="o">=</span> <span class="n">TS</span><span class="p">(</span>
+                    <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+                    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.8</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="n">line_width</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#cecce0&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">TS</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                <span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;plot_</span><span class="si">{</span><span class="n">var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">plot</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SubTimeSeries"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.SubTimeSeries">[docs]</a><span class="k">class</span> <span class="nc">SubTimeSeries</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the content for each time series in the &quot;Time Series&quot; section&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Summary</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">std</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;minimum&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;maximum&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zeros</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;zeros&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">missing</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">infinite</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;infinite&quot;</span><span class="p">]</span>
+
+        <span class="n">fmt_num</span><span class="p">,</span> <span class="n">div_num</span> <span class="o">=</span> <span class="n">ju</span><span class="o">.</span><span class="n">format_number</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="n">fmt_date</span> <span class="o">=</span> <span class="n">ju</span><span class="o">.</span><span class="n">format_date_freq</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">[[</span><span class="n">fmt_num</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span> <span class="o">/</span> <span class="n">div_num</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">]],</span>
+            <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">fmt_date</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span> <span class="s2">&quot;...&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_ts</span> <span class="o">=</span> <span class="n">TS</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ser</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">2.3</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># Tabs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tabs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;Stats&quot;</span><span class="p">:</span> <span class="n">TabTSStatistics</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Distribution&quot;</span><span class="p">:</span> <span class="n">TabTSDistribution</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Features&quot;</span><span class="p">:</span> <span class="n">TabTSFeatures</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Components&quot;</span><span class="p">:</span> <span class="n">TabTSComponents</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Correlation&quot;</span><span class="p">:</span> <span class="n">TabTSAutoCorrelation</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Lags&quot;</span><span class="p">:</span> <span class="n">TabTSLagPlots</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Seasonal&quot;</span><span class="p">:</span> <span class="n">TabTSSeasonality</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+            <span class="s2">&quot;Smoothing&quot;</span><span class="p">:</span> <span class="n">TabTSSmoothing</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">ser</span><span class="p">),</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="SectionTimeSeries"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.SectionTimeSeries">[docs]</a><span class="k">class</span> <span class="nc">SectionTimeSeries</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class representing the Time Series section&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="s2">&quot;timeseries&quot;</span>
+    <span class="n">_title</span> <span class="o">=</span> <span class="s2">&quot;Time Series&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">BundledResult</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">meta</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_series</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span> <span class="o">=</span> <span class="n">scheduler</span> <span class="ow">or</span> <span class="n">Scheduler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_df</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">SubTimeSeries</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">series_result</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">ser</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SubTimeSeries</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">SubTimeSeries</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">series_result</span><span class="p">,</span> <span class="n">ser</span><span class="p">)</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">html</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@lazyproperty</span>
+    <span class="k">def</span> <span class="nf">html</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">objs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheduler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">,</span>
+            <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">series_result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_df</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">series_result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_series</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Rendering TimeSeries section&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="p">{</span><span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">obj</span> <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">objs</span><span class="p">}</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">html</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SectionTSFeatures"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.SectionTSFeatures">[docs]</a><span class="k">class</span> <span class="nc">SectionTSFeatures</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the contents of the &quot;Features&quot; section&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="s2">&quot;tsfeatures&quot;</span>
+    <span class="n">_title</span> <span class="o">=</span> <span class="s2">&quot;Features&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">BundledResult</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">)</span>
+        <span class="n">series</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">ser</span><span class="p">[</span><span class="n">ft</span><span class="p">]</span> <span class="k">for</span> <span class="n">ft</span> <span class="ow">in</span> <span class="n">_PROFILERS_TSFEATURES</span><span class="p">])</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">ser</span> <span class="ow">in</span> <span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">],</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">_FTS_MAIN</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_radar</span> <span class="o">=</span> <span class="n">Radar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_heat</span> <span class="o">=</span> <span class="n">Heatmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_fts</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SectionRelations"><a class="viewcode-back" href="../../../../api/tslumen.report.html.html#tslumen.report.html.sections.SectionRelations">[docs]</a><span class="k">class</span> <span class="nc">SectionRelations</span><span class="p">(</span><span class="n">HtmlBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the contents of the &quot;Correlations&quot; section&quot;&quot;&quot;</span>
+
+    <span class="n">_id</span> <span class="o">=</span> <span class="s2">&quot;relations&quot;</span>
+    <span class="n">_title</span> <span class="o">=</span> <span class="s2">&quot;Relations&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">BundledResult</span><span class="p">,</span>
+        <span class="n">meta</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span> <span class="o">=</span> <span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">scheduler</span><span class="p">)</span>
+        <span class="n">frame</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="s2">&quot;Pearson&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_corr</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;corr_pearson&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">plot_scatter</span> <span class="o">=</span> <span class="n">ScatterMatrix</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">df_corr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df_corr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;granger_causality&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dfp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">granger_diff</span> <span class="o">=</span> <span class="n">frame</span><span class="p">[</span><span class="s2">&quot;granger_causality&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dfp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfl</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">granger_diff</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">granger_critical</span> <span class="o">=</span> <span class="mf">0.05</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_granger_m</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_granger_g</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_granger_m</span> <span class="o">=</span> <span class="n">GrangerMatrix</span><span class="p">(</span>
+                <span class="n">dfp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dfp</span><span class="p">,</span> <span class="n">dfl</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dfl</span><span class="p">,</span> <span class="n">critical</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">granger_critical</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_granger_g</span> <span class="o">=</span> <span class="n">GrangerGraph</span><span class="p">(</span><span class="n">dfp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dfp</span><span class="p">,</span> <span class="n">critical</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">granger_critical</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

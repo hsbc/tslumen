@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.plot.static package &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.plot.interactive package" href="tslumen.plot.interactive.html" />
+    <link rel="prev" title="tslumen.plot package" href="tslumen.plot.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tslumen.plot.static package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.plot.static.comparison">tslumen.plot.static.comparison module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.plot.static.correlation">tslumen.plot.static.correlation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.plot.static.distribution">tslumen.plot.static.distribution module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.plot.static.line">tslumen.plot.static.line module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-tslumen.plot.static.misc">tslumen.plot.static.misc module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.plot.interactive.html">tslumen.plot.interactive package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+          <li><a href="tslumen.plot.html">tslumen.plot package</a> &raquo;</li>
+      <li>tslumen.plot.static package</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.plot.static">
+<span id="tslumen-plot-static-package"></span><h1>tslumen.plot.static package<a class="headerlink" href="#module-tslumen.plot.static" title="Permalink to this headline">¶</a></h1>
+<p>Default static <cite>Matplotlib</cite> plots.</p>
+<section id="module-tslumen.plot.static.comparison">
+<span id="tslumen-plot-static-comparison-module"></span><h2>tslumen.plot.static.comparison module<a class="headerlink" href="#module-tslumen.plot.static.comparison" title="Permalink to this headline">¶</a></h2>
+<p>Comparison plots.</p>
+<dl class="py class">
+<dt id="tslumen.plot.static.comparison.Heatmap">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.comparison.</span></code><code class="sig-name descname"><span class="pre">Heatmap</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(4,</span> <span class="pre">0.45)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(4,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'PuBu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valfmt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'{x:.3f}'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">textcolors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">('black',</span> <span class="pre">'white')</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/comparison.html#Heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Heatmap plot.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.cmap">
+<code class="sig-name descname"><span class="pre">cmap</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'PuBu'</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.cmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(4,</span> <span class="pre">0.45)</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.min_figsize">
+<code class="sig-name descname"><span class="pre">min_figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(4,</span> <span class="pre">4)</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.min_figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.textcolors">
+<code class="sig-name descname"><span class="pre">textcolors</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">('black',</span> <span class="pre">'white')</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.textcolors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Heatmap.valfmt">
+<code class="sig-name descname"><span class="pre">valfmt</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'{x:.3f}'</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Heatmap.valfmt" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.comparison.Radar">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.comparison.</span></code><code class="sig-name descname"><span class="pre">Radar</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nticks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(2.1,</span> <span class="pre">2.1)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/comparison.html#Radar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.comparison.Radar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Radar (aka spider) plot for comparing data bearing multiple dimensions.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.alpha">
+<code class="sig-name descname"><span class="pre">alpha</span></code><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0.45</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.alpha" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(2.1,</span> <span class="pre">2.1)</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.legend">
+<code class="sig-name descname"><span class="pre">legend</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.legend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.linewidth">
+<code class="sig-name descname"><span class="pre">linewidth</span></code><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0.75</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.linewidth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.comparison.Radar.nticks">
+<code class="sig-name descname"><span class="pre">nticks</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">5</span></em><a class="headerlink" href="#tslumen.plot.static.comparison.Radar.nticks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.plot.static.correlation">
+<span id="tslumen-plot-static-correlation-module"></span><h2>tslumen.plot.static.correlation module<a class="headerlink" href="#module-tslumen.plot.static.correlation" title="Permalink to this headline">¶</a></h2>
+<p>Correlation plots.</p>
+<dl class="py class">
+<dt id="tslumen.plot.static.correlation.LagCorrelation">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.correlation.</span></code><code class="sig-name descname"><span class="pre">LagCorrelation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_lag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'lag'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_correlation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'correlation'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_up</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'up'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_low</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'low'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(3.3,</span> <span class="pre">2)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/correlation.html#LagCorrelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Lag correlation (ACF/PACF) plots, commonly known as lollipop, for analysing correlation on
+a given lag. Useful for auto-, partial-, cross- and partial-cross-correlation.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.col_correlation">
+<code class="sig-name descname"><span class="pre">col_correlation</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'correlation'</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.col_correlation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.col_lag">
+<code class="sig-name descname"><span class="pre">col_lag</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'lag'</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.col_lag" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.col_low">
+<code class="sig-name descname"><span class="pre">col_low</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'low'</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.col_low" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.col_up">
+<code class="sig-name descname"><span class="pre">col_up</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'up'</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.col_up" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(3.3,</span> <span class="pre">2)</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagCorrelation.title">
+<code class="sig-name descname"><span class="pre">title</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagCorrelation.title" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.correlation.LagMatrix">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.correlation.</span></code><code class="sig-name descname"><span class="pre">LagMatrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">original</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">corr</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cellsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(1.7,</span> <span class="pre">1.7)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/correlation.html#LagMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Lag Matrix plot.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagMatrix.cellsize">
+<code class="sig-name descname"><span class="pre">cellsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(1.7,</span> <span class="pre">1.7)</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix.cellsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagMatrix.corr">
+<code class="sig-name descname"><span class="pre">corr</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.series.Series</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix.corr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagMatrix.lags">
+<code class="sig-name descname"><span class="pre">lags</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix.lags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagMatrix.ncols">
+<code class="sig-name descname"><span class="pre">ncols</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix.ncols" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.LagMatrix.original">
+<code class="sig-name descname"><span class="pre">original</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.series.Series</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.LagMatrix.original" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.correlation.ScatterMatrix">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.correlation.</span></code><code class="sig-name descname"><span class="pre">ScatterMatrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_corr</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(0.8,</span> <span class="pre">0.8)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">8)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/correlation.html#ScatterMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.correlation.ScatterMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Scatter matrix (aka pair plot) with scatters, KDE and correlation Heatmap.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.ScatterMatrix.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.ScatterMatrix.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.ScatterMatrix.df_corr">
+<code class="sig-name descname"><span class="pre">df_corr</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.ScatterMatrix.df_corr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.ScatterMatrix.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(0.8,</span> <span class="pre">0.8)</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.ScatterMatrix.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.correlation.ScatterMatrix.min_figsize">
+<code class="sig-name descname"><span class="pre">min_figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">8)</span></em><a class="headerlink" href="#tslumen.plot.static.correlation.ScatterMatrix.min_figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.plot.static.distribution">
+<span id="tslumen-plot-static-distribution-module"></span><h2>tslumen.plot.static.distribution module<a class="headerlink" href="#module-tslumen.plot.static.distribution" title="Permalink to this headline">¶</a></h2>
+<p>Distribution plots.</p>
+<dl class="py class">
+<dt id="tslumen.plot.static.distribution.BoxPlot">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.distribution.</span></code><code class="sig-name descname"><span class="pre">BoxPlot</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/distribution.html#BoxPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.distribution.BoxPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>BoxPlot w/ whiskers.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.BoxPlot.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.BoxPlot.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.BoxPlot.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">3)</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.BoxPlot.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.distribution.Distribution">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.distribution.</span></code><code class="sig-name descname"><span class="pre">Distribution</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">series</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_quantiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_percentiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_theoretical_quantiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'theoretical_quantiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_sample_quantiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'sample_quantiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_theoretical_percentiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'theoretical_percentiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_sample_percentiles</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'sample_percentiles'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">6)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/distribution.html#Distribution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Combined Histogram, P-P and Q-Q plots.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_pp_ref">
+<code class="sig-name descname"><span class="pre">col_pp_ref</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'reference'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_pp_ref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_qq_ref">
+<code class="sig-name descname"><span class="pre">col_qq_ref</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'reference'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_qq_ref" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_sample_percentiles">
+<code class="sig-name descname"><span class="pre">col_sample_percentiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'sample_percentiles'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_sample_percentiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_sample_quantiles">
+<code class="sig-name descname"><span class="pre">col_sample_quantiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'sample_quantiles'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_sample_quantiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_theoretical_percentiles">
+<code class="sig-name descname"><span class="pre">col_theoretical_percentiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'theoretical_percentiles'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_theoretical_percentiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.col_theoretical_quantiles">
+<code class="sig-name descname"><span class="pre">col_theoretical_quantiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'theoretical_quantiles'</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.col_theoretical_quantiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.df_percentiles">
+<code class="sig-name descname"><span class="pre">df_percentiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.df_percentiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.df_quantiles">
+<code class="sig-name descname"><span class="pre">df_quantiles</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.df_quantiles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">6)</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.distribution.Distribution.series">
+<code class="sig-name descname"><span class="pre">series</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.series.Series</span></em><a class="headerlink" href="#tslumen.plot.static.distribution.Distribution.series" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.plot.static.line">
+<span id="tslumen-plot-static-line-module"></span><h2>tslumen.plot.static.line module<a class="headerlink" href="#module-tslumen.plot.static.line" title="Permalink to this headline">¶</a></h2>
+<p>Line plots.</p>
+<dl class="py class">
+<dt id="tslumen.plot.static.line.TS">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.line.</span></code><code class="sig-name descname"><span class="pre">TS</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xaxis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaxis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_width</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/line.html#TS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.line.TS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Time series line plot.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.colors">
+<code class="sig-name descname"><span class="pre">colors</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.colors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">3)</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.legend">
+<code class="sig-name descname"><span class="pre">legend</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.legend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.line_width">
+<code class="sig-name descname"><span class="pre">line_width</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.line_width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.xaxis">
+<code class="sig-name descname"><span class="pre">xaxis</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.xaxis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TS.yaxis">
+<code class="sig-name descname"><span class="pre">yaxis</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#tslumen.plot.static.line.TS.yaxis" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.line.TSStack">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.line.</span></code><code class="sig-name descname"><span class="pre">TSStack</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(10,</span> <span class="pre">3)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/line.html#TSStack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.line.TSStack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Stacked time series line plot.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TSStack.df">
+<code class="sig-name descname"><span class="pre">df</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.line.TSStack.df" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.line.TSStack.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(10,</span> <span class="pre">3)</span></em><a class="headerlink" href="#tslumen.plot.static.line.TSStack.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tslumen.plot.static.misc">
+<span id="tslumen-plot-static-misc-module"></span><h2>tslumen.plot.static.misc module<a class="headerlink" href="#module-tslumen.plot.static.misc" title="Permalink to this headline">¶</a></h2>
+<p>Miscellaneous plots.</p>
+<dl class="py class">
+<dt id="tslumen.plot.static.misc.GrangerGraph">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.misc.</span></code><code class="sig-name descname"><span class="pre">GrangerGraph</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfp</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">6)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'PuBu_r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_color</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'white'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgecolors</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#555555'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_hi</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'#b60982'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/misc.html#GrangerGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Granger causality graph.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.cmap">
+<code class="sig-name descname"><span class="pre">cmap</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'PuBu_r'</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.cmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.critical">
+<code class="sig-name descname"><span class="pre">critical</span></code><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0.05</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.critical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.dfp">
+<code class="sig-name descname"><span class="pre">dfp</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.dfp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.edge_hi">
+<code class="sig-name descname"><span class="pre">edge_hi</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'#b60982'</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.edge_hi" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.edgecolors">
+<code class="sig-name descname"><span class="pre">edgecolors</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'#555555'</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.edgecolors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">6)</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerGraph.node_color">
+<code class="sig-name descname"><span class="pre">node_color</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'white'</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerGraph.node_color" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.plot.static.misc.GrangerMatrix">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.plot.static.misc.</span></code><code class="sig-name descname"><span class="pre">GrangerMatrix</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfl</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dfp</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(0.8,</span> <span class="pre">0.4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_figsize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(8,</span> <span class="pre">4)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">critical</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/plot/static/misc.html#GrangerMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.plot.static.base.Figure</span></code></p>
+<p>Granger causality matrix.</p>
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerMatrix.critical">
+<code class="sig-name descname"><span class="pre">critical</span></code><em class="property"><span class="pre">:</span> <span class="pre">float</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0.05</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix.critical" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerMatrix.dfl">
+<code class="sig-name descname"><span class="pre">dfl</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix.dfl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerMatrix.dfp">
+<code class="sig-name descname"><span class="pre">dfp</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix.dfp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerMatrix.figsize">
+<code class="sig-name descname"><span class="pre">figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(0.8,</span> <span class="pre">0.4)</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix.figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.plot.static.misc.GrangerMatrix.min_figsize">
+<code class="sig-name descname"><span class="pre">min_figsize</span></code><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">(8,</span> <span class="pre">4)</span></em><a class="headerlink" href="#tslumen.plot.static.misc.GrangerMatrix.min_figsize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.plot.html" class="btn btn-neutral float-left" title="tslumen.plot package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.plot.interactive.html" class="btn btn-neutral float-right" title="tslumen.plot.interactive package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

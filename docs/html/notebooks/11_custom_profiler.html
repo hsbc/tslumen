@@ -1,0 +1,3343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating and bundling custom profilers &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using custom HTML templates" href="12_custom_html.html" />
+    <link rel="prev" title="Interactive dashboard" href="06_dashboard.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and bundling custom profilers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Profiling-Functions">Profiling Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Bundling-profilers-together">Bundling profilers together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Closing-thoughts">Closing thoughts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Creating and bundling custom profilers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="Creating-and-bundling-custom-profilers">
+<h1>Creating and bundling custom profilers<a class="headerlink" href="#Creating-and-bundling-custom-profilers" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">it</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">statsmodels.tsa.api</span> <span class="k">as</span> <span class="nn">sm</span>
+</pre></div>
+</div>
+</div>
+<section id="Profiling-Functions">
+<h2>Profiling Functions<a class="headerlink" href="#Profiling-Functions" title="Permalink to this headline">¶</a></h2>
+<p>Creating a customer profiler is very straightforward. For a function to qualify as a profiler it needs:</p>
+<ul class="simple">
+<li><p>To be type annotated</p></li>
+<li><p>To have one and only one positional argument, the timeseries, which needs to be a pandas DataFrame or Series (or a union of both)</p></li>
+<li><p>To be decorated with <code class="docutils literal notranslate"><span class="pre">&#64;ProfilingFunction</span></code></p></li>
+</ul>
+<p>Let’s use a few dummy examples to better illustrate this.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tslumen.profile</span> <span class="kn">import</span> <span class="n">ProfilingFunction</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i>ProfilingFunction</i>
+ <b>shape</b>
+ at 0x7fcae639aa60
+|
+Frame <span class="text-success">✓</span>
+    ,
+Series <span class="text-success">✓</span>
+
+
+<div class="no-ws">
+    Signature:
+<samp>(data: Union[pandas.core.series.Series, pandas.core.frame.DataFrame]) -> Tuple[int, ...]</samp>
+
+</div></div>
+</div>
+<p>As shown by the checkmarks, the <code class="docutils literal notranslate"><span class="pre">shape</span></code> function we just created is applied to the DataFrame as a whole, as well as each individual series.</p>
+<p>Under the hood, the <code class="docutils literal notranslate"><span class="pre">&#64;ProfilingFunction</span></code> decorator inspects the function and wraps it inside a class which, among other purposes, identifies the scope of action of the profiler (i.e. single Series, DataFrame or both), particularly useful when orchestrating the execution of multiple profilers. More on that later.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">acovf</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">adjusted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">demean</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+          <span class="n">fft</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">missing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">nlag</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
+    <span class="n">est</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">acovf</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="n">adjusted</span><span class="p">,</span> <span class="n">demean</span><span class="o">=</span><span class="n">demean</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="n">fft</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span> <span class="n">nlag</span><span class="o">=</span><span class="n">nlag</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">est</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="n">acovf</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i>ProfilingFunction</i>
+ <b>acovf</b>
+ at 0x7fcae639ac10
+|
+Frame
+        <span class="text-danger">✘</span>,
+Series <span class="text-success">✓</span>
+
+
+<div class="no-ws">
+    Signature:
+<samp>(data: pandas.core.series.Series, adjusted: bool = False, demean: bool = True, fft: bool = True, missing: str = 'none', nlag: Optional[int] = None) -> pandas.core.series.Series</samp>
+
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">euc_sim</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">measure</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;rmse&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">d</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">if</span> <span class="n">measure</span> <span class="o">==</span> <span class="s1">&#39;mean&#39;</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">{(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="n">fn</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">a</span><span class="p">])</span>
+           <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">it</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">)}</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">res</span><span class="p">)</span><span class="o">.</span><span class="n">unstack</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">euc_sim</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i>ProfilingFunction</i>
+ <b>euc_sim</b>
+ at 0x7fcae639a940
+|
+Frame <span class="text-success">✓</span>
+    ,
+Series
+        <span class="text-danger">✘</span>
+
+<div class="no-ws">
+    Signature:
+<samp>(data: pandas.core.frame.DataFrame, measure: str = 'rmse') -> pandas.core.frame.DataFrame</samp>
+
+</div></div>
+</div>
+<p>Now the <code class="docutils literal notranslate"><span class="pre">acovf</span></code> function is for Series only, whereas <code class="docutils literal notranslate"><span class="pre">euc_sim</span></code> is for DataFrames only.</p>
+<p>When wrapping functionality from another library, it is a good idea to expose (some of) its parameters as to make the profiler more configurable. Naturally, in some cases, it’s actually a good idea to hide them from the end-user, particularly when the wrapper itself will have the logic to select the parameters.</p>
+<p>Note that any arguments the profiling function exposes (other than the first one) need to have defaults.</p>
+<p>Let’s load a dataset and try out these profilers</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://datahub.io/core/s-and-p-500/r/data.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="s1">&#39;1990-01-01&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="s1">&#39;2015-01-01&#39;</span><span class="p">)]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SP500</th>
+      <th>Dividend</th>
+      <th>Earnings</th>
+      <th>Consumer Price Index</th>
+      <th>Long Interest Rate</th>
+      <th>Real Price</th>
+      <th>Real Dividend</th>
+      <th>Real Earnings</th>
+      <th>PE10</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1990-01-01</th>
+      <td>339.97</td>
+      <td>11.14</td>
+      <td>22.49</td>
+      <td>127.4</td>
+      <td>8.21</td>
+      <td>666.69</td>
+      <td>21.85</td>
+      <td>44.10</td>
+      <td>17.05</td>
+    </tr>
+    <tr>
+      <th>1990-02-01</th>
+      <td>330.45</td>
+      <td>11.23</td>
+      <td>22.08</td>
+      <td>128.0</td>
+      <td>8.47</td>
+      <td>644.99</td>
+      <td>21.92</td>
+      <td>43.10</td>
+      <td>16.51</td>
+    </tr>
+    <tr>
+      <th>1990-03-01</th>
+      <td>338.46</td>
+      <td>11.32</td>
+      <td>21.67</td>
+      <td>128.7</td>
+      <td>8.59</td>
+      <td>657.03</td>
+      <td>21.97</td>
+      <td>42.07</td>
+      <td>16.83</td>
+    </tr>
+    <tr>
+      <th>1990-04-01</th>
+      <td>338.18</td>
+      <td>11.44</td>
+      <td>21.53</td>
+      <td>128.9</td>
+      <td>8.79</td>
+      <td>655.46</td>
+      <td>22.17</td>
+      <td>41.74</td>
+      <td>16.81</td>
+    </tr>
+    <tr>
+      <th>1990-05-01</th>
+      <td>350.25</td>
+      <td>11.55</td>
+      <td>21.40</td>
+      <td>129.2</td>
+      <td>8.76</td>
+      <td>677.28</td>
+      <td>22.34</td>
+      <td>41.38</td>
+      <td>17.39</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">shape</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i></i>
+ <b>ProfileResult</b>
+ at 0x7fcae630cbe0
+|
+ <span class="text-info">name</span>: shape
+ <span class="text-info">scope</span>: frame
+|
+ <span class="text-info">execution</span>: <span class="text-success">✓</span>
+     0:00:00.000042
+
+<div class="no-ws">
+
+
+(300, 9)
+
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">shape</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">SP500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i></i>
+ <b>ProfileResult</b>
+ at 0x7fcae6307700
+|
+ <span class="text-info">name</span>: shape
+ <span class="text-info">scope</span>: series
+<span class="text-info">target</span>: SP500
+|
+ <span class="text-info">execution</span>: <span class="text-success">✓</span>
+     0:00:00.000047
+
+<div class="no-ws">
+
+
+(300,)
+
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">acovf</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">SP500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i></i>
+ <b>ProfileResult</b>
+ at 0x7fcae6285f10
+|
+ <span class="text-info">name</span>: acovf
+ <span class="text-info">scope</span>: series
+<span class="text-info">target</span>: SP500
+|
+ <span class="text-info">execution</span>: <span class="text-success">✓</span>
+     0:00:00.000727
+
+<div class="no-ws">
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>179217.457496</td>
+      <td>175888.867311</td>
+      <td>172240.056519</td>
+      <td>168900.130792</td>
+      <td>165215.340345</td>
+      <td>161487.048775</td>
+      <td>157530.850357</td>
+      <td>153705.459385</td>
+      <td>149985.479096</td>
+      <td>146125.05111</td>
+      <td>...</td>
+      <td>-21330.750303</td>
+      <td>-19308.50963</td>
+      <td>-17303.253341</td>
+      <td>-15288.805447</td>
+      <td>-13242.503765</td>
+      <td>-11143.461295</td>
+      <td>-9034.245959</td>
+      <td>-6815.498383</td>
+      <td>-4723.390484</td>
+      <td>-2356.619013</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">euc_sim</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;rmse&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i></i>
+ <b>ProfileResult</b>
+ at 0x7fcae6289730
+|
+ <span class="text-info">name</span>: euc_sim
+ <span class="text-info">scope</span>: frame
+|
+ <span class="text-info">execution</span>: <span class="text-success">✓</span>
+     0:00:00.023375
+
+<div class="no-ws">
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Consumer Price Index</th>
+      <th>Dividend</th>
+      <th>Earnings</th>
+      <th>Long Interest Rate</th>
+      <th>PE10</th>
+      <th>Real Dividend</th>
+      <th>Real Earnings</th>
+      <th>Real Price</th>
+      <th>SP500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Consumer Price Index</th>
+      <td>0.000000</td>
+      <td>165.486344</td>
+      <td>135.796101</td>
+      <td>181.364722</td>
+      <td>161.318178</td>
+      <td>159.546683</td>
+      <td>122.081817</td>
+      <td>1247.349170</td>
+      <td>935.855699</td>
+    </tr>
+    <tr>
+      <th>Dividend</th>
+      <td>165.486344</td>
+      <td>0.000000</td>
+      <td>35.661179</td>
+      <td>17.019169</td>
+      <td>11.701936</td>
+      <td>6.940290</td>
+      <td>48.498664</td>
+      <td>1407.033108</td>
+      <td>1093.831545</td>
+    </tr>
+    <tr>
+      <th>Earnings</th>
+      <td>135.796101</td>
+      <td>35.661179</td>
+      <td>0.000000</td>
+      <td>51.538956</td>
+      <td>34.956319</td>
+      <td>31.895157</td>
+      <td>15.897771</td>
+      <td>1375.411112</td>
+      <td>1060.978612</td>
+    </tr>
+    <tr>
+      <th>Long Interest Rate</th>
+      <td>181.364722</td>
+      <td>17.019169</td>
+      <td>51.538956</td>
+      <td>0.000000</td>
+      <td>21.497434</td>
+      <td>22.065529</td>
+      <td>64.027759</td>
+      <td>1422.551992</td>
+      <td>1110.110884</td>
+    </tr>
+    <tr>
+      <th>PE10</th>
+      <td>161.318178</td>
+      <td>11.701936</td>
+      <td>34.956319</td>
+      <td>21.497434</td>
+      <td>0.000000</td>
+      <td>8.751860</td>
+      <td>45.141560</td>
+      <td>1401.371581</td>
+      <td>1089.657346</td>
+    </tr>
+    <tr>
+      <th>Real Dividend</th>
+      <td>159.546683</td>
+      <td>6.940290</td>
+      <td>31.895157</td>
+      <td>22.065529</td>
+      <td>8.751860</td>
+      <td>0.000000</td>
+      <td>43.418904</td>
+      <td>1401.303869</td>
+      <td>1088.640134</td>
+    </tr>
+    <tr>
+      <th>Real Earnings</th>
+      <td>122.081817</td>
+      <td>48.498664</td>
+      <td>15.897771</td>
+      <td>64.027759</td>
+      <td>45.141560</td>
+      <td>43.418904</td>
+      <td>0.000000</td>
+      <td>1361.394243</td>
+      <td>1048.086806</td>
+    </tr>
+    <tr>
+      <th>Real Price</th>
+      <td>1247.349170</td>
+      <td>1407.033108</td>
+      <td>1375.411112</td>
+      <td>1422.551992</td>
+      <td>1401.371581</td>
+      <td>1401.303869</td>
+      <td>1361.394243</td>
+      <td>0.000000</td>
+      <td>364.090297</td>
+    </tr>
+    <tr>
+      <th>SP500</th>
+      <td>935.855699</td>
+      <td>1093.831545</td>
+      <td>1060.978612</td>
+      <td>1110.110884</td>
+      <td>1089.657346</td>
+      <td>1088.640134</td>
+      <td>1048.086806</td>
+      <td>364.090297</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</div></div>
+</div>
+<p>All decorated functions return a <code class="docutils literal notranslate"><span class="pre">ProfileResult</span></code> object, which is a mere wrapper around the function’s result to capture additional details like the name of the function, execution times, exceptions, etc.</p>
+<p>It can be used as a class or cast as a dictionary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">SP500</span><span class="p">)</span>
+<span class="nb">dict</span><span class="p">(</span><span class="n">pr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;name&#39;: &#39;shape&#39;,
+ &#39;scope&#39;: &#39;series&#39;,
+ &#39;target&#39;: &#39;SP500&#39;,
+ &#39;start&#39;: datetime.datetime(2022, 11, 22, 17, 54, 44, 867712),
+ &#39;end&#39;: datetime.datetime(2022, 11, 22, 17, 54, 44, 867761),
+ &#39;success&#39;: True,
+ &#39;warnings&#39;: [],
+ &#39;exception&#39;: None,
+ &#39;result&#39;: (300,)}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr</span><span class="o">.</span><span class="n">start</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+datetime.datetime(2022, 11, 22, 17, 54, 44, 867712)
+</pre></div></div>
+</div>
+</section>
+<section id="Bundling-profilers-together">
+<h2>Bundling profilers together<a class="headerlink" href="#Bundling-profilers-together" title="Permalink to this headline">¶</a></h2>
+<p>Single profilers (i.e. <code class="docutils literal notranslate"><span class="pre">ProfilingFunction</span></code> decorated functions) can be bundled together in one single class, which will deal with orchestrating their execution and collecting the results.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code> is included in tslumen, essentially bundling all the profiling functions included in the package.</p>
+<p>Creating a custom bundle is simply a matter of creating a subclass of <code class="docutils literal notranslate"><span class="pre">BundledProfiler</span></code> and defining the class variable <code class="docutils literal notranslate"><span class="pre">_profilers</span></code> as a list of the profiling functions that are to be included. Note that these need to have unique names, as the name is used to store the output of the function.</p>
+<p>Let’s start by having a look at the <code class="docutils literal notranslate"><span class="pre">DefaultProfiler</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tslumen.profile</span> <span class="kn">import</span> <span class="n">DefaultProfiler</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">DefaultProfiler</span><span class="o">.</span><span class="n">get_profilers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;df_scaled&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159a00&gt;,
+ &#39;dt_end&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae914bc10&gt;,
+ &#39;dt_start&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae914bcd0&gt;,
+ &#39;freq&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae914b7f0&gt;,
+ &#39;infinite&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159f10&gt;,
+ &#39;length&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159d00&gt;,
+ &#39;missing&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9165f40&gt;,
+ &#39;n_series&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae914b8b0&gt;,
+ &#39;period&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae914b7c0&gt;,
+ &#39;sample&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159760&gt;,
+ &#39;sz_total&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159bb0&gt;,
+ &#39;zeros&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9159d90&gt;,
+ &#39;cov&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916ef10&gt;,
+ &#39;iqr&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9173640&gt;,
+ &#39;kurtosis&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae91733d0&gt;,
+ &#39;mad&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916e130&gt;,
+ &#39;maximum&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9173460&gt;,
+ &#39;mean&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae91652e0&gt;,
+ &#39;median&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae91650d0&gt;,
+ &#39;minimum&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916ed60&gt;,
+ &#39;q25&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916ef40&gt;,
+ &#39;q50&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916e160&gt;,
+ &#39;q75&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae916ee80&gt;,
+ &#39;skew&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9179a90&gt;,
+ &#39;std&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9165700&gt;,
+ &#39;var&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9165250&gt;,
+ &#39;adfuller_stationarity&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae90546a0&gt;,
+ &#39;jarque_bera_normality&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9054580&gt;,
+ &#39;kpss_stationarity&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9061d90&gt;,
+ &#39;levene_constant_variance&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9179af0&gt;,
+ &#39;ljungbox_autocorrelation&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9179bb0&gt;,
+ &#39;omnibus_normality&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9054b50&gt;,
+ &#39;binned&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9002d60&gt;,
+ &#39;pd_percentiles&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae9061700&gt;,
+ &#39;pd_quantiles&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae900cf70&gt;,
+ &#39;acf&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94640&gt;,
+ &#39;acf_1d&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94d90&gt;,
+ &#39;acf_2d&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94130&gt;,
+ &#39;corr_kendall&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94520&gt;,
+ &#39;corr_pearson&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94cd0&gt;,
+ &#39;corr_spearman&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8da02e0&gt;,
+ &#39;granger_causality&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94ee0&gt;,
+ &#39;lag_corr&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94c40&gt;,
+ &#39;pacf&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94a90&gt;,
+ &#39;pacf_1d&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94160&gt;,
+ &#39;pacf_2d&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94f40&gt;,
+ &#39;seasonal_split&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8da0070&gt;,
+ &#39;stl&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d94760&gt;,
+ &#39;lowess&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8da0820&gt;,
+ &#39;rolling_avg&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db1670&gt;,
+ &#39;supsmu&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db5220&gt;,
+ &#39;ft_acf&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db20d0&gt;,
+ &#39;ft_adfuller&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db5550&gt;,
+ &#39;ft_cross_pts&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8d4e130&gt;,
+ &#39;ft_entropy&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db2070&gt;,
+ &#39;ft_kpss&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db52e0&gt;,
+ &#39;ft_pacf&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db5f40&gt;,
+ &#39;ft_stl&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db5430&gt;,
+ &#39;ft_tilewin&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae8db5af0&gt;}
+</pre></div></div>
+</div>
+<p>The class method <code class="docutils literal notranslate"><span class="pre">get_profilers</span></code> returns a dictionary with all the <code class="docutils literal notranslate"><span class="pre">ProfilingFunction</span></code> bundled in this <code class="docutils literal notranslate"><span class="pre">BundledProfiler</span></code></p>
+<p>As the name suggests, the class method <code class="docutils literal notranslate"><span class="pre">get_config_defaults</span></code> returns a dictionary with the default parameters of each <code class="docutils literal notranslate"><span class="pre">ProfilingFunction</span></code>. It is useful for understanding exactly which parameter defaults can be overridden.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">DefaultProfiler</span><span class="o">.</span><span class="n">get_config_defaults</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;df_scaled&#39;: {},
+ &#39;dt_end&#39;: {},
+ &#39;dt_start&#39;: {},
+ &#39;freq&#39;: {},
+ &#39;infinite&#39;: {},
+ &#39;length&#39;: {},
+ &#39;missing&#39;: {},
+ &#39;n_series&#39;: {},
+ &#39;period&#39;: {},
+ &#39;sample&#39;: {&#39;sample_size&#39;: 10},
+ &#39;sz_total&#39;: {&#39;memory_deep&#39;: True},
+ &#39;zeros&#39;: {},
+ &#39;cov&#39;: {},
+ &#39;iqr&#39;: {},
+ &#39;kurtosis&#39;: {},
+ &#39;mad&#39;: {},
+ &#39;maximum&#39;: {},
+ &#39;mean&#39;: {},
+ &#39;median&#39;: {},
+ &#39;minimum&#39;: {},
+ &#39;q25&#39;: {},
+ &#39;q50&#39;: {},
+ &#39;q75&#39;: {},
+ &#39;skew&#39;: {},
+ &#39;std&#39;: {},
+ &#39;var&#39;: {},
+ &#39;adfuller_stationarity&#39;: {&#39;confidence_level&#39;: 0.05},
+ &#39;jarque_bera_normality&#39;: {&#39;confidence_level&#39;: 0.05},
+ &#39;kpss_stationarity&#39;: {&#39;confidence_level&#39;: 0.05},
+ &#39;levene_constant_variance&#39;: {&#39;confidence_level&#39;: 0.05},
+ &#39;ljungbox_autocorrelation&#39;: {&#39;n_lags&#39;: None, &#39;confidence_level&#39;: 0.05},
+ &#39;omnibus_normality&#39;: {&#39;confidence_level&#39;: 0.05},
+ &#39;binned&#39;: {&#39;nbins&#39;: None},
+ &#39;pd_percentiles&#39;: {},
+ &#39;pd_quantiles&#39;: {},
+ &#39;acf&#39;: {&#39;lags&#39;: 40,
+  &#39;adjusted&#39;: False,
+  &#39;fft&#39;: False,
+  &#39;alpha&#39;: 0.05,
+  &#39;missing&#39;: &#39;none&#39;},
+ &#39;acf_1d&#39;: {&#39;lags&#39;: 40,
+  &#39;adjusted&#39;: False,
+  &#39;fft&#39;: False,
+  &#39;alpha&#39;: 0.05,
+  &#39;missing&#39;: &#39;none&#39;},
+ &#39;acf_2d&#39;: {&#39;lags&#39;: 40,
+  &#39;adjusted&#39;: False,
+  &#39;fft&#39;: False,
+  &#39;alpha&#39;: 0.05,
+  &#39;missing&#39;: &#39;none&#39;},
+ &#39;corr_kendall&#39;: {},
+ &#39;corr_pearson&#39;: {},
+ &#39;corr_spearman&#39;: {},
+ &#39;granger_causality&#39;: {&#39;test&#39;: &#39;ssr_chi2test&#39;,
+  &#39;addconst&#39;: True,
+  &#39;maxlag&#39;: 5,
+  &#39;max_diff&#39;: 3,
+  &#39;adf_confidence&#39;: 0.1},
+ &#39;lag_corr&#39;: {&#39;lags&#39;: ()},
+ &#39;pacf&#39;: {&#39;lags&#39;: 40, &#39;method&#39;: &#39;ywadjusted&#39;, &#39;alpha&#39;: 0.05},
+ &#39;pacf_1d&#39;: {&#39;lags&#39;: 40, &#39;method&#39;: &#39;ywadjusted&#39;, &#39;alpha&#39;: 0.05},
+ &#39;pacf_2d&#39;: {&#39;lags&#39;: 40, &#39;method&#39;: &#39;ywadjusted&#39;, &#39;alpha&#39;: 0.05},
+ &#39;seasonal_split&#39;: {},
+ &#39;stl&#39;: {&#39;period&#39;: None,
+  &#39;seasonal&#39;: 7,
+  &#39;trend&#39;: None,
+  &#39;low_pass&#39;: None,
+  &#39;seasonal_deg&#39;: 0,
+  &#39;trend_deg&#39;: 0,
+  &#39;low_pass_deg&#39;: 0,
+  &#39;robust&#39;: False,
+  &#39;seasonal_jump&#39;: 1,
+  &#39;trend_jump&#39;: 1,
+  &#39;low_pass_jump&#39;: 1},
+ &#39;lowess&#39;: {&#39;fracs&#39;: (0.05, 0.1, 0.15),
+  &#39;it&#39;: 3,
+  &#39;delta&#39;: 0.0,
+  &#39;missing&#39;: &#39;drop&#39;},
+ &#39;rolling_avg&#39;: {&#39;wins&#39;: (), &#39;max_win_frac&#39;: 10},
+ &#39;supsmu&#39;: {&#39;alpha&#39;: None,
+  &#39;period&#39;: None,
+  &#39;primary_spans&#39;: (0.05, 0.2, 0.5),
+  &#39;middle_span&#39;: 0.2,
+  &#39;final_span&#39;: 0.05},
+ &#39;ft_acf&#39;: {&#39;n_diff&#39;: (0, 1, 2), &#39;n_size&#39;: (1, 10)},
+ &#39;ft_adfuller&#39;: {},
+ &#39;ft_cross_pts&#39;: {},
+ &#39;ft_entropy&#39;: {&#39;sampling_frequency&#39;: 1.0, &#39;n_per_segment&#39;: None},
+ &#39;ft_kpss&#39;: {},
+ &#39;ft_pacf&#39;: {&#39;n_diff&#39;: (0, 1, 2), &#39;n_size&#39;: (5,)},
+ &#39;ft_stl&#39;: {&#39;freq&#39;: None},
+ &#39;ft_tilewin&#39;: {}}
+</pre></div></div>
+</div>
+<p>Let us now create our own profiler by bundling the functions defined above.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tslumen.profile</span> <span class="kn">import</span> <span class="n">BundledProfiler</span>
+
+
+<span class="k">class</span> <span class="nc">MyProfiler</span><span class="p">(</span><span class="n">BundledProfiler</span><span class="p">):</span>
+    <span class="n">_profilers</span> <span class="o">=</span> <span class="p">[</span><span class="n">shape</span><span class="p">,</span> <span class="n">acovf</span><span class="p">,</span> <span class="n">euc_sim</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">MyProfiler</span><span class="o">.</span><span class="n">get_profilers</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;shape&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae639aa60&gt;,
+ &#39;acovf&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae639ac10&gt;,
+ &#39;euc_sim&#39;: &lt;tslumen.profile.base.ProfilingFunction at 0x7fcae639a940&gt;}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">MyProfiler</span><span class="o">.</span><span class="n">get_config_defaults</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;shape&#39;: {},
+ &#39;acovf&#39;: {&#39;adjusted&#39;: False,
+  &#39;demean&#39;: True,
+  &#39;fft&#39;: True,
+  &#39;missing&#39;: &#39;none&#39;,
+  &#39;nlag&#39;: None},
+ &#39;euc_sim&#39;: {&#39;measure&#39;: &#39;rmse&#39;}}
+</pre></div></div>
+</div>
+<p>When instantiating the bundled profiler, the configs will be set, essentially by taking the defaults of each <code class="docutils literal notranslate"><span class="pre">ProfilingFunction</span></code> and overriding any parameters explicitly provided as an argument.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># default configs were set</span>
+<span class="n">profiler1</span> <span class="o">=</span> <span class="n">MyProfiler</span><span class="p">()</span>
+<span class="n">profiler1</span><span class="o">.</span><span class="n">config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;shape&#39;: {},
+ &#39;acovf&#39;: {&#39;adjusted&#39;: False,
+  &#39;demean&#39;: True,
+  &#39;fft&#39;: True,
+  &#39;missing&#39;: &#39;none&#39;,
+  &#39;nlag&#39;: None},
+ &#39;euc_sim&#39;: {&#39;measure&#39;: &#39;rmse&#39;}}
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># euc_sim&#39;s measure was overriden</span>
+<span class="n">profiler2</span> <span class="o">=</span> <span class="n">MyProfiler</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;euc_sim&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;measure&#39;</span><span class="p">:</span> <span class="s1">&#39;mean&#39;</span><span class="p">}})</span>
+<span class="n">profiler2</span><span class="o">.</span><span class="n">config</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;shape&#39;: {},
+ &#39;acovf&#39;: {&#39;adjusted&#39;: False,
+  &#39;demean&#39;: True,
+  &#39;fft&#39;: True,
+  &#39;missing&#39;: &#39;none&#39;,
+  &#39;nlag&#39;: None},
+ &#39;euc_sim&#39;: {&#39;measure&#39;: &#39;mean&#39;}}
+</pre></div></div>
+</div>
+<p>With our profiler instantiated, we can now profile our data. The bundled profiler will take care of orchestrating the execution of the profiling functions and collecting the results. Depending on the function’s scope, each will be called with the dataset or once per series.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr1</span> <span class="o">=</span> <span class="n">profiler1</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "a43d7dbcf65f4c619af86994ba34610b"}</script></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr2</span> <span class="o">=</span> <span class="n">profiler2</span><span class="o">.</span><span class="n">profile</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "9c45c0b93bc14ffe98377e2bb0e31e98"}</script></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr1</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<style scoped>
+.no-ws>* { white-space: normal !important; }
+.no-bullet { list-style: none !important; }
+.list-dash { list-style-type: "-" !important; }
+.li-dash:before {content: "-";}
+.sum-pad { padding-left: 15px; padding-right: 5px; }
+summary { display: list-item; }
+</style>
+<i></i>
+ <b>BundledResult</b>
+ at 0x7fcae6289df0
+|
+ <span class="text-info">name</span>: MyProfiler
+ <span class="text-info">scope</span>: both
+|
+ <span class="text-info">execution</span>: <span class="text-success">✓</span>
+     0:00:00.077626
+
+<div class="no-ws">
+
+
+
+
+
+        <details>
+            <summary><span class="text-info">exec_details</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Profiler</th>
+      <th>Scope</th>
+      <th>Target</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Duration</th>
+      <th>Succeeded</th>
+      <th>Exceptions</th>
+      <th># Runs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>shape</td>
+      <td>frame</td>
+      <td></td>
+      <td>2022-11-22 17:54:44.995921</td>
+      <td>2022-11-22 17:54:44.995990</td>
+      <td>0 days 00:00:00.000069</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>euc_sim</td>
+      <td>frame</td>
+      <td></td>
+      <td>2022-11-22 17:54:44.998409</td>
+      <td>2022-11-22 17:54:45.020264</td>
+      <td>0 days 00:00:00.021855</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>SP500</td>
+      <td>2022-11-22 17:54:45.021628</td>
+      <td>2022-11-22 17:54:45.021671</td>
+      <td>0 days 00:00:00.000043</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Dividend</td>
+      <td>2022-11-22 17:54:45.022741</td>
+      <td>2022-11-22 17:54:45.022775</td>
+      <td>0 days 00:00:00.000034</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Earnings</td>
+      <td>2022-11-22 17:54:45.023813</td>
+      <td>2022-11-22 17:54:45.023843</td>
+      <td>0 days 00:00:00.000030</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Consumer Price Index</td>
+      <td>2022-11-22 17:54:45.024853</td>
+      <td>2022-11-22 17:54:45.024883</td>
+      <td>0 days 00:00:00.000030</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Long Interest Rate</td>
+      <td>2022-11-22 17:54:45.025892</td>
+      <td>2022-11-22 17:54:45.025921</td>
+      <td>0 days 00:00:00.000029</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Real Price</td>
+      <td>2022-11-22 17:54:45.026930</td>
+      <td>2022-11-22 17:54:45.026960</td>
+      <td>0 days 00:00:00.000030</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Real Dividend</td>
+      <td>2022-11-22 17:54:45.027986</td>
+      <td>2022-11-22 17:54:45.028015</td>
+      <td>0 days 00:00:00.000029</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>Real Earnings</td>
+      <td>2022-11-22 17:54:45.029048</td>
+      <td>2022-11-22 17:54:45.029078</td>
+      <td>0 days 00:00:00.000030</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>shape</td>
+      <td>series</td>
+      <td>PE10</td>
+      <td>2022-11-22 17:54:45.030177</td>
+      <td>2022-11-22 17:54:45.030206</td>
+      <td>0 days 00:00:00.000029</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>SP500</td>
+      <td>2022-11-22 17:54:45.031225</td>
+      <td>2022-11-22 17:54:45.031938</td>
+      <td>0 days 00:00:00.000713</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Dividend</td>
+      <td>2022-11-22 17:54:45.032988</td>
+      <td>2022-11-22 17:54:45.033491</td>
+      <td>0 days 00:00:00.000503</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Earnings</td>
+      <td>2022-11-22 17:54:45.034576</td>
+      <td>2022-11-22 17:54:45.035131</td>
+      <td>0 days 00:00:00.000555</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Consumer Price Index</td>
+      <td>2022-11-22 17:54:45.036193</td>
+      <td>2022-11-22 17:54:45.036596</td>
+      <td>0 days 00:00:00.000403</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Long Interest Rate</td>
+      <td>2022-11-22 17:54:45.037695</td>
+      <td>2022-11-22 17:54:45.038267</td>
+      <td>0 days 00:00:00.000572</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Real Price</td>
+      <td>2022-11-22 17:54:45.039317</td>
+      <td>2022-11-22 17:54:45.039790</td>
+      <td>0 days 00:00:00.000473</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Real Dividend</td>
+      <td>2022-11-22 17:54:45.040876</td>
+      <td>2022-11-22 17:54:45.041296</td>
+      <td>0 days 00:00:00.000420</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>Real Earnings</td>
+      <td>2022-11-22 17:54:45.042320</td>
+      <td>2022-11-22 17:54:45.042742</td>
+      <td>0 days 00:00:00.000422</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>acovf</td>
+      <td>series</td>
+      <td>PE10</td>
+      <td>2022-11-22 17:54:45.043797</td>
+      <td>2022-11-22 17:54:45.044399</td>
+      <td>0 days 00:00:00.000602</td>
+      <td>True</td>
+      <td>None</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </details>
+
+
+
+        <details>
+            <summary><span class="text-info">config</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <span class="text-info sum-pad">shape</span>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <span class="text-info sum-pad">adjusted</span> 0
+
+                </li><li>
+
+
+
+
+        <span class="text-info sum-pad">demean</span> 1
+
+                </li><li>
+
+
+
+
+        <span class="text-info sum-pad">fft</span> 1
+
+                </li><li>
+
+
+
+
+        <span class="text-info sum-pad">missing</span> none
+
+                </li><li>
+
+
+
+
+        <span class="text-info sum-pad">nlag</span>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">euc_sim</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <span class="text-info sum-pad">measure</span> rmse
+
+                </li>
+        </ul>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+
+
+
+        <details>
+            <summary><span class="text-info">frame</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li><li>
+
+                    9
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">euc_sim</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Consumer Price Index</th>
+      <th>Dividend</th>
+      <th>Earnings</th>
+      <th>Long Interest Rate</th>
+      <th>PE10</th>
+      <th>Real Dividend</th>
+      <th>Real Earnings</th>
+      <th>Real Price</th>
+      <th>SP500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Consumer Price Index</th>
+      <td>0.000000</td>
+      <td>165.486344</td>
+      <td>135.796101</td>
+      <td>181.364722</td>
+      <td>161.318178</td>
+      <td>159.546683</td>
+      <td>122.081817</td>
+      <td>1247.349170</td>
+      <td>935.855699</td>
+    </tr>
+    <tr>
+      <th>Dividend</th>
+      <td>165.486344</td>
+      <td>0.000000</td>
+      <td>35.661179</td>
+      <td>17.019169</td>
+      <td>11.701936</td>
+      <td>6.940290</td>
+      <td>48.498664</td>
+      <td>1407.033108</td>
+      <td>1093.831545</td>
+    </tr>
+    <tr>
+      <th>Earnings</th>
+      <td>135.796101</td>
+      <td>35.661179</td>
+      <td>0.000000</td>
+      <td>51.538956</td>
+      <td>34.956319</td>
+      <td>31.895157</td>
+      <td>15.897771</td>
+      <td>1375.411112</td>
+      <td>1060.978612</td>
+    </tr>
+    <tr>
+      <th>Long Interest Rate</th>
+      <td>181.364722</td>
+      <td>17.019169</td>
+      <td>51.538956</td>
+      <td>0.000000</td>
+      <td>21.497434</td>
+      <td>22.065529</td>
+      <td>64.027759</td>
+      <td>1422.551992</td>
+      <td>1110.110884</td>
+    </tr>
+    <tr>
+      <th>PE10</th>
+      <td>161.318178</td>
+      <td>11.701936</td>
+      <td>34.956319</td>
+      <td>21.497434</td>
+      <td>0.000000</td>
+      <td>8.751860</td>
+      <td>45.141560</td>
+      <td>1401.371581</td>
+      <td>1089.657346</td>
+    </tr>
+    <tr>
+      <th>Real Dividend</th>
+      <td>159.546683</td>
+      <td>6.940290</td>
+      <td>31.895157</td>
+      <td>22.065529</td>
+      <td>8.751860</td>
+      <td>0.000000</td>
+      <td>43.418904</td>
+      <td>1401.303869</td>
+      <td>1088.640134</td>
+    </tr>
+    <tr>
+      <th>Real Earnings</th>
+      <td>122.081817</td>
+      <td>48.498664</td>
+      <td>15.897771</td>
+      <td>64.027759</td>
+      <td>45.141560</td>
+      <td>43.418904</td>
+      <td>0.000000</td>
+      <td>1361.394243</td>
+      <td>1048.086806</td>
+    </tr>
+    <tr>
+      <th>Real Price</th>
+      <td>1247.349170</td>
+      <td>1407.033108</td>
+      <td>1375.411112</td>
+      <td>1422.551992</td>
+      <td>1401.371581</td>
+      <td>1401.303869</td>
+      <td>1361.394243</td>
+      <td>0.000000</td>
+      <td>364.090297</td>
+    </tr>
+    <tr>
+      <th>SP500</th>
+      <td>935.855699</td>
+      <td>1093.831545</td>
+      <td>1060.978612</td>
+      <td>1110.110884</td>
+      <td>1089.657346</td>
+      <td>1088.640134</td>
+      <td>1048.086806</td>
+      <td>364.090297</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+
+
+        <details>
+            <summary><span class="text-info">series</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">SP500</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>179217.457496</td>
+      <td>175888.867311</td>
+      <td>172240.056519</td>
+      <td>168900.130792</td>
+      <td>165215.340345</td>
+      <td>161487.048775</td>
+      <td>157530.850357</td>
+      <td>153705.459385</td>
+      <td>149985.479096</td>
+      <td>146125.05111</td>
+      <td>...</td>
+      <td>-21330.750303</td>
+      <td>-19308.50963</td>
+      <td>-17303.253341</td>
+      <td>-15288.805447</td>
+      <td>-13242.503765</td>
+      <td>-11143.461295</td>
+      <td>-9034.245959</td>
+      <td>-6815.498383</td>
+      <td>-4723.390484</td>
+      <td>-2356.619013</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Dividend</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>49.400977</td>
+      <td>48.606554</td>
+      <td>47.794709</td>
+      <td>46.966367</td>
+      <td>46.124609</td>
+      <td>45.273997</td>
+      <td>44.416014</td>
+      <td>43.551058</td>
+      <td>42.681026</td>
+      <td>41.808392</td>
+      <td>...</td>
+      <td>-4.913877</td>
+      <td>-4.491505</td>
+      <td>-4.052579</td>
+      <td>-3.600032</td>
+      <td>-3.134073</td>
+      <td>-2.653572</td>
+      <td>-2.15576</td>
+      <td>-1.640504</td>
+      <td>-1.108437</td>
+      <td>-0.561729</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Earnings</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>677.698755</td>
+      <td>669.673559</td>
+      <td>657.92764</td>
+      <td>643.170637</td>
+      <td>626.132013</td>
+      <td>607.439338</td>
+      <td>587.328768</td>
+      <td>566.06651</td>
+      <td>543.918129</td>
+      <td>521.181079</td>
+      <td>...</td>
+      <td>-49.219151</td>
+      <td>-44.510434</td>
+      <td>-39.753329</td>
+      <td>-34.898247</td>
+      <td>-29.945646</td>
+      <td>-24.880609</td>
+      <td>-19.760028</td>
+      <td>-14.58367</td>
+      <td>-9.542138</td>
+      <td>-4.681179</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Consumer Price Index</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1046.925821</td>
+      <td>1037.008199</td>
+      <td>1026.620322</td>
+      <td>1015.986037</td>
+      <td>1005.218336</td>
+      <td>994.466492</td>
+      <td>983.714687</td>
+      <td>972.977294</td>
+      <td>962.481925</td>
+      <td>952.30536</td>
+      <td>...</td>
+      <td>-95.760634</td>
+      <td>-86.981831</td>
+      <td>-77.911929</td>
+      <td>-68.49001</td>
+      <td>-58.772746</td>
+      <td>-48.980822</td>
+      <td>-39.139278</td>
+      <td>-29.207523</td>
+      <td>-19.34701</td>
+      <td>-9.600817</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Long Interest Rate</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.206453</td>
+      <td>3.150692</td>
+      <td>3.079734</td>
+      <td>3.009203</td>
+      <td>2.937006</td>
+      <td>2.864374</td>
+      <td>2.802541</td>
+      <td>2.745641</td>
+      <td>2.686821</td>
+      <td>2.627148</td>
+      <td>...</td>
+      <td>-0.301043</td>
+      <td>-0.272852</td>
+      <td>-0.24273</td>
+      <td>-0.212285</td>
+      <td>-0.18481</td>
+      <td>-0.156489</td>
+      <td>-0.124337</td>
+      <td>-0.092837</td>
+      <td>-0.060652</td>
+      <td>-0.029786</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Real Price</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>185372.546946</td>
+      <td>182138.908686</td>
+      <td>178410.497863</td>
+      <td>175010.963782</td>
+      <td>171288.50299</td>
+      <td>167479.202707</td>
+      <td>163330.402897</td>
+      <td>159296.874</td>
+      <td>155213.734452</td>
+      <td>150767.462332</td>
+      <td>...</td>
+      <td>-16587.827481</td>
+      <td>-14952.145329</td>
+      <td>-13356.148569</td>
+      <td>-11798.267161</td>
+      <td>-10280.053473</td>
+      <td>-8718.552261</td>
+      <td>-7130.097809</td>
+      <td>-5417.025787</td>
+      <td>-3824.172983</td>
+      <td>-1908.431674</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Real Dividend</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>23.784269</td>
+      <td>23.307033</td>
+      <td>22.811945</td>
+      <td>22.305853</td>
+      <td>21.788526</td>
+      <td>21.257242</td>
+      <td>20.717799</td>
+      <td>20.169604</td>
+      <td>19.609093</td>
+      <td>19.035693</td>
+      <td>...</td>
+      <td>-1.788915</td>
+      <td>-1.635697</td>
+      <td>-1.476435</td>
+      <td>-1.319282</td>
+      <td>-1.16362</td>
+      <td>-1.000958</td>
+      <td>-0.828</td>
+      <td>-0.641519</td>
+      <td>-0.43859</td>
+      <td>-0.225194</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">Real Earnings</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>627.922808</td>
+      <td>620.911342</td>
+      <td>608.835159</td>
+      <td>592.677006</td>
+      <td>573.408179</td>
+      <td>551.651944</td>
+      <td>527.755051</td>
+      <td>502.042683</td>
+      <td>474.838709</td>
+      <td>446.575623</td>
+      <td>...</td>
+      <td>-32.995829</td>
+      <td>-29.667612</td>
+      <td>-26.376891</td>
+      <td>-23.058698</td>
+      <td>-19.706581</td>
+      <td>-16.260724</td>
+      <td>-12.815635</td>
+      <td>-9.372833</td>
+      <td>-6.049005</td>
+      <td>-2.927201</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">PE10</span></summary>
+            <ul class="no-bullet">
+            <li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">shape</span></summary>
+            <ul class=list-dash >
+        <li>
+
+                    300
+            </li>
+        </ul>
+        </details>
+
+                </li><li>
+
+
+
+
+        <details>
+            <summary><span class="text-info">acovf</span></summary>
+            <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Date</th>
+      <th>1990-01-01</th>
+      <th>1990-02-01</th>
+      <th>1990-03-01</th>
+      <th>1990-04-01</th>
+      <th>1990-05-01</th>
+      <th>1990-06-01</th>
+      <th>1990-07-01</th>
+      <th>1990-08-01</th>
+      <th>1990-09-01</th>
+      <th>1990-10-01</th>
+      <th>...</th>
+      <th>2014-03-01</th>
+      <th>2014-04-01</th>
+      <th>2014-05-01</th>
+      <th>2014-06-01</th>
+      <th>2014-07-01</th>
+      <th>2014-08-01</th>
+      <th>2014-09-01</th>
+      <th>2014-10-01</th>
+      <th>2014-11-01</th>
+      <th>2014-12-01</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>46.669335</td>
+      <td>46.126725</td>
+      <td>45.410262</td>
+      <td>44.710637</td>
+      <td>43.980611</td>
+      <td>43.22205</td>
+      <td>42.378318</td>
+      <td>41.554839</td>
+      <td>40.681552</td>
+      <td>39.682067</td>
+      <td>...</td>
+      <td>-0.104916</td>
+      <td>-0.110232</td>
+      <td>-0.115056</td>
+      <td>-0.117495</td>
+      <td>-0.110682</td>
+      <td>-0.100873</td>
+      <td>-0.093304</td>
+      <td>-0.077496</td>
+      <td>-0.08024</td>
+      <td>-0.04124</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 300 columns</p>
+</div>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+                </li>
+        </ul>
+        </details>
+
+
+
+</div></div>
+</div>
+<p>Results are held in a <code class="docutils literal notranslate"><span class="pre">BundledResult</span></code> object, which includes the same details as <code class="docutils literal notranslate"><span class="pre">ProfileResult</span></code>. Under the <code class="docutils literal notranslate"><span class="pre">result</span></code> attribute you’ll find:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">exec_details</span></code> a DataFrame with all the executions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code> the configurations passed onto this execution</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">frame</span></code> a dictionary with the results of each profiling function whose scope is DataFrame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">series</span></code> a dictionary with each of the series in the DataFrame, and for each series a dictionary with the results of the series profiling functions</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr1</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;euc_sim&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Consumer Price Index</th>
+      <th>Dividend</th>
+      <th>Earnings</th>
+      <th>Long Interest Rate</th>
+      <th>PE10</th>
+      <th>Real Dividend</th>
+      <th>Real Earnings</th>
+      <th>Real Price</th>
+      <th>SP500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Consumer Price Index</th>
+      <td>0.000000</td>
+      <td>165.486344</td>
+      <td>135.796101</td>
+      <td>181.364722</td>
+      <td>161.318178</td>
+      <td>159.546683</td>
+      <td>122.081817</td>
+      <td>1247.349170</td>
+      <td>935.855699</td>
+    </tr>
+    <tr>
+      <th>Dividend</th>
+      <td>165.486344</td>
+      <td>0.000000</td>
+      <td>35.661179</td>
+      <td>17.019169</td>
+      <td>11.701936</td>
+      <td>6.940290</td>
+      <td>48.498664</td>
+      <td>1407.033108</td>
+      <td>1093.831545</td>
+    </tr>
+    <tr>
+      <th>Earnings</th>
+      <td>135.796101</td>
+      <td>35.661179</td>
+      <td>0.000000</td>
+      <td>51.538956</td>
+      <td>34.956319</td>
+      <td>31.895157</td>
+      <td>15.897771</td>
+      <td>1375.411112</td>
+      <td>1060.978612</td>
+    </tr>
+    <tr>
+      <th>Long Interest Rate</th>
+      <td>181.364722</td>
+      <td>17.019169</td>
+      <td>51.538956</td>
+      <td>0.000000</td>
+      <td>21.497434</td>
+      <td>22.065529</td>
+      <td>64.027759</td>
+      <td>1422.551992</td>
+      <td>1110.110884</td>
+    </tr>
+    <tr>
+      <th>PE10</th>
+      <td>161.318178</td>
+      <td>11.701936</td>
+      <td>34.956319</td>
+      <td>21.497434</td>
+      <td>0.000000</td>
+      <td>8.751860</td>
+      <td>45.141560</td>
+      <td>1401.371581</td>
+      <td>1089.657346</td>
+    </tr>
+    <tr>
+      <th>Real Dividend</th>
+      <td>159.546683</td>
+      <td>6.940290</td>
+      <td>31.895157</td>
+      <td>22.065529</td>
+      <td>8.751860</td>
+      <td>0.000000</td>
+      <td>43.418904</td>
+      <td>1401.303869</td>
+      <td>1088.640134</td>
+    </tr>
+    <tr>
+      <th>Real Earnings</th>
+      <td>122.081817</td>
+      <td>48.498664</td>
+      <td>15.897771</td>
+      <td>64.027759</td>
+      <td>45.141560</td>
+      <td>43.418904</td>
+      <td>0.000000</td>
+      <td>1361.394243</td>
+      <td>1048.086806</td>
+    </tr>
+    <tr>
+      <th>Real Price</th>
+      <td>1247.349170</td>
+      <td>1407.033108</td>
+      <td>1375.411112</td>
+      <td>1422.551992</td>
+      <td>1401.371581</td>
+      <td>1401.303869</td>
+      <td>1361.394243</td>
+      <td>0.000000</td>
+      <td>364.090297</td>
+    </tr>
+    <tr>
+      <th>SP500</th>
+      <td>935.855699</td>
+      <td>1093.831545</td>
+      <td>1060.978612</td>
+      <td>1110.110884</td>
+      <td>1089.657346</td>
+      <td>1088.640134</td>
+      <td>1048.086806</td>
+      <td>364.090297</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr2</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;euc_sim&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Consumer Price Index</th>
+      <th>Dividend</th>
+      <th>Earnings</th>
+      <th>Long Interest Rate</th>
+      <th>PE10</th>
+      <th>Real Dividend</th>
+      <th>Real Earnings</th>
+      <th>Real Price</th>
+      <th>SP500</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Consumer Price Index</th>
+      <td>0.000000</td>
+      <td>163.441100</td>
+      <td>134.428367</td>
+      <td>178.143767</td>
+      <td>157.812267</td>
+      <td>156.987300</td>
+      <td>119.670567</td>
+      <td>-1177.380400</td>
+      <td>-847.525000</td>
+    </tr>
+    <tr>
+      <th>Dividend</th>
+      <td>-163.441100</td>
+      <td>0.000000</td>
+      <td>-29.012733</td>
+      <td>14.702667</td>
+      <td>-5.628833</td>
+      <td>-6.453800</td>
+      <td>-43.770533</td>
+      <td>-1340.821500</td>
+      <td>-1010.966100</td>
+    </tr>
+    <tr>
+      <th>Earnings</th>
+      <td>-134.428367</td>
+      <td>29.012733</td>
+      <td>0.000000</td>
+      <td>43.715400</td>
+      <td>23.383900</td>
+      <td>22.558933</td>
+      <td>-14.757800</td>
+      <td>-1311.808767</td>
+      <td>-981.953367</td>
+    </tr>
+    <tr>
+      <th>Long Interest Rate</th>
+      <td>-178.143767</td>
+      <td>-14.702667</td>
+      <td>-43.715400</td>
+      <td>0.000000</td>
+      <td>-20.331500</td>
+      <td>-21.156467</td>
+      <td>-58.473200</td>
+      <td>-1355.524167</td>
+      <td>-1025.668767</td>
+    </tr>
+    <tr>
+      <th>PE10</th>
+      <td>-157.812267</td>
+      <td>5.628833</td>
+      <td>-23.383900</td>
+      <td>20.331500</td>
+      <td>0.000000</td>
+      <td>-0.824967</td>
+      <td>-38.141700</td>
+      <td>-1335.192667</td>
+      <td>-1005.337267</td>
+    </tr>
+    <tr>
+      <th>Real Dividend</th>
+      <td>-156.987300</td>
+      <td>6.453800</td>
+      <td>-22.558933</td>
+      <td>21.156467</td>
+      <td>0.824967</td>
+      <td>0.000000</td>
+      <td>-37.316733</td>
+      <td>-1334.367700</td>
+      <td>-1004.512300</td>
+    </tr>
+    <tr>
+      <th>Real Earnings</th>
+      <td>-119.670567</td>
+      <td>43.770533</td>
+      <td>14.757800</td>
+      <td>58.473200</td>
+      <td>38.141700</td>
+      <td>37.316733</td>
+      <td>0.000000</td>
+      <td>-1297.050967</td>
+      <td>-967.195567</td>
+    </tr>
+    <tr>
+      <th>Real Price</th>
+      <td>1177.380400</td>
+      <td>1340.821500</td>
+      <td>1311.808767</td>
+      <td>1355.524167</td>
+      <td>1335.192667</td>
+      <td>1334.367700</td>
+      <td>1297.050967</td>
+      <td>0.000000</td>
+      <td>329.855400</td>
+    </tr>
+    <tr>
+      <th>SP500</th>
+      <td>847.525000</td>
+      <td>1010.966100</td>
+      <td>981.953367</td>
+      <td>1025.668767</td>
+      <td>1005.337267</td>
+      <td>1004.512300</td>
+      <td>967.195567</td>
+      <td>-329.855400</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pr1</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;euc_sim&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">pr2</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span><span class="p">[</span><span class="s1">&#39;euc_sim&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+False
+</pre></div></div>
+</div>
+<p>As we can see, the parameter is being passed on correctly to <code class="docutils literal notranslate"><span class="pre">euc_sim</span></code>.</p>
+</section>
+<section id="Closing-thoughts">
+<h2>Closing thoughts<a class="headerlink" href="#Closing-thoughts" title="Permalink to this headline">¶</a></h2>
+<p>This notebook illustrates how simple it is to create custom profilers and bundles.</p>
+<p>It’s up to the user to mix and match whichever profilers are relevant to their needs, pre-canned ones available under <code class="docutils literal notranslate"><span class="pre">tslumen.profile</span></code> or user-defined functions, provided they meet the conventions listed above and are decorated using <code class="docutils literal notranslate"><span class="pre">&#64;ProfilingFunction</span></code>.</p>
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"73e9f888d0e443e9b4dd55ac9cbf176c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c8196cc018574951ab7240cd8a8d3700": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "3ef9fe65c4bd4d0999abfcfd22b0ddd6": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_73e9f888d0e443e9b4dd55ac9cbf176c", "max": 20.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_c8196cc018574951ab7240cd8a8d3700", "tabbable": null, "tooltip": null, "value": 20.0}}, "ccd77815d28c4330a1cb66a1f11dd5ce": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d791b77273b4499a8c69df911a37629b": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "152224f85709479697d0b042959b66be": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_ccd77815d28c4330a1cb66a1f11dd5ce", "placeholder": "\u200b", "style": "IPY_MODEL_d791b77273b4499a8c69df911a37629b", "tabbable": null, "tooltip": null, "value": "Profiling: 100%"}}, "78da0053cc294d7891d168e7fac27863": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6819f43f63de42a49da6342091bc5626": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "d37aa96c8d3b4173b4119134473f8222": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_78da0053cc294d7891d168e7fac27863", "placeholder": "\u200b", "style": "IPY_MODEL_6819f43f63de42a49da6342091bc5626", "tabbable": null, "tooltip": null, "value": " 20/20 [00:00&lt;00:00, 278.28it/s]"}}, "e8855b5d51d549209757ec371c13e54c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a43d7dbcf65f4c619af86994ba34610b": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_152224f85709479697d0b042959b66be", "IPY_MODEL_3ef9fe65c4bd4d0999abfcfd22b0ddd6", "IPY_MODEL_d37aa96c8d3b4173b4119134473f8222"], "layout": "IPY_MODEL_e8855b5d51d549209757ec371c13e54c", "tabbable": null, "tooltip": null}}, "a87dd168fa5c44fca97c2533f5d1e198": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f6fdec016ad84643975e8b29f2ec490d": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "75b0a57a027140f7a52269021b757f93": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_a87dd168fa5c44fca97c2533f5d1e198", "max": 20.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_f6fdec016ad84643975e8b29f2ec490d", "tabbable": null, "tooltip": null, "value": 20.0}}, "72cacdb75e814d73aee89218378aef88": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f6cc4c0cb9ee499085ac16b7b581ef27": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "9d519f93b715402cb1854b98f6d3e045": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_72cacdb75e814d73aee89218378aef88", "placeholder": "\u200b", "style": "IPY_MODEL_f6cc4c0cb9ee499085ac16b7b581ef27", "tabbable": null, "tooltip": null, "value": "Profiling: 100%"}}, "41b07c92da9845f198f05c27d037b71b": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "aca61199a90a432e96db16a979f58a34": {"model_name": "HTMLStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "5e76daf322ee432fbf529470874aa3f6": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_41b07c92da9845f198f05c27d037b71b", "placeholder": "\u200b", "style": "IPY_MODEL_aca61199a90a432e96db16a979f58a34", "tabbable": null, "tooltip": null, "value": " 20/20 [00:00&lt;00:00, 309.19it/s]"}}, "daf029c8f4b447caa3c29698a5767404": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9c45c0b93bc14ffe98377e2bb0e31e98": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_9d519f93b715402cb1854b98f6d3e045", "IPY_MODEL_75b0a57a027140f7a52269021b757f93", "IPY_MODEL_5e76daf322ee432fbf529470874aa3f6"], "layout": "IPY_MODEL_daf029c8f4b447caa3c29698a5767404", "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}
+</script></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="06_dashboard.html" class="btn btn-neutral float-left" title="Interactive dashboard" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="12_custom_html.html" class="btn btn-neutral float-right" title="Using custom HTML templates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

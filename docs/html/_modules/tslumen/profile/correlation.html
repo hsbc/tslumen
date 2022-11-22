@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.correlation &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html"><img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../tslumen.html">tslumen</a> &raquo;</li>
+          <li><a href="../profile.html">tslumen.profile</a> &raquo;</li>
+      <li>tslumen.profile.correlation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.profile.correlation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Auto/correlation functions, including Spearman, ACF, PACF, etc.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">statsmodels.tsa</span> <span class="kn">import</span> <span class="n">stattools</span> <span class="k">as</span> <span class="n">sms</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.profile.base</span> <span class="kn">import</span> <span class="n">ProfilingFunction</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;acf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf_1d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;acf_2d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf_1d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pacf_2d&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;lag_corr&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;corr_pearson&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;corr_kendall&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;corr_spearman&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;granger_causality&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_stattools_make_df</span><span class="p">(</span><span class="n">corr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">conf</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">df_corr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;lag&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corr</span><span class="p">)),</span>
+            <span class="s2">&quot;correlation&quot;</span><span class="p">:</span> <span class="n">corr</span><span class="p">,</span>
+            <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="n">conf</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">corr</span><span class="p">,</span>
+            <span class="s2">&quot;up&quot;</span><span class="p">:</span> <span class="n">conf</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">corr</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">df_corr</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;low&quot;</span><span class="p">,</span> <span class="s2">&quot;up&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+    <span class="k">return</span> <span class="n">df_corr</span>
+
+
+<span class="k">def</span> <span class="nf">_acf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">diff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="n">adjusted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">fft</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">data_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lags</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_clean</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_clean</span><span class="p">))</span>
+    <span class="n">data_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">data_clean</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">diff</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">data_clean</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">diff</span><span class="p">:])</span>
+    <span class="n">corr</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="n">sms</span><span class="o">.</span><span class="n">acf</span><span class="p">(</span>
+        <span class="n">data_clean</span><span class="p">,</span>
+        <span class="n">nlags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span>
+        <span class="n">adjusted</span><span class="o">=</span><span class="n">adjusted</span><span class="p">,</span>
+        <span class="n">qstat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fft</span><span class="o">=</span><span class="n">fft</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+        <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_stattools_make_df</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">conf</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_pacf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">diff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ywadjusted&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="n">data_clean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lags</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_clean</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_clean</span><span class="p">))</span>
+    <span class="n">data_clean</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">data_clean</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">diff</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="n">data_clean</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">diff</span><span class="p">:])</span>
+    <span class="n">corr</span><span class="p">,</span> <span class="n">conf</span> <span class="o">=</span> <span class="n">sms</span><span class="o">.</span><span class="n">pacf</span><span class="p">(</span><span class="n">data_clean</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_stattools_make_df</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">conf</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="acf"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.acf">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">acf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="n">adjusted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">fft</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the autocorrelation function on level data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_acf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="n">adjusted</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="n">fft</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="acf_1d"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.acf_1d">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">acf_1d</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="n">adjusted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">fft</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the autocorrelation function on 1-differenced data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_acf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="n">adjusted</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="n">fft</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="acf_2d"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.acf_2d">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">acf_2d</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="n">adjusted</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">fft</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">missing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the autocorrelation function on 2-differenced data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_acf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">adjusted</span><span class="o">=</span><span class="n">adjusted</span><span class="p">,</span> <span class="n">fft</span><span class="o">=</span><span class="n">fft</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span> <span class="n">missing</span><span class="o">=</span><span class="n">missing</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pacf"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.pacf">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">pacf</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ywadjusted&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the partial autocorrelation function on level data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pacf_1d"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.pacf_1d">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">pacf_1d</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ywadjusted&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the partial autocorrelation function on 1-differenced data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="pacf_2d"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.pacf_2d">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">pacf_2d</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lags</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ywadjusted&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the partial autocorrelation function on 1-differenced data.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: DataFrame with 4 columns: lag, correlation, low and up.</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_pacf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="lag_corr"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.lag_corr">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">lag_corr</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">lags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">()</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Creates a DataFrame with the level data plus shifts as per the ``lags`` parameter.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.Series): Timeseries data.</span>
+<span class="sd">        lags (Optional[Tuple[int, ...]]): Lags to shift the data on. If not supplied attempts to</span>
+<span class="sd">            find appropriate defaults based on the frequency.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame, pd.DataFrame: DataFrame with shifted data, DataFrame with correlation between</span>
+<span class="sd">        lagged and level</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span>
+    <span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">freq</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">lags</span><span class="p">:</span>
+        <span class="n">max_lag</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">lags_dic</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+            <span class="s2">&quot;Q&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+            <span class="s2">&quot;M&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">),</span>
+            <span class="s2">&quot;W&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">),</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">365</span><span class="p">),</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">240</span><span class="p">),</span>
+            <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">)),</span>
+        <span class="p">}</span>
+        <span class="n">lags</span> <span class="o">=</span> <span class="n">lags_dic</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">tuple</span><span class="p">()</span>
+        <span class="n">lags</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">lag</span> <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span> <span class="k">if</span> <span class="n">lag</span> <span class="o">&lt;=</span> <span class="n">max_lag</span><span class="p">)</span>
+    <span class="n">df_lags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;original&quot;</span><span class="p">)]</span> <span class="o">+</span> <span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;lag </span><span class="si">{</span><span class="n">lag</span><span class="si">}{</span><span class="n">freq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="n">lags</span><span class="p">],</span>
+        <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_lags</span><span class="p">,</span> <span class="n">df_lags</span><span class="o">.</span><span class="n">corr</span><span class="p">()[</span><span class="s2">&quot;original&quot;</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="corr_pearson"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.corr_pearson">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">corr_pearson</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): Timeseries dataframe.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Pearson correlation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;pearson&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="corr_kendall"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.corr_kendall">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">corr_kendall</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): Timeseries dataframe.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Kendall correlation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;kendall&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="corr_spearman"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.corr_spearman">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">corr_spearman</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): Timeseries dataframe.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame: Spearman correlation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;spearman&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="granger_causality"><a class="viewcode-back" href="../../../api/tslumen.profile.correlation.html#tslumen.profile.correlation.granger_causality">[docs]</a><span class="nd">@ProfilingFunction</span>
+<span class="k">def</span> <span class="nf">granger_causality</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">test</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ssr_chi2test&quot;</span><span class="p">,</span>
+    <span class="n">addconst</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">maxlag</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">max_diff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">adf_confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Attempts to make the data stationary by applying differencing if needed (up to ``max_diff``)</span>
+<span class="sd">    -- determined based on ADFuller test on ``adf_confidence`` with autolag calculation based on</span>
+<span class="sd">    AIC; for each series pair, runs granger causality test and gets the smallest p-value and</span>
+<span class="sd">    corresponding lag; builds a matrix with the result.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (pd.DataFrame): Timeseries dataframe.</span>
+<span class="sd">        test (str): Test name to use with Granger Causality.</span>
+<span class="sd">        addconst (bool): Include a constant in the model.</span>
+<span class="sd">        maxlag (int): Compute Granger Causality up til maxlag.</span>
+<span class="sd">        max_diff (int): Diff at most max_diff times to attain stationarity.</span>
+<span class="sd">        adf_confidence (float): Confidence level for the ADFuller test on stationarity.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pd.DataFrame, pd.DataFrame, int: p-values matrix, lags matrix, number of differencing</span>
+
+<span class="sd">    See Also:</span>
+<span class="sd">        https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.grangercausalitytests.html</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># only stationary</span>
+    <span class="n">df_</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+    <span class="n">stationary</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_diff</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">stationary</span> <span class="o">=</span> <span class="p">[</span><span class="n">sms</span><span class="o">.</span><span class="n">adfuller</span><span class="p">(</span><span class="n">df_</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">autolag</span><span class="o">=</span><span class="s2">&quot;AIC&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">adf_confidence</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df_</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">stationary</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">df_</span> <span class="o">=</span> <span class="n">df_</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+    <span class="n">df_</span> <span class="o">=</span> <span class="n">df_</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">st</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stationary</span><span class="p">)</span> <span class="k">if</span> <span class="n">st</span><span class="p">]]</span>
+
+    <span class="n">dfp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">df_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">df_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df_</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">)</span>
+    <span class="n">dfl</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">df_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">df_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">df_</span><span class="o">.</span><span class="n">columns</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dfp</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">dfp</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">min_p_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+                <span class="n">min_lag</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">test_result</span> <span class="o">=</span> <span class="n">sms</span><span class="o">.</span><span class="n">grangercausalitytests</span><span class="p">(</span>
+                    <span class="n">df_</span><span class="p">[[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]],</span> <span class="n">addconst</span><span class="o">=</span><span class="n">addconst</span><span class="p">,</span> <span class="n">maxlag</span><span class="o">=</span><span class="n">maxlag</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span>
+                <span class="p">)</span>
+                <span class="n">p_values</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+                    <span class="p">[</span><span class="n">test_result</span><span class="p">[</span><span class="n">lag</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="n">test</span><span class="p">]</span> <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxlag</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)],</span>
+                    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="p">)</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">min_p_value</span><span class="p">,</span> <span class="n">min_lag</span> <span class="o">=</span> <span class="n">p_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dfp</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_p_value</span>
+            <span class="n">dfl</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_lag</span>
+    <span class="n">dfp</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">[x]&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dfp</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">dfp</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">[y]&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dfp</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">dfl</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">[x]&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dfl</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+    <span class="n">dfl</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">[y]&quot;</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">dfl</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+    <span class="n">dfl</span> <span class="o">=</span> <span class="n">dfl</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dfp</span><span class="p">,</span> <span class="n">dfl</span><span class="p">,</span> <span class="n">d</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

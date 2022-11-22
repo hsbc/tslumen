@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.summary module &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.report package" href="tslumen.report.html" />
+    <link rel="prev" title="tslumen.profile.stats module" href="tslumen.profile.stats.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.base.html">tslumen.profile.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.components.html">tslumen.profile.components module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.correlation.html">tslumen.profile.correlation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.distribution.html">tslumen.profile.distribution module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.features.html">tslumen.profile.features module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.smooth.html">tslumen.profile.smooth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stat_tests.html">tslumen.profile.stat_tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stats.html">tslumen.profile.stats module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tslumen.profile.summary module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+          <li><a href="tslumen.profile.html">tslumen.profile package</a> &raquo;</li>
+      <li>tslumen.profile.summary module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.profile.summary">
+<span id="tslumen-profile-summary-module"></span><h1>tslumen.profile.summary module<a class="headerlink" href="#module-tslumen.profile.summary" title="Permalink to this headline">¶</a></h1>
+<p>Summary indicators, both at frame and series levels.</p>
+<dl class="py function">
+<dt id="tslumen.profile.summary.df_scaled">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">df_scaled</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#df_scaled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.df_scaled" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data scaled to be between 0 and 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>pd.Series</em><em>, </em><em>pd.DataFrame</em><em>]</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Scaled data.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Union[pd.Series, pd.DataFrame]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.dt_end">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">dt_end</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#dt_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.dt_end" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>End datetime.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.dt_start">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">dt_start</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#dt_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.dt_start" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Start datetime.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.freq">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">freq</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#freq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.freq" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>pd.Series</em><em>, </em><em>pd.DataFrame</em><em>]</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data’s inferred frequency.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.infinite">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">infinite</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#infinite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.infinite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count number of infinite values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.Series</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of <code class="docutils literal notranslate"><span class="pre">np.inf</span></code> in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.length">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">length</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.length" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Length of the time series.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.missing">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">missing</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#missing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.missing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count number of missing values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.Series</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.n_series">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">n_series</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#n_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.n_series" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of series in the DataFrame.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.period">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">period</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#period"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.period" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>Union</em><em>[</em><em>pd.Series</em><em>, </em><em>pd.DataFrame</em><em>]</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Data’s periodicity.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.sample">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">sample</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.series.Series</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#sample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sample N records from the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.Series</em>) – Time series.</p></li>
+<li><p><strong>sample_size</strong> (<em>int</em>) – Size of the sample.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>First and last <code class="docutils literal notranslate"><span class="pre">sample_size/2</span></code> records in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.Series</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.sz_total">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">sz_total</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory_deep</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#sz_total"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.sz_total" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – TimeSeries data.</p></li>
+<li><p><strong>memory_deep</strong> (<em>bool</em>) – deeper interrogation to obtain system-level memory consumption.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Memory usage in bytes.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.summary.zeros">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.summary.</span></code><code class="sig-name descname"><span class="pre">zeros</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/tslumen/profile/summary.html#zeros"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.summary.zeros" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count number of zeros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.Series</em>) – Time series.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Number of <code class="docutils literal notranslate"><span class="pre">0</span></code> in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.profile.stats.html" class="btn btn-neutral float-left" title="tslumen.profile.stats module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.report.html" class="btn btn-neutral float-right" title="tslumen.report package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.base module &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.profile.components module" href="tslumen.profile.components.html" />
+    <link rel="prev" title="tslumen.profile package" href="tslumen.profile.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tslumen.profile.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.components.html">tslumen.profile.components module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.correlation.html">tslumen.profile.correlation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.distribution.html">tslumen.profile.distribution module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.features.html">tslumen.profile.features module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.smooth.html">tslumen.profile.smooth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stat_tests.html">tslumen.profile.stat_tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stats.html">tslumen.profile.stats module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.summary.html">tslumen.profile.summary module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+          <li><a href="tslumen.profile.html">tslumen.profile package</a> &raquo;</li>
+      <li>tslumen.profile.base module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.profile.base">
+<span id="tslumen-profile-base-module"></span><h1>tslumen.profile.base module<a class="headerlink" href="#module-tslumen.profile.base" title="Permalink to this headline">¶</a></h1>
+<p>Base functionality for the profile package, including a dataclass for representing results and a
+decorator for allowing profiling functions to be employed correctly, as well as automatically
+capturing execution information.</p>
+<dl class="py class">
+<dt id="tslumen.profile.base.BundledProfiler">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">BundledProfiler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><span class="pre">tslumen.scheduling.Scheduler</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledProfiler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledProfiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for creating bundled profilers.</p>
+<p>Contains functionality to manage configurations, orchestrate the execution of the profiling
+functions and collate the results. It’s up for the subclasses to decide on which profiling
+functions to include, done so by assigning a list with said profiling functions to the
+class variable <cite>_profilers</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> (<em>Optional</em><em>[</em><em>dict</em><em>]</em>) – Profiler functions’ configurations. Whatever options are
+provided here will override the defaults. Expects a 2-level dictionary with the
+first level indexed by the name of the profiling functions and the second level
+the function’s parameters. Assumed configs (i.e. defaults + overrides) are stored
+in the class variable <cite>config</cite>.</p></li>
+<li><p><strong>scheduler</strong> (<em>Optional</em><em>[</em><a class="reference internal" href="tslumen.scheduling.html#tslumen.scheduling.Scheduler" title="tslumen.scheduling.Scheduler"><em>Scheduler</em></a><em>]</em>) – For executing the profiling functions. Instantiates
+the default one if not provided.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="tslumen.profile.base.BundledProfiler.get_config_defaults">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get_config_defaults</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">as_dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledProfiler.get_config_defaults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledProfiler.get_config_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Bundled configurations (defaults), profiler name =&gt; configuration.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.profile.base.BundledProfiler.get_profilers">
+<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get_profilers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'any'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><a class="reference internal" href="#tslumen.profile.base.ProfilingFunction" title="tslumen.profile.base.ProfilingFunction"><span class="pre">tslumen.profile.base.ProfilingFunction</span></a><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledProfiler.get_profilers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledProfiler.get_profilers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>target</strong> – {‘series’, ‘frame’, ‘any’}, default ‘any’
+Filter by function target (single series, data frame, or any/no filter).</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Bundled profilers, profiler name =&gt; profiler function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.profile.base.BundledProfiler.profile">
+<code class="sig-name descname"><span class="pre">profile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#tslumen.profile.base.BundledResult" title="tslumen.profile.base.BundledResult"><span class="pre">tslumen.profile.base.BundledResult</span></a><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledProfiler.profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledProfiler.profile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the profiling functions on the supplied DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em>) – TimeSeries data to be profiled.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Result of the profiling.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tslumen.profile.base.ProfileResult" title="tslumen.profile.base.ProfileResult">ProfileResult</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.profile.base.BundledResult">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">BundledResult</span></code><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tslumen.profile.base.ProfileResult" title="tslumen.profile.base.ProfileResult"><code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.profile.base.ProfileResult</span></code></a></p>
+<dl class="py attribute">
+<dt id="tslumen.profile.base.BundledResult.result">
+<code class="sig-name descname"><span class="pre">result</span></code><em class="property"><span class="pre">:</span> <a class="reference internal" href="#tslumen.profile.base.BundledResultDetails" title="tslumen.profile.base.BundledResultDetails"><span class="pre">tslumen.profile.base.BundledResultDetails</span></a></em><a class="headerlink" href="#tslumen.profile.base.BundledResult.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.profile.base.BundledResultDetails">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">BundledResultDetails</span></code><a class="reference internal" href="../_modules/tslumen/profile/base.html#BundledResultDetails"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.BundledResultDetails" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.profile.base._DCDict</span></code></p>
+<dl class="py attribute">
+<dt id="tslumen.profile.base.BundledResultDetails.config">
+<code class="sig-name descname"><span class="pre">config</span></code><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.BundledResultDetails.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.BundledResultDetails.exec_details">
+<code class="sig-name descname"><span class="pre">exec_details</span></code><em class="property"><span class="pre">:</span> <span class="pre">pandas.core.frame.DataFrame</span></em><a class="headerlink" href="#tslumen.profile.base.BundledResultDetails.exec_details" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.BundledResultDetails.frame">
+<code class="sig-name descname"><span class="pre">frame</span></code><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.BundledResultDetails.frame" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.BundledResultDetails.series">
+<code class="sig-name descname"><span class="pre">series</span></code><em class="property"><span class="pre">:</span> <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.BundledResultDetails.series" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt id="tslumen.profile.base.ProfileException">
+<em class="property"><span class="pre">exception</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">ProfileException</span></code><a class="reference internal" href="../_modules/tslumen/profile/base.html#ProfileException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.ProfileException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseException</span></code></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.profile.base.ProfileResult">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">ProfileResult</span></code><a class="reference internal" href="../_modules/tslumen/profile/base.html#ProfileResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.ProfileResult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tslumen.profile.base._DCDict</span></code></p>
+<p>For recording the results of a profiling operation.</p>
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.end">
+<code class="sig-name descname"><span class="pre">end</span></code><em class="property"><span class="pre">:</span> <span class="pre">datetime.datetime</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.exception">
+<code class="sig-name descname"><span class="pre">exception</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.profile.base.ProfileException" title="tslumen.profile.base.ProfileException"><span class="pre">tslumen.profile.base.ProfileException</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.exception" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.name">
+<code class="sig-name descname"><span class="pre">name</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.result">
+<code class="sig-name descname"><span class="pre">result</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.scope">
+<code class="sig-name descname"><span class="pre">scope</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.scope" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.start">
+<code class="sig-name descname"><span class="pre">start</span></code><em class="property"><span class="pre">:</span> <span class="pre">datetime.datetime</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.success">
+<code class="sig-name descname"><span class="pre">success</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.success" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.target">
+<code class="sig-name descname"><span class="pre">target</span></code><em class="property"><span class="pre">:</span> <span class="pre">str</span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.target" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfileResult.warnings">
+<code class="sig-name descname"><span class="pre">warnings</span></code><em class="property"><span class="pre">:</span> <span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">warnings.WarningMessage</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#tslumen.profile.base.ProfileResult.warnings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.profile.base.ProfilingFunction">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">ProfilingFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/profile/base.html#ProfilingFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Decorator for turning a function into a profiler. Inspects the function’s signature and
+builds a dataclass representing its configurations (for integrating with <code class="docutils literal notranslate"><span class="pre">Hydra</span></code>). Adds two
+attributes <code class="docutils literal notranslate"><span class="pre">is_pseries</span></code> and <code class="docutils literal notranslate"><span class="pre">is_pframe</span></code> to distinguish whether it targets Series or
+DataFrames. This is inferred based on the type annotation of the first parameter. Captures the
+start and end timestamps, the return value, as well as any warnings or exceptions raised during
+the execution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fn</strong> (<em>Callable</em>) – Profiler function to decorate.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfilingFunction.config">
+<code class="sig-name descname"><span class="pre">config</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfilingFunction.fn">
+<code class="sig-name descname"><span class="pre">fn</span></code><em class="property"><span class="pre">:</span> <span class="pre">Callable</span></em><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction.fn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfilingFunction.is_pframe">
+<code class="sig-name descname"><span class="pre">is_pframe</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction.is_pframe" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfilingFunction.is_pseries">
+<code class="sig-name descname"><span class="pre">is_pseries</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction.is_pseries" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.profile.base.ProfilingFunction.sig">
+<code class="sig-name descname"><span class="pre">sig</span></code><em class="property"><span class="pre">:</span> <span class="pre">inspect.Signature</span></em><a class="headerlink" href="#tslumen.profile.base.ProfilingFunction.sig" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.base.valid_timeseries">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.base.</span></code><code class="sig-name descname"><span class="pre">valid_timeseries</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/base.html#valid_timeseries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.base.valid_timeseries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the DataFrame meets the necessary criteria to be profiled: be a Pandas DataFrame,
+have values (must be numeric), have a DateTimeIndex, have a recognizable frequency/period.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>df</strong> – Pandas DataFrame.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A copy of the input containing only numeric series and a sorted index.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.profile.html" class="btn btn-neutral float-left" title="tslumen.profile package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.profile.components.html" class="btn btn-neutral float-right" title="tslumen.profile.components module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

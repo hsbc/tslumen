@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.plot.interactive.comparison &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html"><img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.plot.interactive.comparison</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.plot.interactive.comparison</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Comparison plots.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.plot.interactive.base</span> <span class="kn">import</span> <span class="n">VizBase</span><span class="p">,</span> <span class="n">go</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.utils</span> <span class="kn">import</span> <span class="n">cmapper</span><span class="p">,</span> <span class="n">ccontrast</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Radar&quot;</span><span class="p">,</span> <span class="s2">&quot;Heatmap&quot;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Radar"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.comparison.Radar">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">Radar</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Radar (aka spider) plot for comparing data bearing multiple dimensions.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">axis_range</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">show_legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">legend_position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;bottom_left&quot;</span><span class="p">,</span>
+        <span class="n">fill</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;toself&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            data (pd.DataFrame): Dataframe to be plotted.</span>
+<span class="sd">            columns (list): Subset of columns to use (optional).</span>
+<span class="sd">            labels (list): Option to re-label the columns (defined positionally).</span>
+<span class="sd">            colors (list): For coloring each of the series being plotted.</span>
+<span class="sd">            axis_range (Tuple[Number, Number]): Manually define the range of values to plot.</span>
+<span class="sd">            show_legend (bool): Switches legend on/off.</span>
+<span class="sd">            legend_position (str): Controls the legend positioning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colors</span> <span class="o">=</span> <span class="n">colors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span> <span class="o">=</span> <span class="n">show_legend</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span> <span class="o">=</span> <span class="n">legend_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">axis_range</span> <span class="o">=</span> <span class="n">axis_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fill</span> <span class="o">=</span> <span class="n">fill</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pfix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">labels</span> <span class="ow">or</span> <span class="n">columns</span>
+        <span class="n">colors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pfix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">PALETTE</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">labels</span> <span class="o">+</span> <span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">num</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>
+            <span class="n">radial</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+                <span class="n">go</span><span class="o">.</span><span class="n">Scatterpolar</span><span class="p">(</span>
+                    <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
+                    <span class="n">r</span><span class="o">=</span><span class="n">radial</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">idx</span><span class="p">,</span>
+                    <span class="n">meta</span><span class="o">=</span><span class="n">idx</span><span class="p">,</span>
+                    <span class="n">fill</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fill</span><span class="p">,</span>
+                    <span class="n">line_color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">num</span><span class="p">],</span>
+                    <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;&lt;b&gt;Group: %</span><span class="si">{meta}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="s2">&quot;&lt;b&gt;Category&lt;/b&gt;: %</span><span class="si">{theta}</span><span class="s2">&lt;br&gt;&quot;</span>
+                    <span class="s2">&quot;&lt;b&gt;Value&lt;/b&gt;: %</span><span class="si">{r}</span><span class="s2">&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;legend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">LEGEND_POSITION</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">legend_position</span><span class="p">],</span>
+            <span class="s2">&quot;showlegend&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_legend</span><span class="p">,</span>
+            <span class="s2">&quot;margin&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;l&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_apply_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plot</span><span class="p">:</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">*</span><span class="n">overrides</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_apply_base_opts</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="o">*</span><span class="n">overrides</span><span class="p">)</span>
+        <span class="n">plot</span><span class="o">.</span><span class="n">update_polars</span><span class="p">(</span>
+            <span class="n">bgcolor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="p">[</span><span class="s2">&quot;plot_bgcolor&quot;</span><span class="p">],</span>
+            <span class="n">radialaxis</span><span class="o">=</span><span class="p">{</span>
+                <span class="o">**</span><span class="p">{</span>
+                    <span class="n">k</span><span class="p">:</span> <span class="n">v</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">VIZBASE_LAYOUT_OPTS</span><span class="p">[</span><span class="s2">&quot;xaxis&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;linecolor&quot;</span><span class="p">,</span> <span class="s2">&quot;showgrid&quot;</span><span class="p">,</span> <span class="s2">&quot;gridcolor&quot;</span><span class="p">]</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">axis_range</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">plot</span></div>
+
+
+<div class="viewcode-block" id="Heatmap"><a class="viewcode-back" href="../../../../api/tslumen.plot.interactive.html#tslumen.plot.interactive.comparison.Heatmap">[docs]</a><span class="nd">@VizBase</span><span class="o">.</span><span class="n">extend_init</span>
+<span class="k">class</span> <span class="nc">Heatmap</span><span class="p">(</span><span class="n">VizBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Heatmap plot.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+        <span class="n">label_xaxis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">label_yaxis</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">xrotation</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">show_labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">labels_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="n">cmap</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;PuBu&quot;</span><span class="p">,</span>
+        <span class="n">colorbar</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">colorbar_position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+        <span class="n">colorbar_limit</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span>
+        <span class="n">fmt_colorbar</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.00 a&quot;</span><span class="p">,</span>
+        <span class="n">hovertemplate</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_xaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;%</span><span class="si">{meta.label_yaxis}</span><span class="s2">&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&lt;br&gt;&quot;</span>
+        <span class="s2">&quot;&lt;b&gt;Value&lt;/b&gt;: %</span><span class="si">{z}</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;&lt;extra&gt;&lt;/extra&gt;&quot;</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            data (pd.DataFrame): Matrix with the coefficient values.</span>
+<span class="sd">            label_xaxis (str): X-axis label, default &#39;&#39;.</span>
+<span class="sd">            label_yaxis (str): X-axis label,  default &#39;&#39;.</span>
+<span class="sd">            xrotation (int): Rotation degree to apply to the x axis, default 0.</span>
+<span class="sd">            show_labels (bool): Whether to show the coefficient on the heatmap, default True.</span>
+<span class="sd">            labels_format (str): Format to apply to the labels, default &#39;{0:.2f}&#39;.</span>
+<span class="sd">            cmap (str): Color map or palette, default &#39;PuBu&#39;.</span>
+<span class="sd">            colorbar (bool): Whether to show the color bar, default True.</span>
+<span class="sd">            colorbar_position (str): Where to position the colorbar, e.g. &#39;left&#39;, &#39;right&#39;, etc.</span>
+<span class="sd">            colorbar_limit (Tuple[float, float]): Min and max colorbar range, default (-1, 1).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span> <span class="o">=</span> <span class="n">label_xaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span> <span class="o">=</span> <span class="n">label_yaxis</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span> <span class="o">=</span> <span class="n">xrotation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_labels</span> <span class="o">=</span> <span class="n">show_labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">labels_format</span> <span class="o">=</span> <span class="n">labels_format</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorbar</span> <span class="o">=</span> <span class="n">colorbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorbar_position</span> <span class="o">=</span> <span class="n">colorbar_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fmt_colorbar</span> <span class="o">=</span> <span class="n">fmt_colorbar</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span> <span class="o">=</span> <span class="n">colorbar_limit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span> <span class="o">=</span> <span class="n">hovertemplate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_annotations</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">_annotate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">cmap</span> <span class="o">=</span> <span class="n">cmapper</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cmap</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cmap</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;PuBu&quot;</span><span class="p">,</span>
+            <span class="n">as_hex</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_annotations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span> <span class="ow">or</span> <span class="n">val</span> <span class="o">!=</span> <span class="n">val</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="o">*</span><span class="n">bg</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">fg</span> <span class="o">=</span> <span class="n">ccontrast</span><span class="p">(</span><span class="o">*</span><span class="n">bg</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_annotations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">go</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">Annotation</span><span class="p">(</span>
+                        <span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">labels_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">val</span><span class="p">),</span>
+                        <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">fg</span><span class="p">),</span>
+                        <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">j</span><span class="p">],</span>
+                        <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                        <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span>
+                        <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">,</span>
+                        <span class="n">showarrow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_figure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">colorbar_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">COLORBAR_POSITION</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">colorbar_position</span><span class="p">]</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                <span class="n">zmid</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="n">zmin</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">zmax</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">colorbar_limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                <span class="n">meta</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;label_xaxis&quot;</span><span class="p">:</span> <span class="s2">&quot;Category&quot;</span><span class="p">,</span> <span class="s2">&quot;label_yaxis&quot;</span><span class="p">:</span> <span class="s2">&quot;Group&quot;</span><span class="p">},</span>
+                <span class="n">colorscale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">cmap</span><span class="p">,</span>
+                <span class="n">colorbar</span><span class="o">=</span><span class="p">{</span>
+                    <span class="s2">&quot;tickmode&quot;</span><span class="p">:</span> <span class="s2">&quot;array&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;tickformat&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmt_colorbar</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">colorbar_position</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                <span class="p">},</span>
+                <span class="n">showscale</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">colorbar</span><span class="p">,</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hovertemplate</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_annotations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_labels</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_annotate</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_base_opts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_xaxis</span><span class="p">,</span>
+                <span class="s2">&quot;tickangle&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">xrotation</span><span class="p">,</span>
+                <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;mirror&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;side&quot;</span><span class="p">:</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;showgrid&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;category&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_yaxis</span><span class="p">,</span>
+                <span class="s2">&quot;mirror&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;annotations&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_annotations</span><span class="p">,</span>
+        <span class="p">}</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

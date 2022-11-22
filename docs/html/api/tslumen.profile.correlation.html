@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.correlation module &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.profile.distribution module" href="tslumen.profile.distribution.html" />
+    <link rel="prev" title="tslumen.profile.components module" href="tslumen.profile.components.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.base.html">tslumen.profile.base module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.components.html">tslumen.profile.components module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tslumen.profile.correlation module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.distribution.html">tslumen.profile.distribution module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.features.html">tslumen.profile.features module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.smooth.html">tslumen.profile.smooth module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stat_tests.html">tslumen.profile.stat_tests module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.stats.html">tslumen.profile.stats module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tslumen.profile.summary.html">tslumen.profile.summary module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.scheduling.html">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+          <li><a href="tslumen.profile.html">tslumen.profile package</a> &raquo;</li>
+      <li>tslumen.profile.correlation module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.profile.correlation">
+<span id="tslumen-profile-correlation-module"></span><h1>tslumen.profile.correlation module<a class="headerlink" href="#module-tslumen.profile.correlation" title="Permalink to this headline">¶</a></h1>
+<p>Auto/correlation functions, including Spearman, ACF, PACF, etc.</p>
+<dl class="py function">
+<dt id="tslumen.profile.correlation.acf">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">acf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fft</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#acf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.acf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the autocorrelation function on level data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.acf_1d">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">acf_1d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fft</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#acf_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.acf_1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the autocorrelation function on 1-differenced data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.acf_2d">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">acf_2d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fft</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#acf_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.acf_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the autocorrelation function on 2-differenced data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.corr_kendall">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">corr_kendall</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#corr_kendall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.corr_kendall" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Timeseries dataframe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Kendall correlation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.corr_pearson">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">corr_pearson</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#corr_pearson"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.corr_pearson" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Timeseries dataframe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pearson correlation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.corr_spearman">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">corr_spearman</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#corr_spearman"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.corr_spearman" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em>) – Timeseries dataframe.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Spearman correlation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.granger_causality">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">granger_causality</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.frame.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'ssr_chi2test'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addconst</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxlag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_diff</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adf_confidence</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.1</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#granger_causality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.granger_causality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to make the data stationary by applying differencing if needed (up to <code class="docutils literal notranslate"><span class="pre">max_diff</span></code>)
+– determined based on ADFuller test on <code class="docutils literal notranslate"><span class="pre">adf_confidence</span></code> with autolag calculation based on
+AIC; for each series pair, runs granger causality test and gets the smallest p-value and
+corresponding lag; builds a matrix with the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – Timeseries dataframe.</p></li>
+<li><p><strong>test</strong> (<em>str</em>) – Test name to use with Granger Causality.</p></li>
+<li><p><strong>addconst</strong> (<em>bool</em>) – Include a constant in the model.</p></li>
+<li><p><strong>maxlag</strong> (<em>int</em>) – Compute Granger Causality up til maxlag.</p></li>
+<li><p><strong>max_diff</strong> (<em>int</em>) – Diff at most max_diff times to attain stationarity.</p></li>
+<li><p><strong>adf_confidence</strong> (<em>float</em>) – Confidence level for the ADFuller test on stationarity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>p-values matrix, lags matrix, number of differencing</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame, pd.DataFrame, int</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.grangercausalitytests.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.grangercausalitytests.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.lag_corr">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">lag_corr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="p"><span class="pre">…</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#lag_corr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.lag_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a DataFrame with the level data plus shifts as per the <code class="docutils literal notranslate"><span class="pre">lags</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.Series</em>) – Timeseries data.</p></li>
+<li><p><strong>lags</strong> (<em>Optional</em><em>[</em><em>Tuple</em><em>[</em><em>int</em><em>, </em><em>..</em><em>]</em><em>]</em>) – Lags to shift the data on. If not supplied attempts to
+find appropriate defaults based on the frequency.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>DataFrame with shifted data, DataFrame with correlation between
+lagged and level</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>pd.DataFrame, pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.pacf">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">pacf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'ywadjusted'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#pacf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.pacf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partial autocorrelation function on level data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.pacf_1d">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">pacf_1d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'ywadjusted'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#pacf_1d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.pacf_1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partial autocorrelation function on 1-differenced data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="tslumen.profile.correlation.pacf_2d">
+<code class="sig-prename descclassname"><span class="pre">tslumen.profile.correlation.</span></code><code class="sig-name descname"><span class="pre">pacf_2d</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pandas.core.series.Series</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'ywadjusted'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">pandas.core.frame.DataFrame</span><a class="reference internal" href="../_modules/tslumen/profile/correlation.html#pacf_2d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.profile.correlation.pacf_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the partial autocorrelation function on 1-differenced data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>DataFrame with 4 columns: lag, correlation, low and up.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html">https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html</a></p>
+</div>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.profile.components.html" class="btn btn-neutral float-left" title="tslumen.profile.components module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.profile.distribution.html" class="btn btn-neutral float-right" title="tslumen.profile.distribution module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

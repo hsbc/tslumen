@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.scheduling module &mdash; tslumen  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tslumen.misc module" href="tslumen.misc.html" />
+    <link rel="prev" title="tslumen.cli package" href="tslumen.cli.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html"><img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index_api.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tslumen.html">tslumen package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.profile.html">tslumen.profile package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.report.html">tslumen.report package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.plot.html">tslumen.plot package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.cli.html">tslumen.cli package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">tslumen.scheduling module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.misc.html">tslumen.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tslumen.jinja_utils.html">tslumen.jinja_utils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index_api.html">API Reference</a> &raquo;</li>
+      <li>tslumen.scheduling module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-tslumen.scheduling">
+<span id="tslumen-scheduling-module"></span><h1>tslumen.scheduling module<a class="headerlink" href="#module-tslumen.scheduling" title="Permalink to this headline">¶</a></h1>
+<p>Provides options for the scheduling of tasks and computation.</p>
+<dl class="py class">
+<dt id="tslumen.scheduling.Scheduler">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.scheduling.</span></code><code class="sig-name descname"><span class="pre">Scheduler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#tslumen.scheduling.Scheduler.Config" title="tslumen.scheduling.Scheduler.Config"><span class="pre">tslumen.scheduling.Scheduler.Config</span></a><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/scheduling.html#Scheduler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.scheduling.Scheduler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper around <code class="docutils literal notranslate"><span class="pre">joblib</span></code>’s <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> + <code class="docutils literal notranslate"><span class="pre">delayed</span></code> to integrate with <code class="docutils literal notranslate"><span class="pre">Hydra</span></code>’s config
+and offer some syntactic sugar to the execution.</p>
+<dl class="py class">
+<dt id="tslumen.scheduling.Scheduler.Config">
+<em class="property"><span class="pre">class</span> </em><code class="sig-name descname"><span class="pre">Config</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_jobs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">-</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'processes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backend</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_dispatch</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'2</span> <span class="pre">*</span> <span class="pre">n_jobs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_folder</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nbytes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'1M'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mmap_mode</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'r'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_disable</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/scheduling.html#Scheduler.Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> representing <code class="docutils literal notranslate"><span class="pre">joblib</span></code>’s <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> default parameters.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">dataclass</span></code> representing <code class="docutils literal notranslate"><span class="pre">joblib</span></code>’s <code class="docutils literal notranslate"><span class="pre">Parallel</span></code> default parameters.</p>
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.backend">
+<code class="sig-name descname"><span class="pre">backend</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.backend" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.batch_size">
+<code class="sig-name descname"><span class="pre">batch_size</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'auto'</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.batch_size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.max_nbytes">
+<code class="sig-name descname"><span class="pre">max_nbytes</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">'1M'</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.max_nbytes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.mmap_mode">
+<code class="sig-name descname"><span class="pre">mmap_mode</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">'r'</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.mmap_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.n_jobs">
+<code class="sig-name descname"><span class="pre">n_jobs</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">-2</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.n_jobs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.pre_dispatch">
+<code class="sig-name descname"><span class="pre">pre_dispatch</span></code><em class="property"><span class="pre">:</span> <span class="pre">Any</span></em><em class="property"> <span class="pre">=</span> <span class="pre">'2</span> <span class="pre">*</span> <span class="pre">n_jobs'</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.pre_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.prefer">
+<code class="sig-name descname"><span class="pre">prefer</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">'processes'</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.prefer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.progress_disable">
+<code class="sig-name descname"><span class="pre">progress_disable</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><em class="property"> <span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.progress_disable" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.require">
+<code class="sig-name descname"><span class="pre">require</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.require" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.temp_folder">
+<code class="sig-name descname"><span class="pre">temp_folder</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.temp_folder" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.timeout">
+<code class="sig-name descname"><span class="pre">timeout</span></code><em class="property"><span class="pre">:</span> <span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><em class="property"> <span class="pre">=</span> <span class="pre">None</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.timeout" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="tslumen.scheduling.Scheduler.Config.verbose">
+<code class="sig-name descname"><span class="pre">verbose</span></code><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#tslumen.scheduling.Scheduler.Config.verbose" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt id="tslumen.scheduling.Scheduler.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">list</span><a class="reference internal" href="../_modules/tslumen/scheduling.html#Scheduler.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.scheduling.Scheduler.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs a single function with multiple args</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn</strong> (<em>Callable</em>) – Function to be executed in parallel.</p></li>
+<li><p><strong>args</strong> (<em>Sequence</em><em>[</em><em>tuple</em><em>]</em>) – A sequence of sets of arguments to pass on to <code class="docutils literal notranslate"><span class="pre">fn</span></code>.</p></li>
+<li><p><strong>desc</strong> (<em>str</em>) – A description to accompany the progress bar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list with the return values of each function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="tslumen.scheduling.TqdmParallel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">tslumen.scheduling.</span></code><code class="sig-name descname"><span class="pre">TqdmParallel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_disable</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tslumen/scheduling.html#TqdmParallel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.scheduling.TqdmParallel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">joblib.parallel.Parallel</span></code></p>
+<p>For using <code class="docutils literal notranslate"><span class="pre">tqdm</span></code> with <code class="docutils literal notranslate"><span class="pre">joblib</span></code>’s <code class="docutils literal notranslate"><span class="pre">Parallel</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>depth</strong> (<em>int</em><em>, </em><em>optional</em>) – The depth of objects printed.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="tslumen.scheduling.TqdmParallel.print_progress">
+<code class="sig-name descname"><span class="pre">print_progress</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/tslumen/scheduling.html#TqdmParallel.print_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tslumen.scheduling.TqdmParallel.print_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the process of the parallel execution only a fraction
+of time, controlled by self.verbose.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tslumen.cli.html" class="btn btn-neutral float-left" title="tslumen.cli package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tslumen.misc.html" class="btn btn-neutral float-right" title="tslumen.misc module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

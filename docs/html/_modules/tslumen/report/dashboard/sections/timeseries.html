@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.report.dashboard.sections.timeseries &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html"><img src="../../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../../../tslumen.html">tslumen</a> &raquo;</li>
+      <li>tslumen.report.dashboard.sections.timeseries</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.report.dashboard.sections.timeseries</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Time series section and blocks.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.plot</span> <span class="kn">import</span> <span class="n">interactive</span> <span class="k">as</span> <span class="n">viz</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.utils</span> <span class="kn">import</span> <span class="n">cmap_to_list</span>
+<span class="kn">from</span> <span class="nn">tslumen.plot.interactive.base</span> <span class="kn">import</span> <span class="n">go</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.dashboard._dash</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">dbc</span><span class="p">,</span>
+    <span class="n">html</span><span class="p">,</span>
+    <span class="n">Component</span><span class="p">,</span>
+    <span class="n">StatsTable</span><span class="p">,</span>
+    <span class="n">Plot</span><span class="p">,</span>
+    <span class="n">EmptyFigure</span><span class="p">,</span>
+    <span class="n">SimpleTable</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tslumen.jinja_utils</span> <span class="kn">import</span> <span class="n">filter_numberformat</span>
+<span class="kn">from</span> <span class="nn">tslumen.report.dashboard.base</span> <span class="kn">import</span> <span class="n">DashInput</span><span class="p">,</span> <span class="n">DashSection</span><span class="p">,</span> <span class="n">DashBlock</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;BlockTSSelect&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSDetails&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSPlot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSStats&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSDist&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSSmoothing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSComponents&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSSeasonality&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSAutoCorrelation&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BlockTSLagPlots&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;SectionTimeSeries&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="BlockTSSelect"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSSelect">[docs]</a><span class="k">class</span> <span class="nc">BlockTSSelect</span><span class="p">(</span><span class="n">DashInput</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block for selecting which timeseries details to display&quot;&quot;&quot;</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Select a series&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">RadioItems</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">ser</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">ser</span><span class="p">}</span> <span class="k">for</span> <span class="n">ser</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">],</span>
+            <span class="n">value</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span>
+            <span class="n">inline</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BlockTSDetails"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSDetails">[docs]</a><span class="k">class</span> <span class="nc">BlockTSDetails</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with the time series details&quot;&quot;&quot;</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Series Details&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="s2">&quot;225px&quot;</span><span class="p">,</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_details</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="s2">&quot;Mean&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Deviation&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;std&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Maximum&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;maximum&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Minimum&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;minimum&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Zeros&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;zeros&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Missing&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;missing&quot;</span><span class="p">]),</span>
+                        <span class="s2">&quot;Infinite&quot;</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;infinite&quot;</span><span class="p">]),</span>
+                    <span class="p">},</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Spinner</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;table-tsdetails&quot;</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Component</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">StatsTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_details</span><span class="p">[[</span><span class="n">name</span><span class="p">]]),)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_render</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;table-tsdetails&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSPlot"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSPlot">[docs]</a><span class="k">class</span> <span class="nc">BlockTSPlot</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with a preview of the time series on a line plot&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Preview&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span><span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-tsplot&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">TS</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[[</span><span class="n">name</span><span class="p">]],</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+                <span class="n">show_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">rangeslider</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-tsplot&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSStats"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSStats">[docs]</a><span class="k">class</span> <span class="nc">BlockTSStats</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with the dataframe&#39;s statistics and stats tests&quot;&quot;&quot;</span>
+
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Statistics&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="s2">&quot;450px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                    <span class="p">{</span>
+                        <span class="n">name</span><span class="p">:</span> <span class="n">filter_numberformat</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="n">fun</span><span class="p">])</span>
+                        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fun</span> <span class="ow">in</span> <span class="p">{</span>
+                            <span class="s2">&quot;Mean&quot;</span><span class="p">:</span> <span class="s2">&quot;mean&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Variance&quot;</span><span class="p">:</span> <span class="s2">&quot;var&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Standard deviation&quot;</span><span class="p">:</span> <span class="s2">&quot;std&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Median&quot;</span><span class="p">:</span> <span class="s2">&quot;median&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Median absolute deviation&quot;</span><span class="p">:</span> <span class="s2">&quot;mad&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Coefficient of variation&quot;</span><span class="p">:</span> <span class="s2">&quot;cov&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Interquartile range&quot;</span><span class="p">:</span> <span class="s2">&quot;iqr&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Minimum&quot;</span><span class="p">:</span> <span class="s2">&quot;minimum&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;25%&quot;</span><span class="p">:</span> <span class="s2">&quot;q25&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;50%&quot;</span><span class="p">:</span> <span class="s2">&quot;q50&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;75%&quot;</span><span class="p">:</span> <span class="s2">&quot;q75&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Maximum&quot;</span><span class="p">:</span> <span class="s2">&quot;maximum&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Kurtosis&quot;</span><span class="p">:</span> <span class="s2">&quot;kurtosis&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;Skewness&quot;</span><span class="p">:</span> <span class="s2">&quot;skew&quot;</span><span class="p">,</span>
+                        <span class="p">}</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+                    <span class="p">},</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_stests</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">series_tests</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">tname</span> <span class="ow">in</span> <span class="p">[</span>
+                <span class="s2">&quot;levene_constant_variance&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;ljungbox_autocorrelation&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;jarque_bera_normality&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;omnibus_normality&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;adfuller_stationarity&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;kpss_stationarity&quot;</span><span class="p">,</span>
+            <span class="p">]:</span>
+                <span class="n">tr</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">tname</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">tr</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">series_tests</span><span class="p">[</span><span class="n">tr</span><span class="o">.</span><span class="n">test</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;Null Hypothesis&quot;</span><span class="p">:</span> <span class="n">tr</span><span class="o">.</span><span class="n">null_hypothesis</span><span class="p">,</span>
+                    <span class="s2">&quot;Reject&quot;</span><span class="p">:</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">reject_null_hypothesis</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;pvalue&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Conf&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tr</span><span class="o">.</span><span class="n">confidence_level</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">df_stests</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">series_tests</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;Test&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Tabs</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Tab</span><span class="p">(</span>
+                    <span class="n">dbc</span><span class="o">.</span><span class="n">Spinner</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;table-tsstats&quot;</span><span class="p">)),</span>
+                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Descriptive statistics&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Tab</span><span class="p">(</span>
+                    <span class="n">dbc</span><span class="o">.</span><span class="n">Spinner</span><span class="p">(</span><span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;table-tsstests&quot;</span><span class="p">)),</span>
+                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Statistical Tests&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_render_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Component</span><span class="p">]:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_stats</span><span class="p">[[</span><span class="n">name</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">7</span><span class="p">:]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">rsuffix</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Indicator&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Indicator &quot;</span><span class="p">,</span> <span class="s2">&quot;Value &quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">SimpleTable</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">,</span> <span class="n">show_index</span><span class="o">=</span><span class="kc">False</span><span class="p">),)</span>
+
+    <span class="k">def</span> <span class="nf">_render_stests</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Component</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">SimpleTable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_stests</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">classes</span><span class="o">=</span><span class="s2">&quot;small&quot;</span><span class="p">),)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="n">selector</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_render_stats</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;table-tsstats&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)],</span> <span class="n">selector</span><span class="p">,</span> <span class="p">[]),</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_render_stests</span><span class="p">,</span> <span class="p">[(</span><span class="s2">&quot;table-tsstests&quot;</span><span class="p">,</span> <span class="s2">&quot;children&quot;</span><span class="p">)],</span> <span class="n">selector</span><span class="p">,</span> <span class="p">[]),</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSDist"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSDist">[docs]</a><span class="k">class</span> <span class="nc">BlockTSDist</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with the distribution plots&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">375</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Distribution&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;300px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_binned</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;binned&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_quantiles</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;pd_quantiles&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_percentiles</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;pd_percentiles&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">controls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;select-tsdist&quot;</span><span class="p">,</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Histogram&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;histogram&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;QQ-Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;qq&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;PP-Plot&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;pp&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">value</span><span class="o">=</span><span class="s2">&quot;histogram&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-tsdist&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot_dist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">Histogram</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df_binned</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="nf">_plot_qq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">SampleTheoretical</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">df_quantiles</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+                <span class="s2">&quot;theoretical_quantiles&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sample_quantiles&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">label_xaxis</span><span class="o">=</span><span class="s2">&quot;Theoretical Quantiles&quot;</span><span class="p">,</span>
+                <span class="n">label_yaxis</span><span class="o">=</span><span class="s2">&quot;Sample Quantiles&quot;</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot_pp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">SampleTheoretical</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">df_percentiles</span><span class="p">[</span><span class="n">name</span><span class="p">],</span>
+                <span class="s2">&quot;theoretical_percentiles&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;sample_percentiles&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reference&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">label_xaxis</span><span class="o">=</span><span class="s2">&quot;Theoretical Percentiles&quot;</span><span class="p">,</span>
+                <span class="n">label_yaxis</span><span class="o">=</span><span class="s2">&quot;Sample Percentiles&quot;</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plot</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;histogram&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_dist</span><span class="p">,</span> <span class="s2">&quot;pp&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_pp</span><span class="p">,</span> <span class="s2">&quot;qq&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_qq</span><span class="p">}[</span><span class="n">plot</span><span class="p">](</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-tsdist&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;select-tsdist&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSSmoothing"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSSmoothing">[docs]</a><span class="k">class</span> <span class="nc">BlockTSSmoothing</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with smooth series&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">375</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Smoothing&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;300px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_smooth</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="p">{</span><span class="n">var</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;rolling_avg&quot;</span><span class="p">,</span> <span class="s2">&quot;lowess&quot;</span><span class="p">,</span> <span class="s2">&quot;supsmu&quot;</span><span class="p">]}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">controls</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Select</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;select-tssmooth&quot;</span><span class="p">,</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Rolling Average&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;rolling_avg&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;LOWESS&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;lowess&quot;</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Super Smoother&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;supsmu&quot;</span><span class="p">},</span>
+            <span class="p">],</span>
+            <span class="n">value</span><span class="o">=</span><span class="s2">&quot;rolling_avg&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-tssmooth&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">smoother</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_smooth</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="n">smoother</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">EmptyFigure</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">),)</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">TS</span><span class="p">(</span>
+                <span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span>
+                <span class="n">colors</span><span class="o">=</span><span class="s2">&quot;#cecce0&quot;</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">rangeslider</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">rangeselector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">line_width</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+                <span class="n">legend_position</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-tssmooth&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;select-tssmooth&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSComponents"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSComponents">[docs]</a><span class="k">class</span> <span class="nc">BlockTSComponents</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with a time series decomposition&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span> <span class="o">=</span> <span class="mi">600</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Decomposition&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_stl</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;stl&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">df_stl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">df_stl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[[</span><span class="n">name</span><span class="p">]]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-tscomponents&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_stl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">EmptyFigure</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">),)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span>
+                <span class="n">viz</span><span class="o">.</span><span class="n">TSStack</span><span class="p">(</span>
+                    <span class="n">df</span><span class="p">,</span>
+                    <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+                    <span class="n">show_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#a09ebb&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span>
+                    <span class="n">rangeselector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">rangeslider</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,</span>
+            <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-tscomponents&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSSeasonality"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSSeasonality">[docs]</a><span class="k">class</span> <span class="nc">BlockTSSeasonality</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with seasonality plots&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Seasonality&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_split</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;seasonal_split&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_box1</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_split</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_box2</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_split</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bfill&quot;</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;ffill&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;plot-season</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ts&quot;</span><span class="p">,</span> <span class="s2">&quot;box1&quot;</span><span class="p">,</span> <span class="s2">&quot;box2&quot;</span><span class="p">]]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_split</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">dfb1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_box1</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">dfb2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_box2</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">plot_ts</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">TS</span><span class="p">(</span>
+            <span class="n">df</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">colors</span><span class="o">=</span><span class="n">cmap_to_list</span><span class="p">(</span><span class="s2">&quot;Purples&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+            <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+            <span class="n">show_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">rangeselector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">rangeslider</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">plot</span>
+        <span class="n">plot_box1</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">BoxPlot</span><span class="p">(</span><span class="n">dfb1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#a09ebb&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dfb1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span>
+        <span class="n">plot_box2</span> <span class="o">=</span> <span class="n">viz</span><span class="o">.</span><span class="n">BoxPlot</span><span class="p">(</span><span class="n">dfb2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;#a09ebb&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">dfb2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span>
+        <span class="k">return</span> <span class="n">plot_ts</span><span class="p">,</span> <span class="n">plot_box1</span><span class="p">,</span> <span class="n">plot_box2</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="sa">f</span><span class="s2">&quot;plot-season</span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;ts&quot;</span><span class="p">,</span> <span class="s2">&quot;box1&quot;</span><span class="p">,</span> <span class="s2">&quot;box2&quot;</span><span class="p">]],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSAutoCorrelation"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSAutoCorrelation">[docs]</a><span class="k">class</span> <span class="nc">BlockTSAutoCorrelation</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with ACF and PACF plot&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Auto Correlation&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span><span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;plot-tsacf</span><span class="si">{</span><span class="n">diff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">diff</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;_1d&quot;</span><span class="p">,</span> <span class="s2">&quot;_2d&quot;</span><span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;plot-tspacf</span><span class="si">{</span><span class="n">diff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+                        <span class="k">for</span> <span class="n">diff</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;_1d&quot;</span><span class="p">,</span> <span class="s2">&quot;_2d&quot;</span><span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">),</span>
+            <span class="p">],</span>
+            <span class="n">className</span><span class="o">=</span><span class="s2">&quot;no-gutters&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">plots</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">viz</span><span class="o">.</span><span class="n">LagCorrelation</span><span class="p">(</span>
+                <span class="n">result</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acf</span><span class="si">}{</span><span class="n">diff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">],</span>
+                <span class="n">label_xaxis</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="n">label_yaxis</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">acf</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}{</span><span class="n">diff</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="s2">&quot;diff&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span>
+            <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">acf</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;acf&quot;</span><span class="p">,</span> <span class="s2">&quot;pacf&quot;</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">diff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;_1d&quot;</span><span class="p">,</span> <span class="s2">&quot;_2d&quot;</span><span class="p">])</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">plots</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;plot-ts</span><span class="si">{</span><span class="n">acf</span><span class="si">}{</span><span class="n">diff</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">acf</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;acf&quot;</span><span class="p">,</span> <span class="s2">&quot;pacf&quot;</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">diff</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;_1d&quot;</span><span class="p">,</span> <span class="s2">&quot;_2d&quot;</span><span class="p">]</span>
+                <span class="p">],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BlockTSLagPlots"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.BlockTSLagPlots">[docs]</a><span class="k">class</span> <span class="nc">BlockTSLagPlots</span><span class="p">(</span><span class="n">DashBlock</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Block with a lag (scatter) plots&quot;&quot;&quot;</span>
+
+    <span class="n">_height</span> <span class="o">=</span> <span class="mi">600</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Lag Plots&quot;</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="s2">&quot;minWidth&quot;</span><span class="p">:</span> <span class="s2">&quot;500px&quot;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">_init_post</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_lag</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;lag_corr&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Plot</span><span class="p">(</span><span class="n">pid</span><span class="o">=</span><span class="s2">&quot;plot-tslag&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">]:</span>
+        <span class="n">df</span><span class="p">,</span> <span class="n">corr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_lag</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">viz</span><span class="o">.</span><span class="n">LagMatrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">corr</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_height</span><span class="p">,</span> <span class="n">show_legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">,)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">callbacks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">List</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_plot</span><span class="p">,</span>
+                <span class="p">[(</span><span class="s2">&quot;plot-tslag&quot;</span><span class="p">,</span> <span class="s2">&quot;figure&quot;</span><span class="p">)],</span>
+                <span class="p">[(</span><span class="s2">&quot;select-timeseries&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">)],</span>
+                <span class="p">[],</span>
+            <span class="p">)</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="SectionTimeSeries"><a class="viewcode-back" href="../../../../../api/tslumen.report.dashboard.html#tslumen.report.dashboard.sections.timeseries.SectionTimeSeries">[docs]</a><span class="k">class</span> <span class="nc">SectionTimeSeries</span><span class="p">(</span><span class="n">DashSection</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class holding the contents of the &quot;TimeSeries&quot; section&quot;&quot;&quot;</span>
+
+    <span class="n">_block_classes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">BlockTSSelect</span><span class="p">,</span>
+        <span class="n">BlockTSDetails</span><span class="p">,</span>
+        <span class="n">BlockTSPlot</span><span class="p">,</span>
+        <span class="n">BlockTSStats</span><span class="p">,</span>
+        <span class="n">BlockTSDist</span><span class="p">,</span>
+        <span class="n">BlockTSSmoothing</span><span class="p">,</span>
+        <span class="n">BlockTSComponents</span><span class="p">,</span>
+        <span class="n">BlockTSSeasonality</span><span class="p">,</span>
+        <span class="n">BlockTSAutoCorrelation</span><span class="p">,</span>
+        <span class="n">BlockTSLagPlots</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Time Series&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">anchors</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">block</span><span class="o">.</span><span class="n">block_id</span><span class="p">,</span> <span class="n">block</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="n">block</span><span class="o">.</span><span class="n">block_id</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">block</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">block</span><span class="p">,</span> <span class="n">DashInput</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">body</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Component</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">html</span><span class="o">.</span><span class="n">Div</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSSelect&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;col-sm-auto&quot;</span><span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSDetails&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span>
+                            <span class="n">className</span><span class="o">=</span><span class="s2">&quot;col-sm-auto&quot;</span><span class="p">,</span>
+                        <span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSPlot&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="n">className</span><span class="o">=</span><span class="s2">&quot;mb-4&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSStats&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">,</span> <span class="n">className</span><span class="o">=</span><span class="s2">&quot;col-sm-auto&quot;</span><span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSDist&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSSmoothing&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="n">className</span><span class="o">=</span><span class="s2">&quot;mb-4&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSComponents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSSeasonality&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="n">className</span><span class="o">=</span><span class="s2">&quot;mb-4&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">dbc</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span>
+                    <span class="p">[</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSAutoCorrelation&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                        <span class="n">dbc</span><span class="o">.</span><span class="n">Col</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">blocks</span><span class="p">[</span><span class="s2">&quot;BlockTSLagPlots&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">layout</span><span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="n">className</span><span class="o">=</span><span class="s2">&quot;mb-4&quot;</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

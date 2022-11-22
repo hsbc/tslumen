@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tslumen.profile.base &mdash; tslumen  documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/project.css" type="text/css" /><link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html"><img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                v0.1.dev1+gd1738ed
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../issues.html">Questions, Issues and Feature Requests</a></li>
+</ul>
+<p><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/01_multiple_series.html">Multiple Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/02_single_series.html">Single Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/03_tune_profilers.html">Tweaking the profilers parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/04_displaying_sections.html">Displaying individual sections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/05_raw_data.html">Accessing the profiling raw data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/06_dashboard.html">Interactive dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/11_custom_profiler.html">Creating and bundling custom profilers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/12_custom_html.html">Using custom HTML templates</a></li>
+</ul>
+<p><span class="caption-text">Credits and related work</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../thirdparty.html">Third party libraries and references</a></li>
+</ul>
+<p><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index_api.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">API Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CONTRIBUTING.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CHANGELOG.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tslumen</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../tslumen.html">tslumen</a> &raquo;</li>
+          <li><a href="../profile.html">tslumen.profile</a> &raquo;</li>
+      <li>tslumen.profile.base</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tslumen.profile.base</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Base functionality for the profile package, including a dataclass for representing results and a</span>
+<span class="sd">decorator for allowing profiling functions to be employed correctly, as well as automatically</span>
+<span class="sd">capturing execution information.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Any</span><span class="p">,</span>
+    <span class="n">Optional</span><span class="p">,</span>
+    <span class="n">Union</span><span class="p">,</span>
+    <span class="n">Dict</span><span class="p">,</span>
+    <span class="n">List</span><span class="p">,</span>
+    <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">Tuple</span><span class="p">,</span>
+    <span class="n">KeysView</span><span class="p">,</span>
+    <span class="n">ValuesView</span><span class="p">,</span>
+    <span class="n">ItemsView</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">make_dataclass</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">is_dataclass</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">update_wrapper</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">signature</span><span class="p">,</span> <span class="n">Signature</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">typing_inspect</span> <span class="kn">import</span> <span class="n">is_union_type</span><span class="p">,</span> <span class="n">get_args</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">tslumen.scheduling</span> <span class="kn">import</span> <span class="n">Scheduler</span>
+<span class="kn">from</span> <span class="nn">tslumen.misc</span> <span class="kn">import</span> <span class="n">repr_html</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;TypeSeriesFrame&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProfileException&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;valid_timeseries&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProfileResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ProfilingFunction&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BundledResult&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BundledResultDetails&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;BundledProfiler&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="n">TypeSeriesFrame</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="ProfileException"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.ProfileException">[docs]</a><span class="k">class</span> <span class="nc">ProfileException</span><span class="p">(</span><span class="ne">BaseException</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="valid_timeseries"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.valid_timeseries">[docs]</a><span class="k">def</span> <span class="nf">valid_timeseries</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Checks if the DataFrame meets the necessary criteria to be profiled: be a Pandas DataFrame,</span>
+<span class="sd">    have values (must be numeric), have a DateTimeIndex, have a recognizable frequency/period.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        df: Pandas DataFrame.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pandas.DataFrame: A copy of the input containing only numeric series and a sorted index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># check if valid time series</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expecting &#39;df&#39; to be a pandas.DataFrame&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All column names must be &#39;str&#39;&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;DataFrame cannot be empty&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expecting DataFrame index to be a pandas.DateTimeIndex&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">inferred_freq</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Could not infer the DataFrame&#39;s frequency&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span></div>
+
+
+<span class="k">class</span> <span class="nc">_DCDict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">KeysView</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ValuesView</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ItemsView</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">asdict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="ProfileResult"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.ProfileResult">[docs]</a><span class="nd">@repr_html</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ProfileResult</span><span class="p">(</span><span class="n">_DCDict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;For recording the results of a profiling operation.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">target</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">end</span><span class="p">:</span> <span class="n">datetime</span>
+    <span class="n">success</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">warnings</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">warnings</span><span class="o">.</span><span class="n">WarningMessage</span><span class="p">]</span>
+    <span class="n">exception</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProfileException</span><span class="p">]</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span></div>
+
+
+<div class="viewcode-block" id="ProfilingFunction"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.ProfilingFunction">[docs]</a><span class="nd">@repr_html</span>
+<span class="k">class</span> <span class="nc">ProfilingFunction</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Decorator for turning a function into a profiler. Inspects the function&#39;s signature and</span>
+<span class="sd">    builds a dataclass representing its configurations (for integrating with ``Hydra``). Adds two</span>
+<span class="sd">    attributes ``is_pseries`` and ``is_pframe`` to distinguish whether it targets Series or</span>
+<span class="sd">    DataFrames. This is inferred based on the type annotation of the first parameter. Captures the</span>
+<span class="sd">    start and end timestamps, the return value, as well as any warnings or exceptions raised during</span>
+<span class="sd">    the execution.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fn (Callable): Profiler function to decorate.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">is_pframe</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_pseries</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Any</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">sig</span><span class="p">:</span> <span class="n">Signature</span>
+    <span class="n">_par_data</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">update_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">)</span>
+        <span class="n">p_configs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sig</span> <span class="o">=</span> <span class="n">signature</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span>
+        <span class="p">),</span> <span class="s2">&quot;Profiling function requires at least 1 argument, the timeseries&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">par</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+            <span class="k">assert</span> <span class="n">par</span><span class="o">.</span><span class="n">annotation</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Parameter </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be annotated&quot;</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_par_data</span> <span class="o">=</span> <span class="n">par</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">if</span> <span class="n">is_union_type</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">annotation</span><span class="p">):</span>
+                    <span class="n">data_types</span> <span class="o">=</span> <span class="n">get_args</span><span class="p">(</span><span class="n">par</span><span class="o">.</span><span class="n">annotation</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">data_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">par</span><span class="o">.</span><span class="n">annotation</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_pseries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span> <span class="ow">in</span> <span class="n">data_types</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">is_pframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="ow">in</span> <span class="n">data_types</span>
+                <span class="k">assert</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">is_pseries</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_pframe</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;First argument &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; must be a Series or DataFrame&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">p_configs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">par</span><span class="o">.</span><span class="n">annotation</span><span class="p">,</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">par</span><span class="o">.</span><span class="n">default</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">make_dataclass</span><span class="p">(</span><span class="s2">&quot;Config&quot;</span><span class="p">,</span> <span class="n">p_configs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">fn</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">ProfileResult</span><span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">warnings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">bargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">bargs</span><span class="o">.</span><span class="n">arguments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_par_data</span><span class="p">]</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="s2">&quot;frame&quot;</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;series&quot;</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">scope</span> <span class="o">==</span> <span class="s2">&quot;series&quot;</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">(</span><span class="n">record</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">w</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">warnings</span> <span class="o">+=</span> <span class="n">w</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="n">ProfileException</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="BundledResultDetails"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledResultDetails">[docs]</a><span class="nd">@repr_html</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">BundledResultDetails</span><span class="p">(</span><span class="n">_DCDict</span><span class="p">):</span>
+    <span class="n">frame</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="n">series</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+    <span class="n">exec_details</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="BundledResult"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledResult">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">BundledResult</span><span class="p">(</span><span class="n">ProfileResult</span><span class="p">):</span>
+    <span class="n">result</span><span class="p">:</span> <span class="n">BundledResultDetails</span></div>
+
+
+<div class="viewcode-block" id="BundledProfiler"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledProfiler">[docs]</a><span class="nd">@repr_html</span>
+<span class="k">class</span> <span class="nc">BundledProfiler</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Base class for creating bundled profilers.</span>
+
+<span class="sd">    Contains functionality to manage configurations, orchestrate the execution of the profiling</span>
+<span class="sd">    functions and collate the results. It&#39;s up for the subclasses to decide on which profiling</span>
+<span class="sd">    functions to include, done so by assigning a list with said profiling functions to the</span>
+<span class="sd">    class variable `_profilers`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_profilers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ProfilingFunction</span><span class="p">]</span>
+
+<div class="viewcode-block" id="BundledProfiler.get_profilers"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledProfiler.get_profilers">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_profilers</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;any&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ProfilingFunction</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            target: {&#39;series&#39;, &#39;frame&#39;, &#39;any&#39;}, default &#39;any&#39;</span>
+<span class="sd">                Filter by function target (single series, data frame, or any/no filter).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Bundled profilers, profiler name =&gt; profiler function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valid</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;series&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">is_pseries</span><span class="p">,</span>
+            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">is_pframe</span><span class="p">,</span>
+            <span class="s2">&quot;any&quot;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">assert</span> <span class="n">target</span> <span class="ow">in</span> <span class="n">valid</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Invalid target &#39;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&#39;, valid options: </span><span class="si">{</span><span class="n">valid</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">clause</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="n">valid</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">p</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_profilers</span> <span class="k">if</span> <span class="n">clause</span><span class="p">(</span><span class="n">p</span><span class="p">)}</span></div>
+
+<div class="viewcode-block" id="BundledProfiler.get_config_defaults"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledProfiler.get_config_defaults">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_config_defaults</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">as_dict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Bundled configurations (defaults), profiler name =&gt; configuration.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">configs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_profilers</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">config</span><span class="p">()</span>
+            <span class="n">configs</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span> <span class="k">if</span> <span class="n">as_dict</span> <span class="k">else</span> <span class="n">cfg</span>
+        <span class="k">return</span> <span class="n">configs</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Scheduler</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            config (Optional[dict]): Profiler functions&#39; configurations. Whatever options are</span>
+<span class="sd">                provided here will override the defaults. Expects a 2-level dictionary with the</span>
+<span class="sd">                first level indexed by the name of the profiling functions and the second level</span>
+<span class="sd">                the function&#39;s parameters. Assumed configs (i.e. defaults + overrides) are stored</span>
+<span class="sd">                in the class variable `config`.</span>
+<span class="sd">            scheduler (Optional[Scheduler]): For executing the profiling functions. Instantiates</span>
+<span class="sd">                the default one if not provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_config_defaults</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">asdict</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span> <span class="k">if</span> <span class="n">is_dataclass</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span> <span class="k">else</span> <span class="n">cfg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">scheduler</span> <span class="ow">or</span> <span class="n">Scheduler</span><span class="p">()</span>
+
+<div class="viewcode-block" id="BundledProfiler.profile"><a class="viewcode-back" href="../../../api/tslumen.profile.base.html#tslumen.profile.base.BundledProfiler.profile">[docs]</a>    <span class="k">def</span> <span class="nf">profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BundledResult</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Executes the profiling functions on the supplied DataFrame.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df (pd.DataFrame): TimeSeries data to be profiled.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ProfileResult: Result of the profiling.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span>
+            <span class="n">fn</span><span class="p">:</span> <span class="n">ProfilingFunction</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span> <span class="n">config</span><span class="p">:</span> <span class="nb">dict</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+            <span class="n">pr_</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">config</span><span class="p">)</span>
+            <span class="n">details_</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;Profiler&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="s2">&quot;Scope&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">scope</span><span class="p">,</span>
+                    <span class="s2">&quot;Target&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">target</span><span class="p">,</span>
+                    <span class="s2">&quot;Start&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
+                    <span class="s2">&quot;End&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">end</span><span class="p">,</span>
+                    <span class="s2">&quot;Duration&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">pr_</span><span class="o">.</span><span class="n">start</span><span class="p">,</span>
+                    <span class="s2">&quot;Succeeded&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">success</span><span class="p">,</span>
+                    <span class="s2">&quot;Exceptions&quot;</span><span class="p">:</span> <span class="n">pr_</span><span class="o">.</span><span class="n">exception</span><span class="p">,</span>
+                    <span class="s2">&quot;# Runs&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">pr_</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">pr_</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">details_</span>
+
+        <span class="n">df</span> <span class="o">=</span> <span class="n">valid_timeseries</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="n">BundledResult</span><span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">scope</span> <span class="o">=</span> <span class="s2">&quot;both&quot;</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">BundledResultDetails</span><span class="p">()</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="p">{}</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">}</span>
+        <span class="n">exec_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">plan</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_profilers</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;frame&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">]</span> <span class="o">+</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fn</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_profilers</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="s2">&quot;series&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">]</span>
+        <span class="n">executed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">_run</span><span class="p">,</span> <span class="n">plan</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Profiling&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">executed</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">stats</span><span class="o">.</span><span class="n">Scope</span> <span class="o">==</span> <span class="s2">&quot;frame&quot;</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">frame</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">series</span><span class="p">[</span><span class="n">stats</span><span class="o">.</span><span class="n">Target</span><span class="p">][</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span>
+            <span class="n">exec_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">exec_details</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">exec_stats</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - HSBC Group Management Services Limited.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
