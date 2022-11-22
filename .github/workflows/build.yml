@@ -1,0 +1,52 @@
+name: Python package
+
+on: [push]
+
+jobs:
+  build-n-publish:
+    name: Build and publish Python distributions to PyPI and TestPyPI
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-extras.txt
+        pip install -r requirements-dev.txt
+
+    - name: Code quality
+      run: |
+        black tslumen
+        flake8 tslumen
+        mypy tslumen
+
+    - name: Test
+      run: |
+        coverage run -m pytest tests
+        coverage report -m -i
+
+    - name: Build
+      run: |
+        python -m build -n
+        twine check dist/*
+
+    - name: Publish to Test PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+        repository_url: https://test.pypi.org/legacy/
+
+    - name: Publish to PyPI
+      if: startsWith(github.ref, 'refs/tags')
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        password: ${{ secrets.PYPI_API_TOKEN }}
+

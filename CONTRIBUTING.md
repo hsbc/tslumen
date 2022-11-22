@@ -39,7 +39,7 @@ To get the changes merged a Pull Request needs to be raised, reviewed
 and approved.  For better visibility and continuous involvement, the Pull
 Request can be raised even before the changes are finalized, just make
 sure to mark it as *draft*. Be sure to point to the correct target branch,
-as by default GitHub assumes all Pull Requests are to go into `master`.
+as by default GitHub assumes all Pull Requests are to go into `main`.
 
 During the review process there might be questions or comments and
 additional changes to the code as a result. Make sure to keep all the
@@ -58,7 +58,7 @@ Git and GitHub are used for version control/source management of the
 complete codebase of tslumen.
 
 Some branches serve special purposes and are protected against direct
-commits (except from administrators). These would include the `master` and
+commits (except from administrators). These would include the `main` and
 release branches, as well as the documentation branch `gh-pages`. Changes
 to these branches should happen exclusively via Pull requests.
 

@@ -1,15 +1,15 @@
-<img src="/doc/source/_static/logo.svg" width="350px" />
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/logo-350.png)
 
 ## A library for exploratory analysis of Time Series data
 
-![](/doc/source/_static/badge_python.svg)
-![](/doc/source/_static/badge_build.svg)
-![](/doc/source/_static/badge_docs.svg)
-![](/doc/source/_static/badge_tests.svg)
-![](/doc/source/_static/badge_coverage.svg)
-![](/doc/source/_static/badge_lint.svg)
-![](/doc/source/_static/badge_mypy.svg)
-![](/doc/source/_static/badge_style.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_python.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_build.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_docs.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_tests.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_coverage.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_lint.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_mypy.svg)
+![](https://raw.githubusercontent.com/hsbc/tslumen/main/doc/source/_static/badge_style.svg)
 
 
 **tslumen** helps bring to light the key characteristics of your time
